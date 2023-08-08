@@ -11,17 +11,16 @@ class NamesListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CubitProvider, List<Name>>(builder: (context, state) {
-      return ListView.builder(
+      return PageView.builder(
+          scrollDirection: Axis.vertical,
           itemCount: state.length,
           itemBuilder: (context, index) {
-            return SingleChildScrollView(
-              child: Container(
-                width: double.infinity,
-                height: 100.h,
-                color: Colors.teal,
-                child: ListTile(
-                  title: state[index].translation.asWidget(),
-                ),
+            return Container(
+              width: double.infinity,
+              height: 100.h,
+              color: Colors.teal,
+              child: ListTile(
+                title: state[index].translation.asWidget(),
               ),
             );
           });
