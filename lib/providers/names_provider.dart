@@ -3,37 +3,28 @@ import 'package:ninety/core/models/name.dart';
 class NamesProvider {
   static List<Name> names = [
     Name(
-      id: 1,
-      audioPath: 'audio_path_1',
-      transliteration: 'Ar-Rahman',
-      translation: 'Le Tout-Miséricordieux',
-      reference: 'Sourate Al-Fatiha (1:1)',
-      benefite:
-          'Celui qui récite ce nom 100 fois après la prière du matin et du soir, recevra des bénédictions spéciales.',
-      sampleDoua: ['Doua associé au nom Ar-Rahman'],
-      imagePath: 'image_path_1',
-    ),
+        id: 0,
+        arabe: "الله",
+        transliteration: "Allah",
+        translation: "Allah ('Le Dieu' littéralement)",
+        details:
+            "Celui qui est la divinité, c’est-à-dire Celui qui mérite l’adoration, et à qui on doit l’extrême soumission et l’extrême humilité..",
+        sampleDoua: [],
+        benefite: "",
+        reference: "",
+        audioPath: "",
+        imagePath: ""),
     Name(
-      id: 2,
-      audioPath: 'audio_path_2',
-      transliteration: 'Ar-Rahim',
-      translation: 'Le Très-Miséricordieux',
-      reference: 'Sourate Al-Fatiha (1:2)',
-      benefite:
-          "Celui qui récite ce nom régulièrement, Allah lui accordera sa miséricorde dans ce monde et dans l'au-delà.",
-      sampleDoua: ['Doua associé au nom Ar-Rahim'],
-      imagePath: 'image_path_2',
-    ),
-    Name(
-      id: 3,
-      audioPath: 'audio_path_3',
-      transliteration: 'Al-Malik',
-      translation: 'Le Souverain',
-      reference: 'Sourate Al-Hashr (59:23)',
-      benefite:
-          'Celui qui récite ce nom 100 fois après la prière du fajr, recevra la richesse et la prospérité.',
-      sampleDoua: ['Doua associé au nom Al-Malik'],
-      imagePath: 'image_path_3',
-    ),
+        id: 1,
+        arabe: "ٱلْرَّحْمَـٰنُ",
+        transliteration: "Ar-Rahmān",
+        translation: "Le Tout-Miséricordieux ",
+        details:
+            "Clément envers ses créatures. La clémence d'une mère envers son enfant est une partie infime de Son immense clémence envers Ses créatures. Son châtiment est le plus dur et sévère de tous les châtiments mais Sa clémence a précédé Sa colère ; et ce nom fait partie des noms que l’on n’attribue à nul autre qu'Allah. ",
+        sampleDoua: [],
+        benefite: "",
+        reference: "",
+        audioPath: "",
+        imagePath: "")
   ];
 }
