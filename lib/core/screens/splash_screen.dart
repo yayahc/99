@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ninety/core/screens/names_list_view.dart';
+import 'package:ninety/core/screens/names_page_view.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -8,7 +8,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: NamesListView(),
+        child: NamesPageView(),
       ),
     );
   }
