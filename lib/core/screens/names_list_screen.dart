@@ -12,7 +12,7 @@ class NamesListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CubitProvider, List<Name>>(builder: (context, state) {
-      return ListView.builder(
+      return PageView.builder(
           itemCount: state.length,
           itemBuilder: (context, index) {
             return TextButton(
