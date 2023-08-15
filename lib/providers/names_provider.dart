@@ -1,3 +1,4 @@
+import 'package:ninety/core/common/app_assets/app_assets.dart';
 import 'package:ninety/core/models/name.dart';
 
 class NamesProvider {
@@ -12,7 +13,7 @@ class NamesProvider {
         sampleDoua: [],
         benefite: "",
         reference: "",
-        audioPath: "",
+        audioPath: AudioAssets.allah,
         imagePath: ""),
     Name(
         id: 1,
