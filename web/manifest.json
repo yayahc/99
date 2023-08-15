@@ -1,6 +1,6 @@
 {
-    "name": "ninety",
-    "short_name": "ninety",
+    "name": "smart_opd_app",
+    "short_name": "smart_opd_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

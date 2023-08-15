@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ninety/core/common/widgets/containers/audio_player_widget.dart';
 import 'package:ninety/core/extensions/extension_on_string.dart';
 import 'package:ninety/core/theme/colors/light_colors.dart';
 import 'package:ninety/providers/cubit_provider.dart';
@@ -22,7 +23,8 @@ class NameItemScreen extends StatelessWidget {
         child: Column(
           children: [
             name.arabe.asWidget(fontSize: 25.sp),
-            name.translation.asWidget()
+            name.translation.asWidget(),
+            AudioPlayerWidget(audioPath: name.audioPath)
           ],
         ),
       ),
