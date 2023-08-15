@@ -15,23 +15,22 @@ class NamesListScreen extends StatelessWidget {
       return ListView.builder(
           itemCount: state.length,
           itemBuilder: (context, index) {
-            return SingleChildScrollView(
-                child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  NameItemScreen(id: state[index].id)));
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      height: 100.h,
-                      color: Colors.teal,
-                      child: ListTile(
-                        title: state[index].translation.asWidget(),
-                      ),
-                    )));
+            return TextButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              NameItemScreen(id: state[index].id)));
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 100.h,
+                  color: Colors.teal,
+                  child: ListTile(
+                    title: state[index].translation.asWidget(),
+                  ),
+                ));
           });
     });
   }
