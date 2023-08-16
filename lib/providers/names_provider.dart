@@ -7,7 +7,7 @@ class NamesProvider {
         id: 0,
         arabe: "الله",
         transliteration: "Allah",
-        translation: "Allah ('Le Dieu' littéralement)",
+        translation: "translationOfAllah",
         details:
             "Celui qui est la divinité, c’est-à-dire Celui qui mérite l’adoration, et à qui on doit l’extrême soumission et l’extrême humilité..",
         sampleDoua: [],
