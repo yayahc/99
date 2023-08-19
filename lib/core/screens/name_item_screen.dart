@@ -6,6 +6,8 @@ import 'package:ninety/core/theme/colors/light_colors.dart';
 import 'package:ninety/providers/cubit_provider.dart';
 import 'package:sizer/sizer.dart';
 
+import '../models/name.dart';
+
 class NameItemScreen extends StatelessWidget {
   final int id;
 
@@ -16,6 +18,8 @@ class NameItemScreen extends StatelessWidget {
     final names = BlocProvider.of<CubitProvider>(context);
     final name = names.getName(id);
 
+    Locale myLocale = Localizations.localeOf(context);
+
     return Scaffold(
       appBar: _buildAppBar(context),
       backgroundColor: LightColors.background,
@@ -23,7 +27,7 @@ class NameItemScreen extends StatelessWidget {
         child: Column(
           children: [
             name.arabe.asWidget(fontSize: 25.sp),
-            name.translation.asWidget(),
+            getTranslation(myLocale: myLocale, name: name).asWidget(),
             AudioPlayerWidget(audioPath: name.audioPath)
           ],
         ),
@@ -38,5 +42,16 @@ class NameItemScreen extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
           child: const Icon(Icons.back_hand)),
     );
+  }
+
+  String getTranslation({Locale? myLocale, Name? name}) {
+    switch (myLocale!.countryCode) {
+      case 'en':
+        return name!.translationInEn;
+      case 'ar':
+        return name!.translationInAr;
+      default:
+        return name!.translationInFr;
+    }
   }
 }
