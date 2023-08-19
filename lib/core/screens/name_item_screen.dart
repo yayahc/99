@@ -27,7 +27,7 @@ class NameItemScreen extends StatelessWidget {
         child: Column(
           children: [
             name.arabe.asWidget(fontSize: 25.sp),
-            getTranslation(myLocale: myLocale, name: name).asWidget(),
+            _getTranslation(myLocale: myLocale, name: name).asWidget(),
             AudioPlayerWidget(audioPath: name.audioPath)
           ],
         ),
@@ -40,12 +40,12 @@ class NameItemScreen extends StatelessWidget {
       backgroundColor: LightColors.background,
       leading: TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Icon(Icons.back_hand)),
+          child: const Icon(Icons.backspace_rounded)),
     );
   }
 
-  String getTranslation({Locale? myLocale, Name? name}) {
-    switch (myLocale!.countryCode) {
+  String _getTranslation({Locale? myLocale, Name? name}) {
+    switch (myLocale!.toString()) {
       case 'en':
         return name!.translationInEn;
       case 'ar':

@@ -31,7 +31,7 @@ class NamesListScreen extends StatelessWidget {
                   color: Colors.teal,
                   child: ListTile(
                     title:
-                        getTranslation(myLocale: myLocale, name: state[index])
+                        _getTranslation(myLocale: myLocale, name: state[index])
                             .asWidget(),
                   ),
                 ));
@@ -39,8 +39,8 @@ class NamesListScreen extends StatelessWidget {
     });
   }
 
-  String getTranslation({Locale? myLocale, Name? name}) {
-    switch (myLocale!.countryCode) {
+  String _getTranslation({Locale? myLocale, Name? name}) {
+    switch (myLocale!.toString()) {
       case 'en':
         return name!.translationInEn;
       case 'ar':
