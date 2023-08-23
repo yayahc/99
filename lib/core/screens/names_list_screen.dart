@@ -16,6 +16,7 @@ class NamesListScreen extends StatelessWidget {
     return BlocBuilder<CubitProvider, List<Name>>(builder: (context, state) {
       return PageView.builder(
           itemCount: state.length,
+          scrollDirection: Axis.vertical,
           itemBuilder: (context, index) {
             return TextButton(
                 onPressed: () {
