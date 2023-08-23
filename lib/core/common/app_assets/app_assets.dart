@@ -1,3 +1,3 @@
 class AudioAssets {
-  static String allah = "assets/audios/Ar-Allah.wav";
+  static String allah = "assets/audios/ar_aallah.wav";
 }
