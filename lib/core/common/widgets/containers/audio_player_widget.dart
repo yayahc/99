@@ -43,7 +43,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
         }
         return ElevatedButton(
             onPressed: () {
-              _audioPlayer.play(UrlSource(widget.audioPath));
+              _audioPlayer.play(DeviceFileSource(widget.audioPath));
             },
             child: "Play".asWidget());
       },
