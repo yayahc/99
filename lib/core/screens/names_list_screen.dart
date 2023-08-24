@@ -11,9 +11,12 @@ class NamesListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+
     return BlocBuilder<CubitProvider, List<Name>>(builder: (context, state) {
       return PageView.builder(
           itemCount: state.length,
+          scrollDirection: Axis.vertical,
           itemBuilder: (context, index) {
             return TextButton(
                 onPressed: () {
@@ -28,10 +31,23 @@ class NamesListScreen extends StatelessWidget {
                   height: 100.h,
                   color: Colors.teal,
                   child: ListTile(
-                    title: state[index].translation.asWidget(),
+                    title:
+                        _getTranslation(myLocale: myLocale, name: state[index])
+                            .asWidget(),
                   ),
                 ));
           });
     });
+  }
+
+  String _getTranslation({Locale? myLocale, Name? name}) {
+    switch (myLocale!.toString()) {
+      case 'en':
+        return name!.translationInEn;
+      case 'ar':
+        return name!.translationInAr;
+      default:
+        return name!.translationInFr;
+    }
   }
 }
