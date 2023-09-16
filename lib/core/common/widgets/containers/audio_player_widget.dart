@@ -19,7 +19,6 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
   void initState() {
     super.initState();
     _audioPlayer = AudioPlayer();
-    _audioPlayer.setSource(AssetSource(widget.audioPath));
   }
 
   @override
