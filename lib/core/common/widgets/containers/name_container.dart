@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ninety/core/extensions/extension_on_string.dart';
 import 'package:sizer/sizer.dart';
-import '../../../models/name.dart';
+import '../../../../features/name/data/models/name.dart';
 
 class NameContainer extends StatelessWidget {
   final Name nameData;

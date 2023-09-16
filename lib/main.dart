@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ninety/providers/cubit_provider.dart';
-import 'package:ninety/providers/names_provider.dart';
+import 'package:ninety/features/name/presentation/cubit/name_cubit.dart';
+import 'package:ninety/features/name/data/datasources/local_data_sources/name/local_names.dart';
 import 'root.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

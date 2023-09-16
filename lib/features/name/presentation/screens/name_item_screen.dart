@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ninety/core/common/widgets/containers/audio_player_widget.dart';
 import 'package:ninety/core/extensions/extension_on_string.dart';
 import 'package:ninety/core/theme/colors/light_colors.dart';
-import 'package:ninety/providers/cubit_provider.dart';
+import 'package:ninety/features/name/presentation/cubit/name_cubit.dart';
 import 'package:sizer/sizer.dart';
 
-import '../models/name.dart';
+import '../../data/models/name.dart';
 
 class NameItemScreen extends StatelessWidget {
   final int id;

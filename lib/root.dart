@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:ninety/core/screens/splash_screen.dart';
+import 'package:ninety/features/name/presentation/screens/splash_screen.dart';
 import 'package:sizer/sizer.dart';
 import 'core/l10n/generated/app_localizations_export.dart';
 

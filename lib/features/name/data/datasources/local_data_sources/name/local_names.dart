@@ -1,5 +1,5 @@
 import 'package:ninety/core/common/app_assets/app_assets.dart';
-import 'package:ninety/core/models/name.dart';
+import 'package:ninety/features/name/data/models/name.dart';
 
 class NamesProvider {
   static List<Name> names = [
