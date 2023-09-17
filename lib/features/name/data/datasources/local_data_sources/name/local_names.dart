@@ -1,9 +1,9 @@
 import 'package:ninety/core/common/app_assets/app_assets.dart';
 import 'package:ninety/features/name/data/models/name.dart';
 
-class NamesProvider {
-  static List<Name> names = [
-    Name(
+class LocalNamesProvider {
+  static List<NameModel> names = [
+    NameModel(
         id: 0,
         arabe: "الله",
         transliteration: "Allah",
@@ -12,12 +12,12 @@ class NamesProvider {
         translationInEn: "Allah (\"The God\" literally)",
         details:
             "Celui qui est la divinité, c’est-à-dire Celui qui mérite l’adoration, et à qui on doit l’extrême soumission et l’extrême humilité..",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: AudioAssets.allah,
         imagePath: ""),
-    Name(
+    NameModel(
         id: 1,
         arabe: "ٱلْرَّحْمَـٰنُ",
         transliteration: "Ar-Rahmān",
@@ -26,12 +26,12 @@ class NamesProvider {
         translationInAr: "Le Tout-Miséricordieux",
         details:
             "Clément envers ses créatures. La clémence d'une mère envers son enfant est une partie infime de Son immense clémence envers Ses créatures. Son châtiment est le plus dur et sévère de tous les châtiments mais Sa clémence a précédé Sa colère ; et ce nom fait partie des noms que l’on n’attribue à nul autre qu'Allah.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 2,
         arabe: "ٱلْقُدُّوسُ",
         transliteration: "Al-Quddūs",
@@ -40,12 +40,12 @@ class NamesProvider {
         translationInAr: "Le Saint",
         details:
             "Celui qui est exempt de toute imperfection et de toute impureté. Il est pur et parfait dans Sa sainteté. ",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 3,
         arabe: "ٱلْمَلِكُ",
         transliteration: "Al-Malik",
@@ -54,12 +54,12 @@ class NamesProvider {
         translationInAr: "Le Souverain",
         details:
             "Celui qui possède le royaume parfait et complet. Il est le Roi absolu et incontesté de tout l'univers.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 4,
         arabe: "ٱلْقُدُّوسُ",
         transliteration: "Al-Quddūs",
@@ -68,12 +68,12 @@ class NamesProvider {
         translationInAr: "Le Saint",
         details:
             "Celui qui est exempt de toute imperfection et de toute impureté. Il est pur et parfait dans Sa sainteté. ",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 5,
         arabe: "ٱلْمَلِكُ",
         transliteration: "Al-Malik",
@@ -82,12 +82,12 @@ class NamesProvider {
         translationInAr: "Le Souverain",
         details:
             "Celui qui possède le royaume parfait et complet. Il est le Roi absolu et incontesté de tout l'univers.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 6,
         arabe: "ٱلْأَعْلَىٰ",
         transliteration: "Al-Aʿlā",
@@ -96,12 +96,12 @@ class NamesProvider {
         translationInAr: "Le Très-Haut",
         details:
             "Celui dont le rang est le plus élevé. Il est au-dessus de toute chose et de toute imperfection.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 7,
         arabe: "ٱلْكَبِيرُ",
         transliteration: "Al-Kabīr",
@@ -110,12 +110,12 @@ class NamesProvider {
         translationInAr: "Le Plus Grand",
         details:
             "Celui dont la grandeur et la magnificence sont incommensurables. Il est supérieur à toute création.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 8,
         arabe: "ٱلْحَفِيظُ",
         transliteration: "Al-Ḥafīẓ",
@@ -124,12 +124,12 @@ class NamesProvider {
         translationInAr: "Le Préservateur",
         details:
             "Celui qui protège et préserve tout. Rien n'échappe à Sa surveillance et à Sa préservation.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 9,
         arabe: "ٱلْمُقِيتُ",
         transliteration: "Al-Muqīt",
@@ -138,12 +138,12 @@ class NamesProvider {
         translationInAr: "Le Pourvoyeur",
         details:
             "Celui qui pourvoit à tous les besoins. Il nourrit et entretient toute la création.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 10,
         arabe: "ٱلْحَسِيبُ",
         transliteration: "Al-Ḥasīb",
@@ -152,12 +152,12 @@ class NamesProvider {
         translationInAr: "Le Comptable",
         details:
             "Celui qui tient un compte minutieux de toutes les actions et récompenses. Rien n'échappe à Sa comptabilité parfaite.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 11,
         arabe: "ٱلرَّقِيبُ",
         transliteration: "Ar-Raqīb",
@@ -166,12 +166,12 @@ class NamesProvider {
         translationInAr: "Le Vigilant",
         details:
             "Celui qui est attentif à tout ce qui se passe dans l'univers. Rien ne Lui échappe, et Il observe en permanence.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 12,
         arabe: "ٱلْمُجِيبُ",
         transliteration: "Al-Mujīb",
@@ -180,12 +180,12 @@ class NamesProvider {
         translationInAr: "L'Exauceur",
         details:
             "Celui qui répond à toutes les supplications et prières. Il accorde ce qui est le mieux pour Ses créatures.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 13,
         arabe: "ٱلْوَاسِعُ",
         transliteration: "Al-Wāsiʿ",
@@ -194,12 +194,12 @@ class NamesProvider {
         translationInAr: "L'Infiniment Vaste",
         details:
             "Celui dont la générosité, la miséricorde et la bonté sont illimitées. Son pardon et Ses bienfaits sont infinis.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 14,
         arabe: "ٱلْحَكِيمُ",
         transliteration: "Al-Ḥakīm",
@@ -208,12 +208,12 @@ class NamesProvider {
         translationInAr: "Le Sage",
         details:
             "Celui qui possède une sagesse parfaite et incontestée. Toutes Ses décisions et lois sont empreintes de sagesse.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 15,
         arabe: "ٱلْوَدُودُ",
         transliteration: "Al-Wadūd",
@@ -222,12 +222,12 @@ class NamesProvider {
         translationInAr: "L'Aimant",
         details:
             "Celui qui est plein d'amour et de bienveillance envers Ses créatures. Il aime Ses serviteurs et est aimé en retour.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 16,
         arabe: "ٱلْمَجِيدُ",
         transliteration: "Al-Majīd",
@@ -236,12 +236,12 @@ class NamesProvider {
         translationInAr: "Le Glorieux",
         details:
             "Celui qui est digne de toute gloire et de toute magnificence. Sa grandeur est incomparable.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 17,
         arabe: "ٱلْبَاعِثُ",
         transliteration: "Al-Bāʿith",
@@ -250,12 +250,12 @@ class NamesProvider {
         translationInAr: "Le Résurrecteur",
         details:
             "Celui qui ressuscite les morts au Jour de la Résurrection. Il est le Créateur et le Résurrecteur de toute vie.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 18,
         arabe: "ٱلشَّهِيدُ",
         transliteration: "Ash-Shahīd",
@@ -264,12 +264,12 @@ class NamesProvider {
         translationInAr: "Le Témoin",
         details:
             "Celui qui est témoin de tout ce qui se passe. Il est conscient de chaque action et rien ne Lui échappe.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 19,
         arabe: "ٱلْحَقُّ",
         transliteration: "Al-Ḥaqq",
@@ -278,12 +278,12 @@ class NamesProvider {
         translationInAr: "La Vérité",
         details:
             "Celui qui incarne la vérité absolue. Sa parole est véridique et Il est la réalité ultime de l'existence.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 20,
         arabe: "ٱلْوَكِيلُ",
         transliteration: "Al-Wakīl",
@@ -292,12 +292,12 @@ class NamesProvider {
         translationInAr: "Le Dépositaire de toute confiance",
         details:
             "Celui en qui on peut placer sa confiance en toute circonstance. Il est le gardien de toute chose.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 21,
         arabe: "ٱلْقَوِيُّ",
         transliteration: "Al-Qawwiyy",
@@ -306,12 +306,12 @@ class NamesProvider {
         translationInAr: "Le Fort",
         details:
             "Celui qui possède une force inébranlable. Il est capable de tout et rien ne Lui est impossible.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 22,
         arabe: "ٱلْمَتِينُ",
         transliteration: "Al-Matīn",
@@ -320,12 +320,12 @@ class NamesProvider {
         translationInAr: "Le Solide",
         details:
             "Celui qui est ferme, stable et inébranlable. Son pouvoir et Sa solidité sont incontestés.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 23,
         arabe: "ٱلْوَلِيُّ",
         transliteration: "Al-Walī",
@@ -334,12 +334,12 @@ class NamesProvider {
         translationInAr: "Le Protecteur",
         details:
             "Celui qui protège et prend soin de Ses serviteurs croyants. Il est le meilleur gardien et protecteur.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 24,
         arabe: "ٱلْحَمِيدُ",
         transliteration: "Al-Ḥamīd",
@@ -348,12 +348,12 @@ class NamesProvider {
         translationInAr: "Le Loué",
         details:
             "Celui qui mérite la louange parfaite et inconditionnelle. Il est digne de toute reconnaissance.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 25,
         arabe: "ٱلْمُحْصِيُ",
         transliteration: "Al-Muḥṣī",
@@ -362,12 +362,12 @@ class NamesProvider {
         translationInAr: "Le Comptable",
         details:
             "Celui qui tient compte de toutes choses. Rien n'échappe à Sa comptabilité précise.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 26,
         arabe: "ٱلْمُبْدِئُ",
         transliteration: "Al-Mubdīʾ",
@@ -376,12 +376,12 @@ class NamesProvider {
         translationInAr: "Celui qui Initie",
         details:
             "Celui qui commence la création. Il est l'origine de toute existence et de toute innovation.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 27,
         arabe: "ٱلْمُعِيدُ",
         transliteration: "Al-Muʿīd",
@@ -390,12 +390,12 @@ class NamesProvider {
         translationInAr: "Le Répétiteur",
         details:
             "Celui qui ramène la création après qu'elle a disparu. Il fera revivre les morts au Jour de la Résurrection.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 28,
         arabe: "ٱلْمُحْيِي",
         transliteration: "Al-Muḥyī",
@@ -404,12 +404,12 @@ class NamesProvider {
         translationInAr: "Celui qui Donne la Vie",
         details:
             "Celui qui donne la vie à la création. Il est la source de toute vie et de toute vitalité.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 29,
         arabe: "ٱلْمُمِيتُ",
         transliteration: "Al-Mumīt",
@@ -418,12 +418,12 @@ class NamesProvider {
         translationInEn: "Celui qui Donne la Mort",
         details:
             "Celui qui prend la vie de toute chose. Toute existence est soumise à Sa volonté.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 30,
         arabe: "ٱلْحَيُّ",
         transliteration: "Al-Ḥayy",
@@ -432,12 +432,12 @@ class NamesProvider {
         translationInAr: "Le Vivant",
         details:
             "Celui qui est éternellement vivant. Sa vie est absolue et éternelle, et Il est source de vie pour tout.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 31,
         arabe: "ٱلْقَيُّومُ",
         transliteration: "Al-Qayyūm",
@@ -446,12 +446,12 @@ class NamesProvider {
         translationInAr: "Celui qui Subsiste par lui-même",
         details:
             "Celui qui est éternellement auto-subsistant. Il est indépendant et maintient toute la création.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 32,
         arabe: "ٱلْوَاجِدُ",
         transliteration: "Al-Wājid",
@@ -460,12 +460,12 @@ class NamesProvider {
         translationInAr: "Le Présent",
         details:
             "Celui qui est toujours présent et dont la connaissance englobe toute chose.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 33,
         arabe: "ٱلْمَاجِدُ",
         transliteration: "Al-Mājid",
@@ -474,12 +474,12 @@ class NamesProvider {
         translationInAr: "Le Noble",
         details:
             "Celui qui est digne de toute noblesse. Sa grandeur et Sa magnificence sont infinies.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 34,
         arabe: "ٱلْوَاحِدُ",
         transliteration: "Al-Wāḥid",
@@ -488,12 +488,12 @@ class NamesProvider {
         translationInAr: "L'Unique",
         details:
             "Celui qui est unique dans Sa divinité et dans Ses attributs. Il n'y a rien de comparable à Lui.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 35,
         arabe: "ٱلْأَحَدُ",
         transliteration: "Al-Aḥad",
@@ -502,12 +502,12 @@ class NamesProvider {
         translationInAr: "L'Indivisible",
         details:
             "Celui qui est unique et indivisible. Il n'a pas d'associé ni de semblable.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 36,
         arabe: "ٱلصَّمَدُ",
         transliteration: "Aṣ-Ṣamad",
@@ -516,12 +516,12 @@ class NamesProvider {
         translationInAr: "Le Seul à qui on fait appel",
         details:
             "Celui qui est invoqué pour chaque besoin. Toute la création dépend de Lui.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 37,
         arabe: "ٱلْقَادِرُ",
         transliteration: "Al-Qādir",
@@ -530,12 +530,12 @@ class NamesProvider {
         translationInAr: "Le Tout-Puissant",
         details:
             "Celui qui a un pouvoir absolu. Rien ne peut résister à Sa volonté.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 38,
         arabe: "ٱلْمُقْتَدِرُ",
         transliteration: "Al-Muqtadir",
@@ -544,12 +544,12 @@ class NamesProvider {
         translationInAr: "Le Puissant",
         details:
             "Celui qui détermine le destin de toute chose. Il est capable de réaliser tout ce qu'Il veut.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 39,
         arabe: "ٱلْمُقِيتُ",
         transliteration: "Al-Muqīt",
@@ -558,12 +558,12 @@ class NamesProvider {
         translationInAr: "Le Pourvoyeur",
         details:
             "Celui qui pourvoit à tous les besoins. Il nourrit et entretient toute la création.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 40,
         arabe: "ٱلْوَكِيلُ",
         transliteration: "Al-Wakīl",
@@ -572,12 +572,12 @@ class NamesProvider {
         translationInEn: "Le Dépositaire de toute confiance",
         details:
             "Celui en qui on peut placer sa confiance en toute circonstance. Il est le gardien de toute chose.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 41,
         arabe: "ٱلْمُجِيبُ",
         transliteration: "Al-Mujīb",
@@ -586,12 +586,12 @@ class NamesProvider {
         translationInAr: "L'Exauceur",
         details:
             "Celui qui répond à toutes les supplications et prières. Il accorde ce qui est le mieux pour Ses créatures.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 42,
         arabe: "ٱلْوَاسِعُ",
         transliteration: "Al-Wāsiʿ",
@@ -600,12 +600,12 @@ class NamesProvider {
         translationInAr: "L'Infiniment Vaste",
         details:
             "Celui dont la générosité, la miséricorde et la bonté sont illimitées. Son pardon et Ses bienfaits sont infinis.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 43,
         arabe: "ٱلْحَكِيمُ",
         transliteration: "Al-Ḥakīm",
@@ -614,12 +614,12 @@ class NamesProvider {
         translationInAr: "Le Sage",
         details:
             "Celui qui possède une sagesse parfaite et incontestée. Toutes Ses décisions et lois sont empreintes de sagesse.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 44,
         arabe: "ٱلْوَدُودُ",
         transliteration: "Al-Wadūd",
@@ -628,12 +628,12 @@ class NamesProvider {
         translationInAr: "L'Aimant",
         details:
             "Celui qui est plein d'amour et de bienveillance envers Ses créatures. Il aime Ses serviteurs et est aimé en retour.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 45,
         arabe: "ٱلْمَجِيدُ",
         transliteration: "Al-Majīd",
@@ -642,12 +642,12 @@ class NamesProvider {
         translationInAr: "Le Glorieux",
         details:
             "Celui qui est digne de toute gloire et de toute magnificence. Sa grandeur est incomparable.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 46,
         arabe: "ٱلْبَاعِثُ",
         transliteration: "Al-Bāʿith",
@@ -656,12 +656,12 @@ class NamesProvider {
         translationInAr: "Le Résurrecteur",
         details:
             "Celui qui ressuscite les morts au Jour de la Résurrection. Il est le Créateur et le Résurrecteur de toute vie.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 47,
         arabe: "ٱلشَّهِيدُ",
         transliteration: "Ash-Shahīd",
@@ -670,12 +670,12 @@ class NamesProvider {
         translationInAr: "Le Témoin",
         details:
             "Celui qui est témoin de tout ce qui se passe. Il est conscient de chaque action et rien ne Lui échappe.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 48,
         arabe: "ٱلْحَقُّ",
         transliteration: "Al-Ḥaqq",
@@ -684,12 +684,12 @@ class NamesProvider {
         translationInAr: "La Vérité",
         details:
             "Celui qui incarne la vérité absolue. Sa parole est véridique et Il est la réalité ultime de l'existence.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 49,
         arabe: "ٱلْوَكِيلُ",
         transliteration: "Al-Wakīl",
@@ -698,12 +698,12 @@ class NamesProvider {
         translationInAr: "Le Dépositaire de toute confiance",
         details:
             "Celui en qui on peut placer sa confiance en toute circonstance. Il est le gardien de toute chose.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 50,
         arabe: "ٱلْقَوِيُّ",
         transliteration: "Al-Qawwiyy",
@@ -712,12 +712,12 @@ class NamesProvider {
         translationInAr: "Le Fort",
         details:
             "Celui qui possède une force inébranlable. Il est capable de tout et rien ne Lui est impossible.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 51,
         arabe: "ٱلْمَتِينُ",
         transliteration: "Al-Matīn",
@@ -726,12 +726,12 @@ class NamesProvider {
         translationInAr: "Le Solide",
         details:
             "Celui qui est ferme, stable et inébranlable. Son pouvoir et Sa solidité sont incontestés.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 52,
         arabe: "ٱلْوَلِيُّ",
         transliteration: "Al-Walī",
@@ -740,12 +740,12 @@ class NamesProvider {
         translationInAr: "Le Protecteur",
         details:
             "Celui qui protège et prend soin de Ses serviteurs croyants. Il est le meilleur gardien et protecteur.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 53,
         arabe: "ٱلْحَمِيدُ",
         transliteration: "Al-Ḥamīd",
@@ -754,12 +754,12 @@ class NamesProvider {
         translationInAr: "Le Loué",
         details:
             "Celui qui mérite la louange parfaite et inconditionnelle. Il est digne de toute reconnaissance.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 54,
         arabe: "ٱلْمُحْصِيُ",
         transliteration: "Al-Muḥṣī",
@@ -768,12 +768,12 @@ class NamesProvider {
         translationInAr: "Le Comptable",
         details:
             "Celui qui tient compte de toutes choses. Rien n'échappe à Sa comptabilité précise.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 55,
         arabe: "ٱلْمُبْدِئُ",
         transliteration: "Al-Mubdīʾ",
@@ -782,12 +782,12 @@ class NamesProvider {
         translationInAr: "Celui qui Initie",
         details:
             "Celui qui commence la création. Il est l'origine de toute existence et de toute innovation.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 56,
         arabe: "ٱلْمُعِيدُ",
         transliteration: "Al-Muʿīd",
@@ -796,12 +796,12 @@ class NamesProvider {
         translationInAr: "Le Répétiteur",
         details:
             "Celui qui ramène la création après qu'elle a disparu. Il fera revivre les morts au Jour de la Résurrection.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 57,
         arabe: "ٱلْمُحْيِي",
         transliteration: "Al-Muḥyī",
@@ -810,12 +810,12 @@ class NamesProvider {
         translationInAr: "Celui qui Donne la Vie",
         details:
             "Celui qui donne la vie à la création. Il est la source de toute vie et de toute vitalité.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 58,
         arabe: "ٱلْمُمِيتُ",
         transliteration: "Al-Mumīt",
@@ -824,12 +824,12 @@ class NamesProvider {
         translationInAr: "Celui qui Donne la Mort",
         details:
             "Celui qui prend la vie de toute chose. Toute existence est soumise à Sa volonté.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 59,
         arabe: "ٱلْحَيُّ",
         transliteration: "Al-Ḥayy",
@@ -838,12 +838,12 @@ class NamesProvider {
         translationInAr: "Le Vivant",
         details:
             "Celui qui est éternellement vivant. Sa vie est absolue et éternelle, et Il est source de vie pour tout.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 60,
         arabe: "ٱلْقَيُّومُ",
         transliteration: "Al-Qayyūm",
@@ -852,12 +852,12 @@ class NamesProvider {
         translationInAr: "Celui qui Subsiste par lui-même",
         details:
             "Celui qui est éternellement auto-subsistant. Il est indépendant et maintient toute la création.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 61,
         arabe: "ٱلْمَجِيبُ",
         transliteration: "Al-Mujīb",
@@ -866,12 +866,12 @@ class NamesProvider {
         translationInAr: "L'Exauceur",
         details:
             "Celui qui répond à toutes les supplications et prières. Il accorde ce qui est le mieux pour Ses créatures.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 62,
         arabe: "ٱلْوَاسِعُ",
         transliteration: "Al-Wāsiʿ",
@@ -880,12 +880,12 @@ class NamesProvider {
         translationInAr: "L'Infiniment Vaste",
         details:
             "Celui dont la générosité, la miséricorde et la bonté sont illimitées. Son pardon et Ses bienfaits sont infinis.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 63,
         arabe: "ٱلْحَكِيمُ",
         transliteration: "Al-Ḥakīm",
@@ -894,12 +894,12 @@ class NamesProvider {
         translationInAr: "Le Sage",
         details:
             "Celui qui possède une sagesse parfaite et incontestée. Toutes Ses décisions et lois sont empreintes de sagesse.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 64,
         arabe: "ٱلْوَدُودُ",
         transliteration: "Al-Wadūd",
@@ -908,12 +908,12 @@ class NamesProvider {
         translationInAr: "L'Aimant",
         details:
             "Celui qui est plein d'amour et de bienveillance envers Ses créatures. Il aime Ses serviteurs et est aimé en retour.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 65,
         arabe: "ٱلْمَجِيدُ",
         transliteration: "Al-Majīd",
@@ -922,12 +922,12 @@ class NamesProvider {
         translationInAr: "Le Glorieux",
         details:
             "Celui qui est digne de toute gloire et de toute magnificence. Sa grandeur est incomparable.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 66,
         arabe: "ٱلْبَاعِثُ",
         transliteration: "Al-Bāʿith",
@@ -936,12 +936,12 @@ class NamesProvider {
         translationInAr: "Le Résurrecteur",
         details:
             "Celui qui ressuscite les morts au Jour de la Résurrection. Il est le Créateur et le Résurrecteur de toute vie.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 67,
         arabe: "ٱلشَّهِيدُ",
         transliteration: "Ash-Shahīd",
@@ -950,12 +950,12 @@ class NamesProvider {
         translationInAr: "Le Témoin",
         details:
             "Celui qui est témoin de tout ce qui se passe. Il est conscient de chaque action et rien ne Lui échappe.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 68,
         arabe: "ٱلْحَقُّ",
         transliteration: "Al-Ḥaqq",
@@ -964,12 +964,12 @@ class NamesProvider {
         translationInAr: "La Vérité",
         details:
             "Celui qui incarne la vérité absolue. Sa parole est véridique et Il est la réalité ultime de l'existence.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 69,
         arabe: "ٱلْوَكِيلُ",
         transliteration: "Al-Wakīl",
@@ -978,12 +978,12 @@ class NamesProvider {
         translationInAr: "Le Dépositaire de toute confiance",
         details:
             "Celui en qui on peut placer sa confiance en toute circonstance. Il est le gardien de toute chose.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 70,
         arabe: "ٱلْقَوِيُّ",
         transliteration: "Al-Qawwiyy",
@@ -992,12 +992,12 @@ class NamesProvider {
         translationInAr: "Le Fort",
         details:
             "Celui qui possède une force inébranlable. Il est capable de tout et rien ne Lui est impossible.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 71,
         arabe: "ٱلْمَتِينُ",
         transliteration: "Al-Matīn",
@@ -1006,12 +1006,12 @@ class NamesProvider {
         translationInAr: "Le Solide",
         details:
             "Celui qui est ferme, stable et inébranlable. Son pouvoir et Sa solidité sont incontestés.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 72,
         arabe: "ٱلْوَلِيُّ",
         transliteration: "Al-Walī",
@@ -1020,12 +1020,12 @@ class NamesProvider {
         translationInAr: "Le Protecteur",
         details:
             "Celui qui protège et prend soin de Ses serviteurs croyants. Il est le meilleur gardien et protecteur.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 73,
         arabe: "ٱلْحَمِيدُ",
         transliteration: "Al-Ḥamīd",
@@ -1034,12 +1034,12 @@ class NamesProvider {
         translationInAr: "Le Loué",
         details:
             "Celui qui mérite la louange parfaite et inconditionnelle. Il est digne de toute reconnaissance.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 74,
         arabe: "ٱلْمُحْصِيُ",
         transliteration: "Al-Muḥṣī",
@@ -1048,12 +1048,12 @@ class NamesProvider {
         translationInAr: "Le Comptable",
         details:
             "Celui qui tient compte de toutes choses. Rien n'échappe à Sa comptabilité précise.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 75,
         arabe: "ٱلْمُبْدِئُ",
         transliteration: "Al-Mubdīʾ",
@@ -1062,12 +1062,12 @@ class NamesProvider {
         translationInAr: "Celui qui Initie",
         details:
             "Celui qui commence la création. Il est l'origine de toute existence et de toute innovation.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 76,
         arabe: "ٱلْمُعِيدُ",
         transliteration: "Al-Muʿīd",
@@ -1076,12 +1076,12 @@ class NamesProvider {
         translationInAr: "Le Répétiteur",
         details:
             "Celui qui ramène la création après qu'elle a disparu. Il fera revivre les morts au Jour de la Résurrection.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 77,
         arabe: "ٱلْمُحْيِي",
         transliteration: "Al-Muḥyī",
@@ -1090,12 +1090,12 @@ class NamesProvider {
         translationInAr: "Celui qui Donne la Vie",
         details:
             "Celui qui donne la vie à la création. Il est la source de toute vie et de toute vitalité.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 78,
         arabe: "ٱلْمُمِيتُ",
         transliteration: "Al-Mumīt",
@@ -1104,12 +1104,12 @@ class NamesProvider {
         translationInEn: "Celui qui Donne la Mort",
         details:
             "Celui qui prend la vie de toute chose. Toute existence est soumise à Sa volonté.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 79,
         arabe: "ٱلْحَيُّ",
         transliteration: "Al-Ḥayy",
@@ -1118,12 +1118,12 @@ class NamesProvider {
         translationInAr: "Le Vivant",
         details:
             "Celui qui est éternellement vivant. Sa vie est absolue et éternelle, et Il est source de vie pour tout.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 80,
         arabe: "ٱلْقَيُّومُ",
         transliteration: "Al-Qayyūm",
@@ -1132,12 +1132,12 @@ class NamesProvider {
         translationInAr: "Celui qui Subsiste par lui-même",
         details:
             "Celui qui est éternellement auto-subsistant. Il est indépendant et maintient toute la création.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 81,
         arabe: "ٱلْمُتَكَبِّرُ",
         transliteration: "Al-Mutaqabbir",
@@ -1146,12 +1146,12 @@ class NamesProvider {
         translationInAr: "Le Suprême",
         details:
             "Celui qui est supérieur en grandeur et en majesté. Il est le plus grand de tous, au-dessus de toute imperfection.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 82,
         arabe: "ٱلْخَالِقُ",
         transliteration: "Al-Khāliq",
@@ -1160,12 +1160,12 @@ class NamesProvider {
         translationInAr: "Le Créateur",
         details:
             "Celui qui crée tout à partir de rien. Il est l'origine de toute existence.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 83,
         arabe: "ٱلْبَارِئُ",
         transliteration: "Al-Bāriʾ",
@@ -1174,12 +1174,12 @@ class NamesProvider {
         translationInAr: "Le Novateur",
         details:
             "Celui qui conçoit et façonne toute chose en perfection. Il est le Créateur qui donne forme à la création.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 84,
         arabe: "ٱلْمُصَوِّرُ",
         transliteration: "Al-Muṣawwir",
@@ -1188,12 +1188,12 @@ class NamesProvider {
         translationInAr: "Le Formateur",
         details:
             "Celui qui façonne et forme toute chose de manière parfaite. Il est l'Artisan de toute beauté.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 85,
         arabe: "ٱلْغَفَّارُ",
         transliteration: "Al-Ghaffār",
@@ -1202,12 +1202,12 @@ class NamesProvider {
         translationInAr: "L'Infiniment Pardonneur",
         details:
             "Celui qui pardonne de manière répétée et infinie. Sa miséricorde englobe tous les péchés.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 86,
         arabe: "ٱلْقَهَّارُ",
         transliteration: "Al-Qahhār",
@@ -1216,12 +1216,12 @@ class NamesProvider {
         translationInAr: "Le Dominateur Suprême",
         details:
             "Celui qui a un pouvoir absolu et exerce une domination incontestée sur toute la création.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 87,
         arabe: "ٱلْوَهَّابُ",
         transliteration: "Al-Wahhāb",
@@ -1230,12 +1230,12 @@ class NamesProvider {
         translationInAr: "Le Donateur Suprême",
         details:
             "Celui qui donne de manière généreuse et abondante. Il est le donateur ultime de tout bienfait.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 88,
         arabe: "ٱلْرَّزَّاقُ",
         transliteration: "Ar-Razzāq",
@@ -1244,12 +1244,12 @@ class NamesProvider {
         translationInAr: "Le Pourvoyeur",
         details:
             "Celui qui pourvoit à tous les besoins de Ses créatures. Il est le dispensateur de toute subsistance.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 89,
         arabe: "ٱلْفَتَّاحُ",
         transliteration: "Al-Fattāḥ",
@@ -1258,12 +1258,12 @@ class NamesProvider {
         translationInAr: "Le Dévoileur",
         details:
             "Celui qui ouvre les portes de la réussite et de la compréhension. Il révèle la vérité et apporte la clarté.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 90,
         arabe: "ٱلْعَلِيمُ",
         transliteration: "Al-ʿAlīm",
@@ -1272,12 +1272,12 @@ class NamesProvider {
         translationInAr: "L'Omniscient",
         details:
             "Celui qui connaît toutes choses, passées, présentes et futures. Sa connaissance est infinie et absolue.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 91,
         arabe: "ٱلْقَابِضُ",
         transliteration: "Al-Qābiḍ",
@@ -1286,12 +1286,12 @@ class NamesProvider {
         translationInAr: "Le Resserreur",
         details:
             "Celui qui retient et restreint. Il contrôle toute chose selon Sa sagesse et Sa volonté.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 92,
         arabe: "ٱلْبَاسِطُ",
         transliteration: "Al-Bāsiṭ",
@@ -1300,12 +1300,12 @@ class NamesProvider {
         translationInAr: "Le Dispensateur de l'abondance",
         details:
             "Celui qui étend Sa miséricorde, Ses bienfaits et Sa générosité. Il est le pourvoyeur d'abondance.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 93,
         arabe: "ٱلْخَافِضُ",
         transliteration: "Al-Khāfiḍ",
@@ -1314,12 +1314,12 @@ class NamesProvider {
         translationInAr: "Celui qui Avilit",
         details:
             "Celui qui humilie les orgueilleux et les injustes. Rien n'est élevé au-dessus de Sa volonté.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 94,
         arabe: "ٱلْرَّافِعُ",
         transliteration: "Ar-Rāfiʿ",
@@ -1328,12 +1328,12 @@ class NamesProvider {
         translationInAr: "Celui qui Élève",
         details:
             "Celui qui élève en rang et en honneur. Il est le source de toute élévation et de toute dignité.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 95,
         arabe: "ٱلْمُعِزُّ",
         transliteration: "Al-Muʿizz",
@@ -1342,12 +1342,12 @@ class NamesProvider {
         translationInAr: "Celui qui Donne la Puissance",
         details:
             "Celui qui accorde la force, la puissance et la dignité. Il est le protecteur et le défenseur de Ses serviteurs.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 96,
         arabe: "ٱلْمُذِلُّ",
         transliteration: "Al-Muḍill",
@@ -1356,12 +1356,12 @@ class NamesProvider {
         translationInAr: "Celui qui Avilit",
         details:
             "Celui qui humilie les arrogants et les injustes. Le pouvoir et l'honneur sont soumis à Sa souveraineté.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 97,
         arabe: "ٱلْسَّمِيعُ",
         transliteration: "As-Samīʿ",
@@ -1370,12 +1370,12 @@ class NamesProvider {
         translationInAr: "L'Audient",
         details:
             "Celui qui entend tout, même les chuchotements. Rien n'échappe à Sa connaissance auditive.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 98,
         arabe: "ٱلْبَصِيرُ",
         transliteration: "Al-Baṣīr",
@@ -1384,12 +1384,12 @@ class NamesProvider {
         translationInAr: "Le Voyant",
         details:
             "Celui qui voit tout, même ce qui est caché. Sa connaissance est infinie et absolue.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",
         imagePath: ""),
-    Name(
+    NameModel(
         id: 99,
         arabe: "ٱلْحَكَمُ",
         transliteration: "Al-Ḥakam",
@@ -1398,7 +1398,7 @@ class NamesProvider {
         translationInAr: "Le Juge Suprême",
         details:
             "Celui qui juge de manière parfaite et juste. Il est la source de toute justice et de toute sagesse.",
-        sampleDoua: [],
+        sampleDouas: [],
         benefite: "",
         reference: "",
         audioPath: "",

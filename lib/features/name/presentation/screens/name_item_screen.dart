@@ -6,8 +6,6 @@ import 'package:ninety/core/theme/colors/light_colors.dart';
 import 'package:ninety/features/name/presentation/cubit/name_cubit.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../data/models/name.dart';
-
 class NameItemScreen extends StatelessWidget {
   final int id;
 
@@ -15,10 +13,11 @@ class NameItemScreen extends StatelessWidget {
 
   @override
   Scaffold build(BuildContext context) {
-    final names = BlocProvider.of<CubitProvider>(context);
+    final names = BlocProvider.of<NameCubit>(context);
     final name = names.getName(id);
 
     Locale myLocale = Localizations.localeOf(context);
+    getDatas(context);
 
     return Scaffold(
       appBar: _buildAppBar(context),
@@ -53,5 +52,10 @@ class NameItemScreen extends StatelessWidget {
       default:
         return name!.translationInFr;
     }
+  }
+
+  void getDatas(context) async {
+    final names = await BlocProvider.of<NameCubit>(context);
+    final name = names.getName(id);
   }
 }

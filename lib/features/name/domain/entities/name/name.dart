@@ -1,0 +1,27 @@
+class Name {
+  final int id;
+  final String arabe;
+  final String transliteration;
+  final String translationInAr;
+  final String details;
+  final String benefite;
+  final String reference;
+  final String audioPath;
+  final String imagePath;
+  final String translationInEn;
+  final String translationInFr;
+
+  Name({
+    required this.id,
+    required this.arabe,
+    required this.transliteration,
+    required this.translationInAr,
+    required this.translationInEn,
+    required this.translationInFr,
+    required this.details,
+    required this.benefite,
+    required this.reference,
+    required this.audioPath,
+    required this.imagePath,
+  });
+}

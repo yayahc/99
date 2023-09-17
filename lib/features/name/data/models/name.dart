@@ -1,29 +1,19 @@
-class Name {
-  final int id;
-  final String arabe;
-  final String transliteration;
-  final String translationInAr;
-  final String details;
-  final List<String> sampleDoua;
-  final String benefite;
-  final String reference;
-  final String audioPath;
-  final String imagePath;
-  final String translationInEn;
-  final String translationInFr;
+import 'package:ninety/features/name/domain/entities/doua/doua.dart';
+import 'package:ninety/features/name/domain/entities/name/name.dart';
 
-  Name({
-    required this.id,
-    required this.arabe,
-    required this.transliteration,
-    required this.translationInAr,
-    required this.translationInEn,
-    required this.translationInFr,
-    required this.details,
-    required this.sampleDoua,
-    required this.benefite,
-    required this.reference,
-    required this.audioPath,
-    required this.imagePath,
-  });
+class NameModel extends Name {
+  final List<Doua> sampleDouas;
+  NameModel(
+      {required super.id,
+      required super.arabe,
+      required super.transliteration,
+      required super.translationInAr,
+      required super.translationInEn,
+      required super.translationInFr,
+      required super.details,
+      required super.benefite,
+      required super.reference,
+      required super.audioPath,
+      required super.imagePath,
+      required this.sampleDouas});
 }
