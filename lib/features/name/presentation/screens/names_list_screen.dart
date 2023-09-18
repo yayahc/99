@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ninety/core/extensions/extension_on_string.dart';
-import 'package:ninety/features/name/data/models/name.dart';
 import 'package:ninety/features/name/presentation/screens/name_item_screen.dart';
 import 'package:ninety/features/name/presentation/cubit/name_cubit.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../domain/entities/name/name.dart';
 
 class NamesListScreen extends StatelessWidget {
   const NamesListScreen({super.key});
@@ -13,9 +14,9 @@ class NamesListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Locale myLocale = Localizations.localeOf(context);
 
-    return BlocBuilder<CubitProvider, List<Name>>(builder: (context, state) {
+    return BlocBuilder<NameCubit, List<Name>?>(builder: (context, state) {
       return PageView.builder(
-          itemCount: state.length,
+          itemCount: state!.length,
           scrollDirection: Axis.vertical,
           itemBuilder: (context, index) {
             return TextButton(

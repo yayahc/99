@@ -6,18 +6,33 @@ import 'package:ninety/core/theme/colors/light_colors.dart';
 import 'package:ninety/features/name/presentation/cubit/name_cubit.dart';
 import 'package:sizer/sizer.dart';
 
-class NameItemScreen extends StatelessWidget {
+import '../../domain/entities/name/name.dart';
+
+class NameItemScreen extends StatefulWidget {
   final int id;
 
   const NameItemScreen({super.key, required this.id});
 
   @override
-  Scaffold build(BuildContext context) {
-    final names = BlocProvider.of<NameCubit>(context);
-    final name = names.getName(id);
+  State<NameItemScreen> createState() => _NameItemScreenState();
+}
 
+class _NameItemScreenState extends State<NameItemScreen> {
+  late final Name name;
+
+  @override
+  Scaffold build(BuildContext context) {
     Locale myLocale = Localizations.localeOf(context);
-    getDatas(context);
+
+    Future.delayed(
+      const Duration(seconds: 2),
+      () async {
+        final nameList = await getDatas(context);
+        setState(() {
+          name = nameList!.firstWhere((element) => element.id == widget.id);
+        });
+      },
+    );
 
     return Scaffold(
       appBar: _buildAppBar(context),
@@ -54,8 +69,9 @@ class NameItemScreen extends StatelessWidget {
     }
   }
 
-  void getDatas(context) async {
-    final names = await BlocProvider.of<NameCubit>(context);
-    final name = names.getName(id);
+  Future<List<Name>?> getDatas(context) async {
+    final names = BlocProvider.of<NameCubit>(context);
+    final name = await names.getName(widget.id);
+    return name;
   }
 }

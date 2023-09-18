@@ -4,7 +4,7 @@ import 'package:sizer/sizer.dart';
 import '../../../../features/name/data/models/name.dart';
 
 class NameContainer extends StatelessWidget {
-  final Name nameData;
+  final NameModel nameData;
   const NameContainer({super.key, required this.nameData});
 
   @override
