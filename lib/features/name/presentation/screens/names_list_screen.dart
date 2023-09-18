@@ -25,7 +25,7 @@ class NamesListScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              NameItemScreen(id: state[index].id)));
+                              NameItemScreen(name: state[index])));
                 },
                 child: Container(
                   width: double.infinity,
