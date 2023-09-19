@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:ninety/features/name/data/models/i_name_model.dart';
 import '../../../../../../core/error/app_error.dart';
-import '../../../repositories/i_data_sources_repository.dart';
+import '../../../repositories/i_name_data_sources_repository.dart';
 import 'local_names.dart';
 
 class NameLocalDataSourceImpl implements INameDataSource {
