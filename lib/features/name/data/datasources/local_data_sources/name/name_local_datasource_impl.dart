@@ -2,10 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:ninety/features/name/data/models/i_name_model.dart';
 import '../../../../../../core/error/app_error.dart';
-import 'i_name_local_datasource.dart';
+import '../../../repositories/i_data_sources_repository.dart';
 import 'local_names.dart';
 
-class NameLocalDataSourceImpl implements INameLocalDataSource {
+class NameLocalDataSourceImpl implements INameDataSource {
   @override
   Future<Either<AppError, List<ITranslationModel>>> getNames(
       String lang) async {
