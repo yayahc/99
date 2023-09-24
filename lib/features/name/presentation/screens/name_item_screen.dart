@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ninety/core/extensions/extension_on_string.dart';
-import 'package:ninety/core/theme/colors/light_colors.dart';
+import 'package:ninety/core/theme/colors/i_app_colors.dart';
+import 'package:ninety/dependencie_injection.dart';
 import 'package:ninety/features/name/data/models/i_name_model.dart';
 import 'package:sizer/sizer.dart';
 
@@ -13,7 +14,7 @@ class NameItemScreen extends StatelessWidget {
   Scaffold build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
-      backgroundColor: LightColors.background,
+      backgroundColor: locator.get<IAppColors>().background,
       body: Center(
         child: Column(
           children: [
@@ -27,7 +28,7 @@ class NameItemScreen extends StatelessWidget {
 
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: LightColors.background,
+      backgroundColor: locator.get<IAppColors>().background,
       leading: TextButton(
           onPressed: () => Navigator.pop(context),
           child: const Icon(Icons.backspace_rounded)),
