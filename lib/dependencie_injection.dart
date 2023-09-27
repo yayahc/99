@@ -21,9 +21,21 @@ import 'package:ninety/features/name/presentation/cubit/name_cubit.dart';
 
 final GetIt locator = GetIt.instance;
 
-void configureDependencie() {
+Future configureDependencie() async {
   locator.registerSingleton<AudioAssets>(AudioAssets());
   locator.registerSingleton<ArabeNames>(ArabeNames());
+  locator.registerSingleton<Name>(Name(
+      id: 0,
+      arabe: 'arabe',
+      transliteration: 'transliteration',
+      translationInAr: 'translationInAr',
+      translationInEn: 'translationInEn',
+      translationInFr: 'translationInFr',
+      details: 'details',
+      benefite: 'benefite',
+      reference: 'reference',
+      audioPath: 'audioPath',
+      imagePath: 'imagePath'));
   locator.registerSingleton<NameModel>(NameModel(
       id: 0,
       arabe: 'arabe',
@@ -38,31 +50,10 @@ void configureDependencie() {
       imagePath: 'imagePath',
       sampleDouas: <Doua>[]));
   locator.registerSingleton<EnglishNames>(EnglishNames());
-  locator.registerSingleton<NameCubit>(NameCubit(
-      NameCubitState('lang', <ITranslationModel>[]),
-      GetNamesUsesCase(NameRepositoryImpl(NameLocalDataSourceImpl()))));
-  locator.resetLazySingleton<NameCubitState>(
-      instance: NameCubitState('lang', <ITranslationModel>[]));
   locator.registerSingleton<FrenchNames>(FrenchNames());
-  locator.registerLazySingleton<UsesCase>(
-      () => GetNamesUsesCase(NameRepositoryImpl(NameLocalDataSourceImpl())));
-  locator.registerLazySingleton<INameRepository>(
-      () => NameRepositoryImpl(NameLocalDataSourceImpl()));
-  locator.registerSingleton<Name>(Name(
-      id: 0,
-      arabe: 'arabe',
-      transliteration: 'transliteration',
-      translationInAr: 'translationInAr',
-      translationInEn: 'translationInEn',
-      translationInFr: 'translationInFr',
-      details: 'details',
-      benefite: 'benefite',
-      reference: 'reference',
-      audioPath: 'audioPath',
-      imagePath: 'imagePath'));
   locator.registerSingleton<LocalNames>(LocalNames());
-  locator.resetLazySingleton<ITranslationModel>(
-      instance: GenericTranslationModel(
+  locator.registerLazySingleton<ITranslationModel>(() =>
+      GenericTranslationModel(
           benefite: 'benefite',
           details: 'details',
           id: 0,
@@ -73,9 +64,16 @@ void configureDependencie() {
           audioPath: 'audioPath',
           reference: 'reference',
           transliteration: 'transliteration'));
-  locator.resetLazySingleton<INameDataSource>(
-      instance: NameLocalDataSourceImpl());
+  locator
+      .registerLazySingleton<INameDataSource>(() => NameLocalDataSourceImpl());
   locator.registerSingleton<IAppColors>(LightColorsImpl());
   locator
       .registerLazySingleton<AppError>(() => GenericAppError('_errorMessage'));
+  locator.registerSingleton<NameCubit>(NameCubit(
+      NameCubitState('lang', <ITranslationModel>[]),
+      GetNamesUsesCase(NameRepositoryImpl(NameLocalDataSourceImpl()))));
+  locator.registerLazySingleton<UsesCase>(
+      () => GetNamesUsesCase(NameRepositoryImpl(NameLocalDataSourceImpl())));
+  locator.registerLazySingleton<INameRepository>(
+      () => NameRepositoryImpl(NameLocalDataSourceImpl()));
 }

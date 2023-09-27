@@ -19,7 +19,6 @@ class NameCubit extends Cubit<NameCubitState> {
       emit(NameCubitState(lang, names));
       return;
     }
-
     emit(NameCubitState(lang, []));
   }
 }
