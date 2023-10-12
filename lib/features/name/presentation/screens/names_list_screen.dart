@@ -23,36 +23,18 @@ class NamesListScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  NameItemScreen(name: state.names![index])));
+                                  NameItemScreen(id: state.names![index].id)));
                     },
                     child: Container(
                       width: double.infinity,
                       height: 20.h,
                       color: Colors.teal,
-                      child: ListTile(
-                          title: state.names![index].benefite.asWidget()),
+                      child:
+                          ListTile(title: state.names![index].arabe.asWidget()),
                     )),
-                Row(
-                  children: [
-                    ElevatedButton(
-                        onPressed: () => changeLang(context, 'fr'),
-                        child: 'fr'.asWidget()),
-                    ElevatedButton(
-                        onPressed: () => changeLang(context, 'en'),
-                        child: 'en'.asWidget()),
-                    ElevatedButton(
-                        onPressed: () => changeLang(context, 'ar'),
-                        child: 'ar'.asWidget())
-                  ],
-                )
               ],
             );
           });
     });
-  }
-
-  void changeLang(BuildContext context, String lang) {
-    final provider = BlocProvider.of<NameCubit>(context);
-    provider.getName(lang);
   }
 }

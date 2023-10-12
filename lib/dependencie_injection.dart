@@ -32,8 +32,7 @@ Future configureDependencie() async {
       translationInEn: 'translationInEn',
       translationInFr: 'translationInFr',
       details: 'details',
-      benefite: 'benefite',
-      reference: 'reference',
+      description: '',
       audioPath: 'audioPath',
       imagePath: 'imagePath'));
   locator.registerSingleton<NameModel>(NameModel(
@@ -44,8 +43,8 @@ Future configureDependencie() async {
       translationInEn: 'translationInEn',
       translationInFr: 'translationInFr',
       details: 'details',
-      benefite: 'benefite',
-      reference: 'reference',
+      description: '',
+      references: [],
       audioPath: 'audioPath',
       imagePath: 'imagePath',
       sampleDouas: <Doua>[]));
@@ -54,7 +53,7 @@ Future configureDependencie() async {
   locator.registerSingleton<LocalNames>(LocalNames());
   locator.registerLazySingleton<ITranslationModel>(() =>
       GenericTranslationModel(
-          benefite: 'benefite',
+          description: 'benefite',
           details: 'details',
           id: 0,
           arabe: 'arabe',
@@ -62,7 +61,7 @@ Future configureDependencie() async {
           translation: 'translation',
           imagePath: 'imagePath',
           audioPath: 'audioPath',
-          reference: 'reference',
+          reference: [],
           transliteration: 'transliteration'));
   locator
       .registerLazySingleton<INameDataSource>(() => NameLocalDataSourceImpl());

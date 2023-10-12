@@ -6,8 +6,8 @@ abstract class ITranslationModel {
   String get translation;
   String get transliteration;
   String get details;
-  String get benefite;
-  String get reference;
+  String get description;
+  List<String> get reference;
   String get audioPath;
   String get imagePath;
   List<Doua> get sampleDoua;
@@ -15,7 +15,7 @@ abstract class ITranslationModel {
 
 class GenericTranslationModel implements ITranslationModel {
   GenericTranslationModel(
-      {required String benefite,
+      {required String description,
       required String details,
       required int id,
       required String arabe,
@@ -23,9 +23,9 @@ class GenericTranslationModel implements ITranslationModel {
       required String translation,
       required String imagePath,
       required String audioPath,
-      required String reference,
+      required List<String> reference,
       required String transliteration})
-      : _benefite = benefite,
+      : _description = description,
         _details = details,
         _id = id,
         _arabe = arabe,
@@ -42,13 +42,13 @@ class GenericTranslationModel implements ITranslationModel {
   final String _imagePath;
   final String _translation;
   final List<Doua> _sampleDoua;
-  final String _benefite;
+  final String _description;
   final String _details;
-  final String _reference;
+  final List<String> _reference;
   final String _transliteration;
 
   @override
-  String get benefite => _benefite;
+  String get description => _description;
 
   @override
   String get details => _details;
@@ -57,7 +57,7 @@ class GenericTranslationModel implements ITranslationModel {
   int get id => _id;
 
   @override
-  String get reference => _reference;
+  List<String> get reference => _reference;
 
   @override
   String get transliteration => _transliteration;
