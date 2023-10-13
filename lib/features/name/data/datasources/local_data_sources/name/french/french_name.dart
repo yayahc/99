@@ -1,3 +1,4 @@
+import '../../../../../../../core/common/app_assets/app_assets.dart';
 import '../../../../models/i_name_model.dart';
 
 class FrenchNames {
@@ -11,7 +12,7 @@ class FrenchNames {
         reference: [],
         transliteration: "Ar-Rahman",
         arabe: 'ٱلْرَّحْمَـانُ',
-        audioPath: '',
+        audioPath: AudioAssets.arRahman,
         imagePath: '',
         sampleDoua: [],
         translation: 'Le Bienfaisant'),
@@ -23,7 +24,7 @@ class FrenchNames {
         reference: [],
         transliteration: "Ar-Raheem",
         arabe: 'ٱلْرَّحِيمُ',
-        audioPath: '',
+        audioPath: AudioAssets.arRaheem,
         imagePath: '',
         sampleDoua: [],
         translation: 'Le Miséricordieux'),

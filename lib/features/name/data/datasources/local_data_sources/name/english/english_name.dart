@@ -1,3 +1,4 @@
+import '../../../../../../../core/common/app_assets/app_assets.dart';
 import '../../../../models/i_name_model.dart';
 
 class EnglishNames {
@@ -10,7 +11,7 @@ class EnglishNames {
         reference: [],
         transliteration: "Ar-Rahman",
         arabe: 'ٱلْرَّحْمَـانُ',
-        audioPath: '',
+        audioPath: AudioAssets.arRahman,
         imagePath: '',
         sampleDoua: [],
         translation: 'The Beneficent'),
@@ -22,7 +23,7 @@ class EnglishNames {
         reference: [],
         transliteration: "Ar-Raheem",
         arabe: 'ٱلْرَّحِيْمُ',
-        audioPath: '',
+        audioPath: AudioAssets.arRaheem,
         imagePath: '',
         sampleDoua: [],
         translation: 'The Merciful'),
