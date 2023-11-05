@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ninety/core/theme/colors/i_app_colors.dart';
-import 'package:ninety/dependencie_injection.dart';
+import 'package:ninety/di.dart';
 import 'package:sizer/sizer.dart';
 
 extension StringAsWidgetExtension on String {
