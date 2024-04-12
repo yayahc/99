@@ -1,25 +1,22 @@
 import 'dart:ui';
 
+import 'package:injectable/injectable.dart';
 import 'package:ninety/core/theme/colors/i_app_color.dart';
 
+@Singleton(as: IAppColor)
 class LightColor implements IAppColor {
   @override
-  // TODO: implement background
-  Color get background => throw UnimplementedError();
+  Color get background => const Color.fromRGBO(238, 244, 239, 1);
 
   @override
-  // TODO: implement black
-  Color get black => throw UnimplementedError();
+  Color get black => const Color.fromRGBO(17, 17, 17, 1);
 
   @override
-  // TODO: implement gray
-  Color get gray => throw UnimplementedError();
+  Color get gray => const Color.fromRGBO(217, 217, 217, 1);
 
   @override
-  // TODO: implement primary
-  Color get primary => throw UnimplementedError();
+  Color get primary => const Color.fromRGBO(55, 185, 76, 1);
 
   @override
-  // TODO: implement white
-  Color get white => throw UnimplementedError();
+  Color get white => const Color.fromRGBO(250, 246, 246, 1);
 }

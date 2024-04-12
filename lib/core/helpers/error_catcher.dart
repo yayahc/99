@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
-import 'package:ninety/core/common/error/app_error.dart';
+import 'package:ninety/core/error/app_error.dart';
 
 class ErrorCatcher {
   static Future<Either<AppError, T>> trycatch<T>(Future<T> fn) async {

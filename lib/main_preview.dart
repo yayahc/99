@@ -9,5 +9,8 @@ Future<void> main() async {
   await init();
   SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
-      .then((value) => runApp(const Root()));
+      .then((value) => runApp(DevicePreview(
+            enabled: !kReleaseMode,
+            builder: (context) => const Root(),
+          )));
 }

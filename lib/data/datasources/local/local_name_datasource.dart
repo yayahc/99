@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:ninety/core/common/error/app_error.dart';
+import 'package:ninety/core/error/app_error.dart';
 import 'package:ninety/data/datasources/i_name_datasource.dart';
 import 'package:ninety/data/datasources/local/names_datas.dart';
 import 'package:ninety/domain/entities/name.dart';

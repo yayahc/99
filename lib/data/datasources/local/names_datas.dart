@@ -1,4 +1,4 @@
-import 'package:ninety/core/common/app_assets/app_assets.dart';
+import 'package:ninety/core/assets/assets.gen.dart';
 import 'package:ninety/domain/entities/name.dart';
 
 class NamesDatas {
@@ -15,7 +15,7 @@ class NamesDatas {
         sampleDoua: [],
         benefite: "",
         reference: "",
-        audioPath: AudioAssets.allah,
+        audioPath: Assets.audios.arAllah,
         imagePath: ""),
     Name(
         id: 1,
