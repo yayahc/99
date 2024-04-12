@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ninety/core/extensions/string_extension.dart';
 import 'package:sizer/sizer.dart';
-import '../../../models/name.dart';
+import '../../../domain/entities/name.dart';
 
 class NameContainer extends StatelessWidget {
   final Name nameData;
@@ -14,7 +14,7 @@ class NameContainer extends StatelessWidget {
       height: 100.h,
       color: Colors.teal,
       child: ListTile(
-        title: nameData.transliteration.asWidget(),
+        title: nameData.transliteration.light().label,
       ),
     );
   }

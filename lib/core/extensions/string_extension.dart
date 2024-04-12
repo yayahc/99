@@ -1,22 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:ninety/core/theme/colors/light_colors.dart';
+import 'package:ninety/core/theme/typography/i_app_typography.dart';
+import 'package:ninety/di.dart';
 import 'package:sizer/sizer.dart';
+import '../theme/typography/app_typography.dart';
 
 extension StringAsWidgetExtension on String {
-  Text asWidget(
-      {TextAlign? align,
-      double? fontSize,
-      Color? fontColor,
-      FontWeight? fontWeight}) {
-    return Text(
-      this,
-      textAlign: align ?? TextAlign.left,
-      style: GoogleFonts.poppins(
-        color: fontColor ?? LightColors.white,
-        fontSize: fontSize ?? 10.sp,
-        fontWeight: fontWeight ?? FontWeight.normal,
-      ),
-    );
+  TextStyled light({
+    Color? fontColor,
+  }) {
+    return locator.get<IAppTypography>().light(color: fontColor, text: this);
   }
+
+  TextStyled regular({
+    Color? fontColor,
+  }) {
+    return locator.get<IAppTypography>().regular(color: fontColor, text: this);
+  }
+
+  TextStyled medium({
+    Color? fontColor,
+  }) {
+    return locator.get<IAppTypography>().medium(color: fontColor, text: this);
+  }
+}
+
+extension TextStyledExtension on TextStyled {
+  Text get label => Text(text, style: style.copyWith(fontSize: 12.sp));
+  Text get body => Text(text, style: style.copyWith(fontSize: 16.sp));
+  Text get title => Text(text, style: style.copyWith(fontSize: 24.sp));
 }

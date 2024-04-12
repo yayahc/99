@@ -1,0 +1,3 @@
+class GetFavoriteNamesParam {
+  GetFavoriteNamesParam();
+}

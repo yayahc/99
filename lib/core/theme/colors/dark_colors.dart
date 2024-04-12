@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:ninety/core/theme/colors/i_app_color.dart';
 
-class LightColor implements IAppColor {
+class DarkColor implements IAppColor {
   @override
   // TODO: implement background
   Color get background => throw UnimplementedError();

@@ -12,3 +12,11 @@ class GenericError implements AppError {
     return errorMessage;
   }
 }
+
+class ErrorWhileAddingNameToFavorite extends GenericError {
+  ErrorWhileAddingNameToFavorite(super.errorMessage);
+}
+
+class ErrorWhileRemovingNameToFavorite extends GenericError {
+  ErrorWhileRemovingNameToFavorite(super.errorMessage);
+}

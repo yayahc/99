@@ -39,13 +39,13 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
               onPressed: () {
                 _audioPlayer.pause();
               },
-              child: "Pause".asWidget());
+              child: "Pause".light().label);
         }
         return ElevatedButton(
             onPressed: () {
               _audioPlayer.play(DeviceFileSource(widget.audioPath));
             },
-            child: "Play".asWidget());
+            child: "Play".light().label);
       },
     );
   }
