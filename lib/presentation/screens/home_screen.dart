@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ninety/core/assets/assets.gen.dart';
 import 'package:ninety/core/extensions/context_extension.dart';
 import 'package:ninety/core/extensions/string_extension.dart';
-import 'package:sizer/sizer.dart';
+import 'package:ninety/domain/entities/name.dart';
+import 'package:ninety/presentation/screens/favorite_name_screen.dart';
+
+import '../widgets/name_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,35 +16,21 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.colors.background,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: context.colors.background,
-        actions: [
-          InkWell(
-            child: Container(
-              alignment: Alignment.center,
-              child: const Icon(Icons.favorite, color: Colors.red),
-            ),
-          )
-        ],
-        leading: InkWell(
-          child: Container(
-            alignment: Alignment.center,
-            child: Icon(Icons.menu, color: context.colors.primary),
-          ),
-        ),
-      ),
-      body: Padding(
+      appBar: _appBar(context),
+      body: Container(
+        alignment: Alignment.center,
         padding: EdgeInsets.symmetric(horizontal: 16.sp),
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              "The 99 Names of Allah"
-                  .medium(fontColor: context.colors.black)
-                  .title,
-              _buildStack(context)
+              context.gaps.extra,
+              _buildScreenTitle(context),
+              context.gaps.extra,
+              context.gaps.extra,
+              const NamesWidget(
+                names: [],
+                isFav: false,
+              ),
             ],
           ),
         ),
@@ -47,10 +38,40 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Stack _buildStack(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [Assets.svgs.separator.svg()],
+  SizedBox _buildScreenTitle(BuildContext context) {
+    return SizedBox(
+      width: 193.sp,
+      height: 71.sp,
+      child: "The 99 Names of Allah"
+          .medium(fontColor: context.colors.black, textAlign: TextAlign.center)
+          .title,
+    );
+  }
+
+  AppBar _appBar(BuildContext context) {
+    return AppBar(
+      elevation: 0,
+      backgroundColor: context.colors.background,
+      actions: [
+        InkWell(
+          enableFeedback: true,
+          onTap: () {
+            context.push("/favorite");
+          },
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.sp),
+            alignment: Alignment.center,
+            child: const Icon(Icons.favorite, color: Colors.red),
+          ),
+        ),
+      ],
+      leading: InkWell(
+        onTap: () {},
+        child: Container(
+          alignment: Alignment.center,
+          child: Icon(Icons.menu, color: context.colors.primary),
+        ),
+      ),
     );
   }
 }

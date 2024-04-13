@@ -12,11 +12,13 @@ class AppTypography implements IAppTypography {
       {Color? color,
       FontWeight? fontWeight,
       double? fontSize,
+      TextAlign? textAlign,
       required String text}) {
     return TextStyled(
-        defaultStyle(
+        style: defaultStyle(
             color: color, fontSize: fontSize, fontWeight: FontWeight.w300),
-        text);
+        text: text,
+        textAlign: textAlign);
   }
 
   @override
@@ -24,11 +26,13 @@ class AppTypography implements IAppTypography {
       {Color? color,
       FontWeight? fontWeight,
       double? fontSize,
+      TextAlign? textAlign,
       required String text}) {
     return TextStyled(
-        defaultStyle(
+        style: defaultStyle(
             color: color, fontSize: fontSize, fontWeight: FontWeight.w500),
-        text);
+        text: text,
+        textAlign: textAlign);
   }
 
   @override
@@ -36,16 +40,21 @@ class AppTypography implements IAppTypography {
       {Color? color,
       FontWeight? fontWeight,
       double? fontSize,
+      TextAlign? textAlign,
       required String text}) {
-    return TextStyled(defaultStyle(fontSize: fontSize, color: color), text);
+    return TextStyled(
+        style: defaultStyle(fontSize: fontSize, color: color),
+        text: text,
+        textAlign: textAlign);
   }
 }
 
 class TextStyled {
   final TextStyle style;
+  final TextAlign? textAlign;
   final String text;
 
-  TextStyled(this.style, this.text);
+  TextStyled({required this.style, required this.text, this.textAlign});
 }
 
 TextStyle defaultStyle(

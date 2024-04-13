@@ -1,7 +1,7 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ninety/core/theme/gaps/i_app_gap.dart';
-import 'package:sizer/sizer.dart';
 
 @Singleton(as: IAppGap)
 class AppGap implements IAppGap {

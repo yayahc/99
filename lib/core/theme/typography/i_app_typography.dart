@@ -6,14 +6,17 @@ abstract class IAppTypography {
       {Color? color,
       FontWeight? fontWeight,
       double? fontSize,
+      TextAlign? textAlign,
       required String text});
   TextStyled medium(
       {Color? color,
+      TextAlign? textAlign,
       FontWeight? fontWeight,
       double? fontSize,
       required String text});
   TextStyled regular(
       {Color? color,
+      TextAlign? textAlign,
       FontWeight? fontWeight,
       double? fontSize,
       required String text});
