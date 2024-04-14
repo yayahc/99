@@ -3,6 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ninety/core/extensions/context_extension.dart';
 import 'package:ninety/core/extensions/string_extension.dart';
+import 'package:ninety/presentation/widgets/custom_app_bar.dart';
+
+import '../widgets/arrow_back_widget.dart';
 
 class NameItemScreen extends StatelessWidget {
   const NameItemScreen({super.key});
@@ -11,17 +14,7 @@ class NameItemScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.colors.background,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: context.colors.background,
-        leading: InkWell(
-          onTap: () => context.pop(),
-          child: Container(
-            alignment: Alignment.center,
-            child: Icon(Icons.arrow_back, color: context.colors.black),
-          ),
-        ),
-      ),
+      appBar: _buildAppBar(context),
       body: Container(
           padding: EdgeInsets.only(right: 24.sp, left: 24.sp, top: 24.sp),
           child: Column(
@@ -81,5 +74,9 @@ class NameItemScreen extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  AppBar _buildAppBar(BuildContext context) {
+    return CustomAppBar.build(leading: const ArrowBackWidget());
   }
 }

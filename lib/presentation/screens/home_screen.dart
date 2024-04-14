@@ -6,6 +6,7 @@ import 'package:ninety/core/extensions/context_extension.dart';
 import 'package:ninety/core/extensions/string_extension.dart';
 import 'package:ninety/domain/entities/name.dart';
 import 'package:ninety/presentation/screens/favorite_name_screen.dart';
+import 'package:ninety/presentation/widgets/custom_app_bar.dart';
 
 import '../widgets/name_widget.dart';
 
@@ -49,9 +50,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   AppBar _appBar(BuildContext context) {
-    return AppBar(
-      elevation: 0,
-      backgroundColor: context.colors.background,
+    return CustomAppBar.build(
       actions: [
         InkWell(
           enableFeedback: true,

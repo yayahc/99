@@ -20,18 +20,16 @@ class NamesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fake = Name(
-        id: 0,
-        arabe: "Name",
-        transliteration: "transliteration",
-        translationInAr: "translationInAr",
-        translationInEn: "translationInEn",
-        translationInFr: "translationInFr",
-        details: "details",
-        sampleDoua: [],
-        benefite: "benefite",
-        reference: "reference",
-        audioPath: "audioPath",
-        imagePath: "imagePath");
+      id: 0,
+      arabe: "Name",
+      transliteration: "transliteration",
+      translation: "translationInFr",
+      details: "details",
+      sampleDoua: [],
+      benefite: "benefite",
+      reference: [],
+      audioPath: "audioPath",
+    );
     final fakeL = List.generate(
       15,
       (index) => fake,
@@ -78,10 +76,7 @@ class NamesWidget extends StatelessWidget {
                       .transliteration
                       .regular(fontColor: context.colors.black)
                       .body,
-                  fakeL[0]
-                      .translationInFr
-                      .light(fontColor: context.colors.black)
-                      .label
+                  "fakeL[0]".light(fontColor: context.colors.black).label
                 ],
               ),
               context.gaps.extra,
