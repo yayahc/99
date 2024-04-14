@@ -14,7 +14,7 @@ class NamesDatas {
       reference: [
         "Beginning of every Surah (chapter) except one, and numerous other places. The first verse ('ayat) of Surah ar-Rahman (Surah 55) consists only of this Name."
       ],
-      audioPath: Assets.audios.arAllah,
+      audioPath: Assets.audios.one,
     ),
     Name(
       id: 1,
@@ -27,7 +27,7 @@ class NamesDatas {
       reference: [
         "Beginning of every Surah (chapter) except one, and numerous other places (there are a total of 114 Surahs in the Quran.)"
       ],
-      audioPath: "",
+      audioPath: Assets.audios.two,
     ),
     Name(
       id: 2,
@@ -43,7 +43,7 @@ class NamesDatas {
         "Surah 20 : Taa Haa (Ta-Ha) - Verse: 114",
         "Surah 23 : Al Muminoon (The Believers) - Verse: 116"
       ],
-      audioPath: "",
+      audioPath: Assets.audios.three,
     ),
     Name(
       id: 3,
@@ -58,7 +58,7 @@ class NamesDatas {
         "Surah 59 : Al Hashr (The Exile) - Verse: 23",
         "Surah 62 : Al Jumu'a (The Congregation (or, Friday)) - Verse: 1"
       ],
-      audioPath: "",
+      audioPath: Assets.audios.four,
     ),
     Name(
       id: 4,
@@ -70,7 +70,7 @@ class NamesDatas {
       sampleDoua: [],
       benefite: "",
       reference: ["Surah 59 : Al Hashr (The Exile) - Verse: 23"],
-      audioPath: "",
+      audioPath: Assets.audios.five,
     ),
     Name(
       id: 5,
@@ -82,7 +82,7 @@ class NamesDatas {
       sampleDoua: [],
       benefite: "",
       reference: ["Surah 59 : Al Hashr (The Exile) - Verse: 23"],
-      audioPath: "",
+      audioPath: Assets.audios.six,
     ),
     Name(
       id: 6,
@@ -93,7 +93,7 @@ class NamesDatas {
       sampleDoua: [],
       benefite: "",
       reference: ["Surah 59 : Al Hashr (The Exile) - Verse: 23"],
-      audioPath: "",
+      audioPath: Assets.audios.seven,
     ),
     Name(
       id: 7,
@@ -110,7 +110,7 @@ class NamesDatas {
         "Surah 48 : Al Fath (The Victory) - Verse: 7",
         "Surah 59 : Al Hashr (The Exile) - Verse: 23"
       ],
-      audioPath: "",
+      audioPath: Assets.audios.eight,
     ),
     Name(
       id: 8,
@@ -122,7 +122,7 @@ class NamesDatas {
       sampleDoua: [],
       benefite: "",
       reference: ["Surah 59 : Al Hashr (The Exile) - Verse: 23"],
-      audioPath: "",
+      audioPath: Assets.audios.nine,
     ),
     Name(
       id: 9,
@@ -134,7 +134,7 @@ class NamesDatas {
       sampleDoua: [],
       benefite: "",
       reference: ["Surah 59 : Al Hashr (The Exile) - Verse: 23"],
-      audioPath: "",
+      audioPath: Assets.audios.ten,
     ),
     Name(
       id: 10,
@@ -152,7 +152,7 @@ class NamesDatas {
         "Surah 40 : Al Ghaafir (The Forgiver) - Verse: 62",
         "Surah 59 : Al Hashr (The Exile) - Verse: 24",
       ],
-      audioPath: "",
+      audioPath: Assets.audios.eleven,
     ),
     Name(
       id: 11,
@@ -163,7 +163,7 @@ class NamesDatas {
       sampleDoua: [],
       benefite: "",
       reference: ["Surah 59 : Al Hashr (The Exile) - Verse: 24"],
-      audioPath: "",
+      audioPath: Assets.audios.twelve,
     ),
     Name(
       id: 12,
@@ -174,7 +174,7 @@ class NamesDatas {
       sampleDoua: [],
       benefite: "",
       reference: ["Surah 59 : Al Hashr (The Exile) - Verse: 24"],
-      audioPath: "",
+      audioPath: Assets.audios.thirteen,
     ),
     Name(
       id: 13,
@@ -192,7 +192,7 @@ class NamesDatas {
         "Surah 40 : Al Ghaafir (The Forgiver) - Verse: 42",
         "Surah 71 : Nooh (Noah) - Verse: 10"
       ],
-      audioPath: "",
+      audioPath: Assets.audios.fourteen,
     ),
     Name(
       id: 14,
@@ -211,7 +211,7 @@ class NamesDatas {
         "Surah 39 : Az Zumar (The Troops) - Verse: 4",
         "Surah 40 : Al Ghaafir (The Forgiver) - Verse: 16"
       ],
-      audioPath: "",
+      audioPath: Assets.audios.fifteen,
     ),
     Name(
       id: 15,
@@ -226,7 +226,7 @@ class NamesDatas {
         "Surah 38 : Saad (The letter 'Saad') - Verse: 9",
         "Surah 38 : Saad (The letter 'Saad') - Verse: 35"
       ],
-      audioPath: "",
+      audioPath: Assets.audios.sixteen,
     ),
     Name(
       id: 16,
@@ -237,7 +237,7 @@ class NamesDatas {
       sampleDoua: [],
       benefite: "",
       reference: ["Surah 51 : Adh Dhaariyat (The Winnowing Winds) - Verse: 58"],
-      audioPath: "",
+      audioPath: Assets.audios.seventeen,
     ),
     Name(
       id: 17,
@@ -249,7 +249,7 @@ class NamesDatas {
       sampleDoua: [],
       benefite: "",
       reference: ["Surah 34 : Saba (Sheba) - Verse: 26"],
-      audioPath: "",
+      audioPath: Assets.audios.eighteen,
     ),
     Name(
       id: 18,
@@ -267,7 +267,7 @@ class NamesDatas {
         "Surah 24 : An Noor ( The Light) - Verse: 41",
         "Surah 33 : Al Ahzaab (The Combined Forces) - Verse: 40"
       ],
-      audioPath: "",
+      audioPath: Assets.audios.nineteen,
     ),
     Name(
       id: 19,
@@ -279,7 +279,7 @@ class NamesDatas {
       sampleDoua: [],
       benefite: "",
       reference: ["Surah 2 : Al Baqara (The Cow) - Verse: 245"],
-      audioPath: "",
+      audioPath: Assets.audios.twenty,
     ),
     [TODO],
     Name(
