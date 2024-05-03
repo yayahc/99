@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ninety/core/assets/assets.gen.dart';
 import 'package:ninety/core/extensions/context_extension.dart';
 import 'package:ninety/core/extensions/string_extension.dart';
-import 'package:ninety/domain/entities/name.dart';
-import 'package:ninety/presentation/screens/favorite_name_screen.dart';
+import 'package:ninety/data/datasources/local/names_datas.dart';
+import 'package:ninety/presentation/screens/drawer_menu.dart';
 import 'package:ninety/presentation/widgets/custom_app_bar.dart';
 
 import '../widgets/name_widget.dart';
@@ -16,20 +15,21 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const DrawlerMenu(),
       backgroundColor: context.colors.background,
       appBar: _appBar(context),
       body: Container(
         alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(horizontal: 16.sp),
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               context.gaps.extra,
               _buildScreenTitle(context),
               context.gaps.extra,
               context.gaps.extra,
-              const NamesWidget(
-                names: [],
+              NamesWidget(
+                names: NamesDatas.names,
                 isFav: false,
               ),
             ],
@@ -53,6 +53,7 @@ class HomeScreen extends StatelessWidget {
     return CustomAppBar.build(
       actions: [
         InkWell(
+          borderRadius: BorderRadius.circular(8.sp),
           enableFeedback: true,
           onTap: () {
             context.push("/favorite");
@@ -64,13 +65,17 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ],
-      leading: InkWell(
-        onTap: () {},
-        child: Container(
-          alignment: Alignment.center,
-          child: Icon(Icons.menu, color: context.colors.primary),
-        ),
-      ),
+      leading: Builder(builder: (context) {
+        return InkWell(
+          enableFeedback: true,
+          borderRadius: BorderRadius.circular(8.sp),
+          onTap: () async => Scaffold.of(context).openDrawer(),
+          child: Container(
+            alignment: Alignment.center,
+            child: Icon(Icons.menu, color: context.colors.primary),
+          ),
+        );
+      }),
     );
   }
 }

@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:ninety/core/assets/assets.gen.dart';
 import 'package:ninety/core/extensions/context_extension.dart';
 import 'package:ninety/core/extensions/string_extension.dart';
-import 'package:ninety/presentation/screens/name_item_screen.dart';
 
 import '../../domain/entities/name.dart';
 
@@ -19,80 +18,61 @@ class NamesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fake = Name(
-      id: 0,
-      arabe: "Name",
-      transliteration: "transliteration",
-      translation: "translationInFr",
-      details: "details",
-      sampleDoua: [],
-      benefite: "benefite",
-      reference: [],
-      audioPath: "audioPath",
-    );
-    final fakeL = List.generate(
-      15,
-      (index) => fake,
-    );
-
-    return SizedBox(
-      height: MediaQuery.of(context).size.height,
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16.sp),
       child: Wrap(
         runSpacing: 8.sp,
-        children: fakeL.map((e) => _buildName(fakeL, context)).toList(),
+        children: names.map((e) => _buildName(e, context)).toList(),
       ),
     );
   }
 
-  Widget _buildName(List<Name> fakeL, BuildContext context) {
+  Widget _buildName(Name name, BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         !isFav
-            ? _buildIndexWithSeparator(context, fakeL)
+            ? _buildIndexWithSeparator(context, name)
             : _buildFavButton(context),
-        _buildContent(fakeL, context),
+        _buildContent(name, context),
       ],
     );
   }
 
-  Widget _buildContent(List<Name> fakeL, BuildContext context) {
+  Widget _buildContent(Name name, BuildContext context) {
     return InkWell(
-        onTap: () => context.push("/name"),
+        borderRadius: BorderRadius.circular(8.sp),
+        onTap: () => context.push("/name", extra: name),
         child: Container(
+          width: 300.sp,
           padding: EdgeInsets.symmetric(vertical: 12.sp, horizontal: 10.sp),
           decoration: BoxDecoration(
               color: context.colors.background,
               borderRadius: BorderRadius.circular(8)),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  fakeL[0]
-                      .transliteration
+                  name.transliteration
                       .regular(fontColor: context.colors.black)
                       .body,
-                  "fakeL[0]".light(fontColor: context.colors.black).label
+                  name.translation.light(fontColor: context.colors.black).label
                 ],
               ),
-              context.gaps.extra,
-              context.gaps.extra,
-              context.gaps.extra,
-              context.gaps.extra,
-              fakeL[0].arabe.regular(fontColor: context.colors.primary).title
+              name.arabe.medium(fontColor: context.colors.primary).title
             ],
           ),
         ));
   }
 
-  Row _buildIndexWithSeparator(BuildContext context, dynamic fakeL) {
+  Row _buildIndexWithSeparator(BuildContext context, Name name) {
     return Row(
       children: [
-        fakeL[0].id.toString().light(fontColor: context.colors.black).label,
+        name.id.toString().light(fontColor: context.colors.black).label,
         context.gaps.small,
         Assets.svgs.separator.svg(),
       ],
@@ -101,6 +81,7 @@ class NamesWidget extends StatelessWidget {
 
   Widget _buildFavButton(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(8.sp),
       enableFeedback: true,
       onTap: () {},
       child: Container(

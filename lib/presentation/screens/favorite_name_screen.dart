@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ninety/core/extensions/context_extension.dart';
 import 'package:ninety/core/extensions/string_extension.dart';
+import 'package:ninety/data/datasources/local/names_datas.dart';
 
 import '../widgets/name_widget.dart';
 
@@ -21,16 +22,16 @@ class FavoriteNameScreen extends StatelessWidget {
   Container _body(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(horizontal: 16.sp),
       child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             context.gaps.extra,
             _buildScreenTitle(context),
             context.gaps.extra,
             context.gaps.extra,
-            const NamesWidget(
-              names: [],
+            NamesWidget(
+              names: NamesDatas.names,
               isFav: true,
             ),
           ],
@@ -44,6 +45,7 @@ class FavoriteNameScreen extends StatelessWidget {
       elevation: 0,
       backgroundColor: context.colors.background,
       leading: InkWell(
+        borderRadius: BorderRadius.circular(8.sp),
         onTap: () => context.pop(),
         child: Container(
           alignment: Alignment.center,

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:ninety/core/extensions/context_extension.dart';
 import 'package:ninety/core/extensions/string_extension.dart';
 import 'package:ninety/presentation/widgets/custom_app_bar.dart';
 
+import '../../domain/entities/name.dart';
 import '../widgets/arrow_back_widget.dart';
 
 class NameItemScreen extends StatelessWidget {
-  const NameItemScreen({super.key});
+  final Name name;
+  const NameItemScreen({super.key, required this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +35,9 @@ class NameItemScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        "Allah".regular(fontColor: context.colors.black).body,
+        name.translation.regular(fontColor: context.colors.black).body,
         context.gaps.small,
-        "Clément envers ses créatures. La clémence d'une mère envers son enfant est une partie infime de Son immense clémence envers Ses créatures. Son châtiment est le plus dur et sévère de tous les châtiments mais Sa clémence a précédé Sa colère ; et ce nom fait partie des noms que l’on n’attribue à nul autre qu'Allah."
+        name.details
             .light(fontColor: context.colors.black, textAlign: TextAlign.left)
             .label
       ],
@@ -48,31 +49,44 @@ class NameItemScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        _playBtn(context),
         Row(
           children: [
-            "Name".medium(fontColor: context.colors.black).title,
+            _favoriteBtn(),
             context.gaps.small,
             context.gaps.small,
-            InkWell(
-              enableFeedback: true,
-              onTap: () {},
-              child: CircleAvatar(
-                backgroundColor: context.colors.primary,
-                child: Icon(Icons.play_arrow, color: context.colors.white),
-              ),
-            ),
+            name.arabe.medium(fontColor: context.colors.black).title,
           ],
-        ),
-        InkWell(
-          enableFeedback: true,
-          onTap: () {},
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 16.sp),
-            alignment: Alignment.center,
-            child: const Icon(Icons.favorite, color: Colors.red),
-          ),
-        ),
+        )
       ],
+    );
+  }
+
+  InkWell _playBtn(BuildContext context) {
+    return InkWell(
+      borderRadius: BorderRadius.circular(8.sp),
+      enableFeedback: true,
+      onTap: () {},
+      child: Container(
+        padding: EdgeInsets.all(10.sp),
+        child: CircleAvatar(
+          backgroundColor: context.colors.primary,
+          child: Icon(Icons.play_arrow, color: context.colors.white),
+        ),
+      ),
+    );
+  }
+
+  InkWell _favoriteBtn() {
+    return InkWell(
+      borderRadius: BorderRadius.circular(8.sp),
+      enableFeedback: true,
+      onTap: () {},
+      child: Container(
+        padding: EdgeInsets.all(16.sp),
+        alignment: Alignment.center,
+        child: const Icon(Icons.favorite, color: Colors.red),
+      ),
     );
   }
 
