@@ -121,3 +121,4 @@ flutter_gen:
 
 scripts:
   watch: "dart pub run build_runner watch"
+  build: "dart pub run build_runner build"

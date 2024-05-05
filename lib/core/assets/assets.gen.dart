@@ -26,11 +26,44 @@ class $AssetsAudiosGen {
   /// File path: assets/audios/fifteen.wav
   String get fifteen => 'assets/audios/fifteen.wav';
 
+  /// File path: assets/audios/fifty.wav
+  String get fifty => 'assets/audios/fifty.wav';
+
+  /// File path: assets/audios/fiftyone.wav
+  String get fiftyone => 'assets/audios/fiftyone.wav';
+
   /// File path: assets/audios/five.wav
   String get five => 'assets/audios/five.wav';
 
   /// File path: assets/audios/forty.wav
   String get forty => 'assets/audios/forty.wav';
+
+  /// File path: assets/audios/fortyeight.wav
+  String get fortyeight => 'assets/audios/fortyeight.wav';
+
+  /// File path: assets/audios/fortyfive.wav
+  String get fortyfive => 'assets/audios/fortyfive.wav';
+
+  /// File path: assets/audios/fortyfour.wav
+  String get fortyfour => 'assets/audios/fortyfour.wav';
+
+  /// File path: assets/audios/fortynine.wav
+  String get fortynine => 'assets/audios/fortynine.wav';
+
+  /// File path: assets/audios/fortyone.wav
+  String get fortyone => 'assets/audios/fortyone.wav';
+
+  /// File path: assets/audios/fortyseven.wav
+  String get fortyseven => 'assets/audios/fortyseven.wav';
+
+  /// File path: assets/audios/fortysix.wav
+  String get fortysix => 'assets/audios/fortysix.wav';
+
+  /// File path: assets/audios/fortythree.wav
+  String get fortythree => 'assets/audios/fortythree.wav';
+
+  /// File path: assets/audios/fortytwo.wav
+  String get fortytwo => 'assets/audios/fortytwo.wav';
 
   /// File path: assets/audios/four.wav
   String get four => 'assets/audios/four.wav';
@@ -140,8 +173,19 @@ class $AssetsAudiosGen {
         eighteen,
         eleven,
         fifteen,
+        fifty,
+        fiftyone,
         five,
         forty,
+        fortyeight,
+        fortyfive,
+        fortyfour,
+        fortynine,
+        fortyone,
+        fortyseven,
+        fortysix,
+        fortythree,
+        fortytwo,
         four,
         fourteen,
         nine,
