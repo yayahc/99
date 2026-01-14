@@ -1,14 +1,44 @@
+import 'dart:developer';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ninety/core/extensions/context_extension.dart';
 import 'package:ninety/core/extensions/string_extension.dart';
-import 'package:ninety/data/datasources/local/names_datas.dart';
+import 'package:ninety/di.dart';
+import 'package:ninety/presentation/bloc/favorite_cubit.dart';
 
+import '../../domain/entities/name.dart';
+import '../bloc/favorite_state.dart';
 import '../widgets/name_widget.dart';
 
-class FavoriteNameScreen extends StatelessWidget {
+class FavoriteNameScreen extends StatefulWidget {
   const FavoriteNameScreen({super.key});
+
+  @override
+  State<FavoriteNameScreen> createState() => _FavoriteNameScreenState();
+}
+
+class _FavoriteNameScreenState extends State<FavoriteNameScreen> {
+  late final ValueNotifier<List<Name>> _names;
+  late final ValueNotifier<bool> _isLoading;
+
+  @override
+  void initState() {
+    super.initState();
+    _names = ValueNotifier(<Name>[]);
+    _isLoading = ValueNotifier(false);
+    locator.get<FavoriteCubit>().loadFavotiresNames();
+  }
+
+  @override
+  void dispose() {
+    _names.dispose();
+    _isLoading.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +60,26 @@ class FavoriteNameScreen extends StatelessWidget {
             _buildScreenTitle(context),
             context.gaps.extra,
             context.gaps.extra,
-            NamesWidget(
-              names: NamesDatas.names,
-              isFav: true,
+            BlocBuilder<FavoriteCubit, FavoriteNamesState>(
+              builder: (context, state) {
+                _watchState(state);
+                return ListenableBuilder(
+                    listenable: _names,
+                    builder: (context, _) {
+                      return _names.value.isEmpty
+                          ? ListenableBuilder(
+                              listenable: _isLoading,
+                              builder: (context, _) {
+                                return _isLoading.value
+                                    ? const CupertinoActivityIndicator()
+                                    : const Center(child: Text('...'));
+                              })
+                          : NamesWidget(
+                              names: _names.value,
+                              isFav: true,
+                            );
+                    });
+              },
             ),
           ],
         ),
@@ -63,5 +110,30 @@ class FavoriteNameScreen extends StatelessWidget {
           .medium(fontColor: context.colors.black, textAlign: TextAlign.center)
           .title,
     );
+  }
+
+  void _watchState(FavoriteNamesState state) {
+    log('$state');
+    switch (state) {
+      case InitialFavoriteNamesState():
+      case FavoriteNamesLoadingState():
+        _isLoading.value = true;
+      case FavoriteNamesLoadedState():
+        _isLoading.value = false;
+        _names.value = (state).names;
+      case ErrorLoadingFavoriteNamesState():
+        _isLoading.value = false;
+        _names.value.clear();
+      case AddFavoriteNamesState():
+      case FavoriteNamesAddedState():
+      case ErrorAddingFavoriteNamesState():
+        _isLoading.value = false;
+        context.showSnackBar((state as ErrorAddingFavoriteNamesState).error);
+      case RemoveFavoriteNamesState():
+      case FavoriteNamesRemovedState():
+      case ErrorRemovingFavoriteNamesState():
+        _isLoading.value = false;
+        context.showSnackBar((state as ErrorRemovingFavoriteNamesState).error);
+    }
   }
 }

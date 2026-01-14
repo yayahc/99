@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import 'package:ninety/core/error/app_error.dart';
 import 'package:ninety/core/helpers/error_catcher.dart';
 import 'package:ninety/domain/entities/name.dart';
@@ -6,6 +7,7 @@ import 'package:ninety/domain/params/favorite/get_favorite_names_param.dart';
 import 'package:ninety/domain/repositories/favorite/i_favorite_name_repository.dart';
 import 'package:ninety/domain/usecases/usecase.dart';
 
+@singleton
 class GetFavoriteNamesUsecase
     implements Usecase<GetFavoriteNamesParam, List<Name>> {
   final IFavoriteNameRepository _favoriteNameRepository;

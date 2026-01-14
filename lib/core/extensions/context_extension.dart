@@ -6,4 +6,9 @@ import 'package:ninety/di.dart';
 extension ContextExtensions on BuildContext {
   IAppColor get colors => locator.get<IAppColor>();
   IAppGap get gaps => locator.get<IAppGap>();
+
+  void showSnackBar(String message) {
+    ScaffoldMessenger.of(this).removeCurrentSnackBar();
+    ScaffoldMessenger.of(this).showSnackBar(SnackBar(content: Text(message)));
+  }
 }
