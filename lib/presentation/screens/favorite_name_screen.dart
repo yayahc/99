@@ -116,6 +116,7 @@ class _FavoriteNameScreenState extends State<FavoriteNameScreen> {
     log('$state');
     switch (state) {
       case InitialFavoriteNamesState():
+        _isLoading.value = false;
       case FavoriteNamesLoadingState():
         _isLoading.value = true;
       case FavoriteNamesLoadedState():
