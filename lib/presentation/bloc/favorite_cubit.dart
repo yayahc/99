@@ -11,6 +11,9 @@ class FavoriteCubit extends Cubit<FavoriteNamesState> {
   final AddNameToFavoriteUsecase _addNameToFavoriteUsecase;
   final GetFavoriteNamesUsecase _getFavoriteNamesUsecase;
   final RemoveNameToFavoriteUsecase _removeNameToFavoriteUsecase;
+  List<int> _favoriteNameIds = [];
+  List<int> get favoriteNameIds => _favoriteNameIds;
+
   FavoriteCubit(this._addNameToFavoriteUsecase, this._getFavoriteNamesUsecase,
       this._removeNameToFavoriteUsecase)
       : super(InitialFavoriteNamesState());
@@ -22,7 +25,10 @@ class FavoriteCubit extends Cubit<FavoriteNamesState> {
     result.fold(
         (error) =>
             emit(ErrorLoadingFavoriteNamesState(error: error.getError())),
-        (names) => emit(FavoriteNamesLoadedState(names: names)));
+        (names) {
+      _favoriteNameIds = names.map((n) => n.id).toList();
+      emit(FavoriteNamesLoadedState(names: names));
+    });
   }
 
   void addNameToFavorite(int id) async {

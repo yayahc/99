@@ -1,34 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ninety/core/extensions/context_extension.dart';
+import 'package:ninety/core/extensions/name_extension.dart';
 import 'package:ninety/core/extensions/string_extension.dart';
-import 'package:ninety/di.dart';
 import 'package:ninety/presentation/bloc/favorite_cubit.dart';
 import 'package:ninety/presentation/widgets/custom_app_bar.dart';
 
 import '../../domain/entities/name.dart';
+import '../bloc/favorite_state.dart';
 import '../widgets/arrow_back_widget.dart';
 
-class NameItemScreen extends StatelessWidget {
+class NameItemScreen extends StatefulWidget {
   final Name name;
   const NameItemScreen({super.key, required this.name});
+
+  @override
+  State<NameItemScreen> createState() => _NameItemScreenState();
+}
+
+class _NameItemScreenState extends State<NameItemScreen> {
+  late final ValueNotifier<bool> _isFavorite;
+  @override
+  void initState() {
+    super.initState();
+    _isFavorite = ValueNotifier(widget.name.isFavorite(context));
+  }
+
+  @override
+  void dispose() {
+    _isFavorite.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.colors.background,
       appBar: _buildAppBar(context),
-      body: Container(
-          padding: EdgeInsets.only(right: 24.sp, left: 24.sp, top: 24.sp),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildHeader(context),
-              context.gaps.extra,
-              context.gaps.small,
-              _buildContent(context)
-            ],
-          )),
+      body: BlocListener<FavoriteCubit, FavoriteNamesState>(
+        listener: (context, state) {
+          _watchState(state);
+        },
+        child: Container(
+            padding: EdgeInsets.only(right: 24.sp, left: 24.sp, top: 24.sp),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildHeader(context),
+                context.gaps.extra,
+                context.gaps.small,
+                _buildContent(context)
+              ],
+            )),
+      ),
     );
   }
 
@@ -37,9 +62,9 @@ class NameItemScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        name.translation.regular(fontColor: context.colors.black).body,
+        widget.name.translation.regular(fontColor: context.colors.black).body,
         context.gaps.small,
-        name.details
+        widget.name.details
             .light(fontColor: context.colors.black, textAlign: TextAlign.left)
             .label
       ],
@@ -57,7 +82,7 @@ class NameItemScreen extends StatelessWidget {
             _favoriteBtn(),
             context.gaps.small,
             context.gaps.small,
-            name.arabe.medium(fontColor: context.colors.black).title,
+            widget.name.arabe.medium(fontColor: context.colors.black).title,
           ],
         )
       ],
@@ -79,20 +104,50 @@ class NameItemScreen extends StatelessWidget {
     );
   }
 
-  InkWell _favoriteBtn() {
-    return InkWell(
-      borderRadius: BorderRadius.circular(8.sp),
-      enableFeedback: true,
-      onTap: () => locator.get<FavoriteCubit>().addNameToFavorite(name.id),
-      child: Container(
-        padding: EdgeInsets.all(16.sp),
-        alignment: Alignment.center,
-        child: const Icon(Icons.favorite, color: Colors.red),
-      ),
-    );
+  Widget _favoriteBtn() {
+    return ListenableBuilder(
+        listenable: _isFavorite,
+        builder: (context, _) {
+          return InkWell(
+            borderRadius: BorderRadius.circular(8.sp),
+            enableFeedback: true,
+            onTap: !_isFavorite.value
+                ? () => BlocProvider.of<FavoriteCubit>(context)
+                    .addNameToFavorite(widget.name.id)
+                : () => BlocProvider.of<FavoriteCubit>(context)
+                    .removeNameToFavorite(widget.name.id),
+            child: Container(
+              padding: EdgeInsets.all(16.sp),
+              alignment: Alignment.center,
+              child: Icon(Icons.favorite,
+                  color: _isFavorite.value ? Colors.red : Colors.grey),
+            ),
+          );
+        });
   }
 
   AppBar _buildAppBar(BuildContext context) {
     return CustomAppBar.build(leading: const ArrowBackWidget());
+  }
+
+  void _watchState(FavoriteNamesState state) {
+    switch (state) {
+      case InitialFavoriteNamesState():
+      case FavoriteNamesLoadingState():
+      case FavoriteNamesLoadedState():
+      case ErrorLoadingFavoriteNamesState():
+      case AddFavoriteNamesState():
+        break;
+      case FavoriteNamesAddedState():
+        _isFavorite.value = true;
+      case ErrorAddingFavoriteNamesState():
+        context.showSnackBar((state).error);
+      case RemoveFavoriteNamesState():
+        break;
+      case FavoriteNamesRemovedState():
+        _isFavorite.value = false;
+      case ErrorRemovingFavoriteNamesState():
+        context.showSnackBar((state).error);
+    }
   }
 }

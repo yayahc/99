@@ -74,7 +74,6 @@ class _FavoriteNameScreenState extends State<FavoriteNameScreen> {
                                 ? const Center(child: Text('...'))
                                 : NamesWidget(
                                     names: _names.value,
-                                    isFav: true,
                                   );
                           });
                 }),
@@ -122,14 +121,16 @@ class _FavoriteNameScreenState extends State<FavoriteNameScreen> {
         _names.value.clear();
       case AddFavoriteNamesState():
       case FavoriteNamesAddedState():
+        break;
       case ErrorAddingFavoriteNamesState():
         _isLoading.value = false;
-        context.showSnackBar((state as ErrorAddingFavoriteNamesState).error);
+        context.showSnackBar((state).error);
       case RemoveFavoriteNamesState():
       case FavoriteNamesRemovedState():
+        break;
       case ErrorRemovingFavoriteNamesState():
         _isLoading.value = false;
-        context.showSnackBar((state as ErrorRemovingFavoriteNamesState).error);
+        context.showSnackBar((state).error);
     }
   }
 }

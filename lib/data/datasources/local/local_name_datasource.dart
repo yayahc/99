@@ -41,14 +41,18 @@ class LocalNameDatasourceImpl implements INameDatasource {
 
   @override
   Future<List<Name>> getFavoriteNames(GetFavoriteNamesParam param) async {
-    final List<String>? indexes = pref.getStringList('fav');
-    if (indexes == null) {
-      return [];
+    try {
+      final List<String>? indexes = pref.getStringList('fav');
+      if (indexes == null) {
+        return [];
+      }
+      final List<Name> names = await getNames(GetNamesParam());
+      final List<Name> favNames =
+          names.takeWhile((e) => indexes.contains(e.id.toString())).toList();
+      return favNames;
+    } catch (e) {
+      throw ErrorWhileLoadingNameToFavorite(e.toString());
     }
-    final List<Name> names = await getNames(GetNamesParam());
-    final List<Name> favNames =
-        names.takeWhile((e) => indexes.contains(e.id.toString())).toList();
-    return favNames;
   }
 
   @override
@@ -58,7 +62,8 @@ class LocalNameDatasourceImpl implements INameDatasource {
       indexes.remove(param.id.toString());
       await pref.setStringList('fav', indexes);
     } else {
-      throw ErrorWhileRemovingNameToFavorite;
+      throw ErrorWhileRemovingNameToFavorite(
+          'An error occurend while removing name to favorite');
     }
   }
 }

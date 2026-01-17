@@ -17,6 +17,10 @@ class ErrorWhileAddingNameToFavorite extends GenericError {
   ErrorWhileAddingNameToFavorite(super.errorMessage);
 }
 
+class ErrorWhileLoadingNameToFavorite extends GenericError {
+  ErrorWhileLoadingNameToFavorite(super.errorMessage);
+}
+
 class ErrorWhileRemovingNameToFavorite extends GenericError {
   ErrorWhileRemovingNameToFavorite(super.errorMessage);
 }

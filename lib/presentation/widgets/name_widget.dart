@@ -3,17 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ninety/core/assets/assets.gen.dart';
 import 'package:ninety/core/extensions/context_extension.dart';
+import 'package:ninety/core/extensions/name_extension.dart';
 import 'package:ninety/core/extensions/string_extension.dart';
 
 import '../../domain/entities/name.dart';
 
 class NamesWidget extends StatelessWidget {
   final List<Name> names;
-  final bool isFav;
   const NamesWidget({
     super.key,
     required this.names,
-    required this.isFav,
   });
 
   @override
@@ -32,7 +31,7 @@ class NamesWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        !isFav
+        !name.isFavorite(context)
             ? _buildIndexWithSeparator(context, name)
             : _buildFavButton(context),
         _buildContent(name, context),

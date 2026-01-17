@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ninety/core/extensions/context_extension.dart';
 import 'package:ninety/core/extensions/string_extension.dart';
+import 'package:ninety/presentation/bloc/favorite_cubit.dart';
 import 'package:ninety/presentation/bloc/name_cubit.dart';
 import 'package:ninety/presentation/bloc/name_state.dart';
 import 'package:ninety/presentation/screens/drawer_menu.dart';
@@ -29,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _names = ValueNotifier(<Name>[]);
     _isLoading = ValueNotifier(false);
+    BlocProvider.of<FavoriteCubit>(context).loadFavotiresNames();
     BlocProvider.of<NameCubit>(context).loadNames();
   }
 
@@ -77,7 +79,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ? const Center(child: Text('...'))
                                 : NamesWidget(
                                     names: _names.value,
-                                    isFav: true,
                                   );
                           });
                 }),
