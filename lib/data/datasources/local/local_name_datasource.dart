@@ -35,7 +35,7 @@ class LocalNameDatasourceImpl implements INameDatasource {
       indexes.add(param.id.toString());
       await pref.setStringList('fav', indexes);
     } else {
-      throw ErrorWhileAddingNameToFavorite;
+      await pref.setStringList('fav', [param.id.toString()]);
     }
   }
 

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ninety/core/extensions/context_extension.dart';
 import 'package:ninety/core/extensions/string_extension.dart';
+import 'package:ninety/di.dart';
+import 'package:ninety/presentation/bloc/favorite_cubit.dart';
 import 'package:ninety/presentation/widgets/custom_app_bar.dart';
 
 import '../../domain/entities/name.dart';
@@ -81,7 +83,7 @@ class NameItemScreen extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(8.sp),
       enableFeedback: true,
-      onTap: () {},
+      onTap: () => locator.get<FavoriteCubit>().addNameToFavorite(name.id),
       child: Container(
         padding: EdgeInsets.all(16.sp),
         alignment: Alignment.center,

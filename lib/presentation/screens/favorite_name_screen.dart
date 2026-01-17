@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ninety/core/extensions/context_extension.dart';
 import 'package:ninety/core/extensions/string_extension.dart';
-import 'package:ninety/di.dart';
 import 'package:ninety/presentation/bloc/favorite_cubit.dart';
 
 import '../../domain/entities/name.dart';
@@ -30,7 +27,7 @@ class _FavoriteNameScreenState extends State<FavoriteNameScreen> {
     super.initState();
     _names = ValueNotifier(<Name>[]);
     _isLoading = ValueNotifier(false);
-    locator.get<FavoriteCubit>().loadFavotiresNames();
+    BlocProvider.of<FavoriteCubit>(context).loadFavotiresNames();
   }
 
   @override
@@ -45,7 +42,12 @@ class _FavoriteNameScreenState extends State<FavoriteNameScreen> {
     return Scaffold(
       backgroundColor: context.colors.background,
       appBar: _appBar(context),
-      body: _body(context),
+      body: BlocListener<FavoriteCubit, FavoriteNamesState>(
+        listener: (context, state) {
+          _watchState(state);
+        },
+        child: _body(context),
+      ),
     );
   }
 
@@ -60,27 +62,22 @@ class _FavoriteNameScreenState extends State<FavoriteNameScreen> {
             _buildScreenTitle(context),
             context.gaps.extra,
             context.gaps.extra,
-            BlocBuilder<FavoriteCubit, FavoriteNamesState>(
-              builder: (context, state) {
-                _watchState(state);
-                return ListenableBuilder(
-                    listenable: _names,
-                    builder: (context, _) {
-                      return _names.value.isEmpty
-                          ? ListenableBuilder(
-                              listenable: _isLoading,
-                              builder: (context, _) {
-                                return _isLoading.value
-                                    ? const CupertinoActivityIndicator()
-                                    : const Center(child: Text('...'));
-                              })
-                          : NamesWidget(
-                              names: _names.value,
-                              isFav: true,
-                            );
-                    });
-              },
-            ),
+            ListenableBuilder(
+                listenable: _isLoading,
+                builder: (context, _) {
+                  return _isLoading.value
+                      ? const CupertinoActivityIndicator()
+                      : ListenableBuilder(
+                          listenable: _names,
+                          builder: (context, _) {
+                            return _names.value.isEmpty
+                                ? const Center(child: Text('...'))
+                                : NamesWidget(
+                                    names: _names.value,
+                                    isFav: true,
+                                  );
+                          });
+                }),
           ],
         ),
       ),
@@ -113,15 +110,13 @@ class _FavoriteNameScreenState extends State<FavoriteNameScreen> {
   }
 
   void _watchState(FavoriteNamesState state) {
-    log('$state');
     switch (state) {
       case InitialFavoriteNamesState():
-        _isLoading.value = false;
       case FavoriteNamesLoadingState():
         _isLoading.value = true;
       case FavoriteNamesLoadedState():
         _isLoading.value = false;
-        _names.value = (state).names;
+        _names.value = state.names;
       case ErrorLoadingFavoriteNamesState():
         _isLoading.value = false;
         _names.value.clear();

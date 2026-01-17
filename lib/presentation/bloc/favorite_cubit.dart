@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:injectable/injectable.dart';
 import 'package:ninety/domain/params/favorite/add_name_to_favorite_param.dart';
 import 'package:ninety/domain/params/favorite/get_favorite_names_param.dart';
 import 'package:ninety/domain/params/favorite/remove_name_to_favorite_param.dart';
@@ -8,7 +7,6 @@ import '../../domain/usecases/favorite/add_name_to_favorite_usecase.dart';
 import '../../domain/usecases/favorite/get_favorite_names_usecase.dart';
 import '../../domain/usecases/favorite/remove_name_to_favorite_usecase.dart';
 
-@singleton
 class FavoriteCubit extends Cubit<FavoriteNamesState> {
   final AddNameToFavoriteUsecase _addNameToFavoriteUsecase;
   final GetFavoriteNamesUsecase _getFavoriteNamesUsecase;
