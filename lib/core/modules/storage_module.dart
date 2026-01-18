@@ -1,10 +1,9 @@
 import 'package:injectable/injectable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ninety/database.dart';
 
 @module
 abstract class StorageModule {
   @singleton
-  @preResolve
-  @Named('pref')
-  Future<SharedPreferences> get instance => SharedPreferences.getInstance();
+  @Named('db')
+  AppDatabase get instance => AppDatabase();
 }
