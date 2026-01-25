@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ninety/core/assets/assets.gen.dart';
-import 'package:ninety/core/extensions/context_extension.dart';
-import 'package:ninety/core/extensions/name_extension.dart';
-import 'package:ninety/core/extensions/string_extension.dart';
-
+import 'package:ninety/core/extensions/extensions.dart';
 import '../../domain/entities/name.dart';
+
+enum ViewMode { indexWithSeparator, favorite }
 
 class NamesWidget extends StatelessWidget {
   final List<Name> names;
+  final ViewMode? viewMode;
   const NamesWidget({
     super.key,
     required this.names,
+    this.viewMode = ViewMode.favorite,
   });
 
   @override
@@ -31,15 +32,21 @@ class NamesWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        !name.isFavorite(context)
-            ? _buildIndexWithSeparator(context, name)
-            : _buildFavButton(context),
-        _buildContent(name, context),
+        _buildLeft(name, context),
+        _buildRight(name, context),
       ],
     );
   }
 
-  Widget _buildContent(Name name, BuildContext context) {
+  Widget _buildLeft(Name name, BuildContext context) {
+    return switch (viewMode) {
+      ViewMode.indexWithSeparator => _buildIndexWithSeparator(context, name),
+      ViewMode.favorite => _buildFavButton(context),
+      null => const SizedBox(),
+    };
+  }
+
+  Widget _buildRight(Name name, BuildContext context) {
     return InkWell(
         borderRadius: BorderRadius.circular(8.sp),
         onTap: () => context.push("/name", extra: name),

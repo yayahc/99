@@ -79,6 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ? const Center(child: Text('...'))
                                 : NamesWidget(
                                     names: _names.value,
+                                    viewMode: ViewMode.indexWithSeparator,
                                   );
                           });
                 }),
