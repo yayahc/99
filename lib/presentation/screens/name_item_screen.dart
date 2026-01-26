@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -91,22 +92,45 @@ class _NameItemScreenState extends State<NameItemScreen> {
     );
   }
 
-  InkWell _playBtn(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(8.sp),
-      enableFeedback: true,
-      onTap: () {
-        AudioPlayerService.playableStream.add(widget.name.toAudioSource);
-      },
-      child: Container(
-        padding: EdgeInsets.all(10.sp),
-        child: CircleAvatar(
-          backgroundColor: context.colors.primary,
-          child: Icon(Icons.play_arrow, color: context.colors.white),
-        ),
-      ),
-    );
+  Widget _playBtn(BuildContext context) {
+    return ListenableBuilder(
+        listenable: AudioPlayerService.playerStateNotifier,
+        builder: (context, _) {
+          return InkWell(
+            borderRadius: BorderRadius.circular(8.sp),
+            enableFeedback: true,
+            onTap: () {
+              switch (AudioPlayerService.playerStateNotifier.value) {
+                case PlayerState.completed:
+                case PlayerState.disposed:
+                case PlayerState.paused:
+                  AudioPlayerService.playableStream
+                      .add(widget.name.toAudioSource);
+                  break;
+                default:
+                  AudioPlayerService.player.pause();
+              }
+            },
+            child: Container(
+              padding: EdgeInsets.all(10.sp),
+              child: CircleAvatar(
+                backgroundColor: context.colors.primary,
+                child: _buildPlayIconbaseOnPlayerState(context),
+              ),
+            ),
+          );
+        });
   }
+
+  Widget _buildPlayIconbaseOnPlayerState(BuildContext context) =>
+      switch (AudioPlayerService.playerStateNotifier.value) {
+        PlayerState.stopped ||
+        PlayerState.paused ||
+        PlayerState.completed ||
+        PlayerState.disposed =>
+          Icon(Icons.play_arrow, color: context.colors.white),
+        PlayerState.playing => Icon(Icons.pause, color: context.colors.white)
+      };
 
   Widget _favoriteBtn() {
     return ListenableBuilder(
