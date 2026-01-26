@@ -10,6 +10,7 @@ import 'package:ninety/presentation/bloc/name_cubit.dart';
 import 'package:ninety/presentation/bloc/name_state.dart';
 import 'package:ninety/presentation/screens/drawer_menu.dart';
 import 'package:ninety/presentation/widgets/custom_app_bar.dart';
+import 'package:ninety/services/audio_player/audio_player_service.dart';
 
 import '../../domain/entities/name.dart';
 import '../widgets/name_widget.dart';
@@ -32,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _isLoading = ValueNotifier(false);
     BlocProvider.of<FavoriteCubit>(context).loadFavotiresNames();
     BlocProvider.of<NameCubit>(context).loadNames();
+    AudioPlayerService.instance.listen();
   }
 
   @override

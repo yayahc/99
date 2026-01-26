@@ -8,6 +8,7 @@ import 'package:ninety/presentation/bloc/favorite_cubit.dart';
 import 'package:ninety/presentation/widgets/custom_app_bar.dart';
 
 import '../../domain/entities/name.dart';
+import '../../services/audio_player/audio_player_service.dart';
 import '../bloc/favorite_state.dart';
 import '../widgets/arrow_back_widget.dart';
 
@@ -21,6 +22,7 @@ class NameItemScreen extends StatefulWidget {
 
 class _NameItemScreenState extends State<NameItemScreen> {
   late final ValueNotifier<bool> _isFavorite;
+
   @override
   void initState() {
     super.initState();
@@ -93,7 +95,9 @@ class _NameItemScreenState extends State<NameItemScreen> {
     return InkWell(
       borderRadius: BorderRadius.circular(8.sp),
       enableFeedback: true,
-      onTap: () {},
+      onTap: () {
+        AudioPlayerService.playableStream.add(widget.name.toAudioSource);
+      },
       child: Container(
         padding: EdgeInsets.all(10.sp),
         child: CircleAvatar(

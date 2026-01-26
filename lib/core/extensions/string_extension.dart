@@ -35,3 +35,7 @@ extension TextStyledExtension on TextStyled {
   Text get title =>
       Text(text, style: style.copyWith(fontSize: 24.sp), textAlign: textAlign);
 }
+
+extension AudioSourceExtensions on String {
+  String get normalyze => split('assets/').last;
+}
