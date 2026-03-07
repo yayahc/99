@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ninety/core/extensions/context_extension.dart';
-import 'package:ninety/core/extensions/string_extension.dart';
 
 import '../widgets/setting_button.dart';
 
@@ -11,74 +10,160 @@ class DrawlerMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 16.sp),
+      backgroundColor: context.colors.background,
+      child: SafeArea(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            context.gaps.extra,
-            context.gaps.extra,
-            _buildThemeSetting(context),
-            context.gaps.large,
-            _buildNotificationSetting(context)
+            _buildHeader(context),
+            Expanded(
+              child: ListView(
+                padding:
+                    EdgeInsets.symmetric(horizontal: 20.sp, vertical: 8.sp),
+                children: [
+                  _buildSection(
+                    context,
+                    label: 'THEME',
+                    child: _ThemeToggle(),
+                  ),
+                  SizedBox(height: 24.sp),
+                  _buildSection(
+                    context,
+                    label: 'NOTIFICATIONS',
+                    child: _NotificationToggle(),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Column _buildNotificationSetting(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        context.gaps.small,
-        _buildTtitle(context, 'Notification'),
-        context.gaps.small,
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SettingButton(
-              title: "Enable",
-              isEnable: ValueNotifier(false),
-            ),
-            context.gaps.small,
-            SettingButton(
-              title: "Disable",
-              isEnable: ValueNotifier(true),
-            ),
-          ],
-        )
-      ],
+  Widget _buildHeader(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.fromLTRB(20.sp, 20.sp, 8.sp, 16.sp),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'The 99 Names',
+                style: TextStyle(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w800,
+                  color: context.colors.black,
+                ),
+              ),
+              SizedBox(height: 2.sp),
+              Text(
+                'Asma ul Husna',
+                style: TextStyle(
+                  fontSize: 13.sp,
+                  color: context.colors.primary,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+          IconButton(
+            icon: Icon(Icons.close, color: context.colors.black, size: 22.sp),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ],
+      ),
     );
   }
 
-  Column _buildThemeSetting(BuildContext context) {
+  Widget _buildSection(BuildContext context,
+      {required String label, required Widget child}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        context.gaps.small,
-        _buildTtitle(context, 'Thème'),
-        context.gaps.small,
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SettingButton(
-              title: "Light",
-              isEnable: ValueNotifier(true),
-            ),
-            context.gaps.small,
-            SettingButton(
-              title: "Dark",
-              isEnable: ValueNotifier(false),
-            ),
-          ],
-        )
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 11.sp,
+            fontWeight: FontWeight.w700,
+            color: Colors.grey.shade500,
+            letterSpacing: 1.4,
+          ),
+        ),
+        SizedBox(height: 10.sp),
+        child,
       ],
     );
   }
+}
 
-  Widget _buildTtitle(BuildContext context, String title) {
-    return title.medium(fontColor: context.colors.black).body;
+class _ThemeToggle extends StatefulWidget {
+  @override
+  State<_ThemeToggle> createState() => _ThemeToggleState();
+}
+
+class _ThemeToggleState extends State<_ThemeToggle> {
+  final _light = ValueNotifier(true);
+  final _dark = ValueNotifier(false);
+
+  @override
+  void dispose() {
+    _light.dispose();
+    _dark.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SettingButton(
+          title: 'Light',
+          isEnable: _light,
+        ),
+        SizedBox(width: 10.sp),
+        SettingButton(
+          title: 'Dark',
+          isEnable: _dark,
+        ),
+      ],
+    );
+  }
+}
+
+class _NotificationToggle extends StatefulWidget {
+  @override
+  State<_NotificationToggle> createState() => _NotificationToggleState();
+}
+
+class _NotificationToggleState extends State<_NotificationToggle> {
+  final _enable = ValueNotifier(false);
+  final _disable = ValueNotifier(true);
+
+  @override
+  void dispose() {
+    _enable.dispose();
+    _disable.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SettingButton(
+          title: 'Enable',
+          isEnable: _enable,
+        ),
+        SizedBox(width: 10.sp),
+        SettingButton(
+          title: 'Disable',
+          isEnable: _disable,
+        ),
+      ],
+    );
   }
 }

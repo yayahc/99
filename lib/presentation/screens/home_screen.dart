@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const DrawlerMenu(),
+      // drawer: const DrawlerMenu(),
       backgroundColor: context.colors.background,
       appBar: _buildAppBar(context),
       body: BlocListener<NameCubit, NameState>(
@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return AppBar(
       backgroundColor: context.colors.background,
       elevation: 0,
-      centerTitle: true,
+      // centerTitle: true,
       title: Text(
         'The 99 Names',
         style: TextStyle(
@@ -94,16 +94,16 @@ class _HomeScreenState extends State<HomeScreen> {
           color: context.colors.black,
         ),
       ),
-      leading: Builder(builder: (ctx) {
-        return IconButton(
-          icon: Icon(
-            Icons.menu,
-            color: context.colors.black,
-            size: 24.sp,
-          ),
-          onPressed: () => Scaffold.of(ctx).openDrawer(),
-        );
-      }),
+      // leading: Builder(builder: (ctx) {
+      //   return IconButton(
+      //     icon: Icon(
+      //       Icons.menu,
+      //       color: context.colors.black,
+      //       size: 24.sp,
+      //     ),
+      //     onPressed: () => Scaffold.of(ctx).openDrawer(),
+      //   );
+      // }),
       actions: [
         Padding(
           padding: EdgeInsets.only(right: 16.sp),

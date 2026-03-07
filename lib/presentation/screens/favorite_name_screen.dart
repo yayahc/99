@@ -73,7 +73,7 @@ class _FavoriteNameScreenState extends State<FavoriteNameScreen> {
       elevation: 0,
       centerTitle: true,
       title: Text(
-        'Saved',
+        'Favorite',
         style: TextStyle(
           fontSize: 20.sp,
           fontWeight: FontWeight.w800,
