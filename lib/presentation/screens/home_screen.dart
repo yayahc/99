@@ -4,16 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ninety/core/extensions/context_extension.dart';
-import 'package:ninety/core/extensions/string_extension.dart';
 import 'package:ninety/presentation/bloc/favorite_cubit.dart';
 import 'package:ninety/presentation/bloc/name_cubit.dart';
 import 'package:ninety/presentation/bloc/name_state.dart';
 import 'package:ninety/presentation/screens/drawer_menu.dart';
-import 'package:ninety/presentation/widgets/custom_app_bar.dart';
 import 'package:ninety/services/audio_player/audio_player_service.dart';
 
 import '../../domain/entities/name.dart';
-import '../widgets/name_widget.dart';
+import '../widgets/name_card_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,23 +22,50 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late final ValueNotifier<List<Name>> _names;
+  late final ValueNotifier<List<Name>> _filteredNames;
   late final ValueNotifier<bool> _isLoading;
+  late final TextEditingController _searchController;
 
   @override
   void initState() {
     super.initState();
     _names = ValueNotifier(<Name>[]);
+    _filteredNames = ValueNotifier(<Name>[]);
     _isLoading = ValueNotifier(false);
+    _searchController = TextEditingController();
     BlocProvider.of<FavoriteCubit>(context).loadFavotiresNames();
     BlocProvider.of<NameCubit>(context).loadNames();
     AudioPlayerService.instance.listen();
+    _searchController.addListener(_onSearchChanged);
   }
 
   @override
   void dispose() {
     _names.dispose();
+    _filteredNames.dispose();
     _isLoading.dispose();
+    _searchController.dispose();
     super.dispose();
+  }
+
+  void _onSearchChanged() {
+    final query = _searchController.text.toLowerCase();
+    if (query.isEmpty) {
+      _filteredNames.value = List.from(_names.value);
+    } else {
+      _filteredNames.value = _names.value
+          .where((n) =>
+              n.transliteration.toLowerCase().contains(query) ||
+              n.translation.toLowerCase().contains(query))
+          .toList();
+    }
+  }
+
+  Name? get _nameOfTheDay {
+    if (_names.value.isEmpty) return null;
+    final dayOfYear =
+        DateTime.now().difference(DateTime(DateTime.now().year)).inDays;
+    return _names.value[dayOfYear % _names.value.length];
   }
 
   @override
@@ -48,86 +73,211 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       drawer: const DrawlerMenu(),
       backgroundColor: context.colors.background,
-      appBar: _appBar(context),
+      appBar: _buildAppBar(context),
       body: BlocListener<NameCubit, NameState>(
-        listener: (context, state) {
-          _watchState(state);
-        },
-        child: _body(context),
+        listener: (context, state) => _watchState(state),
+        child: _buildBody(context),
       ),
     );
   }
 
-  Container _body(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            context.gaps.extra,
-            _buildScreenTitle(context),
-            context.gaps.extra,
-            context.gaps.extra,
-            ListenableBuilder(
-                listenable: _isLoading,
-                builder: (context, _) {
-                  return _isLoading.value
-                      ? const CupertinoActivityIndicator()
-                      : ListenableBuilder(
-                          listenable: _names,
-                          builder: (context, _) {
-                            return _names.value.isEmpty
-                                ? const Center(child: Text('...'))
-                                : NamesWidget(
-                                    names: _names.value,
-                                    viewMode: ViewMode.indexWithSeparator,
-                                  );
-                          });
-                }),
-          ],
+  AppBar _buildAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: context.colors.background,
+      elevation: 0,
+      centerTitle: true,
+      title: Text(
+        'The 99 Names',
+        style: TextStyle(
+          fontSize: 20.sp,
+          fontWeight: FontWeight.w800,
+          color: context.colors.black,
         ),
       ),
-    );
-  }
-
-  SizedBox _buildScreenTitle(BuildContext context) {
-    return SizedBox(
-      width: 193.sp,
-      height: 71.sp,
-      child: "The 99 Names of Allah"
-          .medium(fontColor: context.colors.black, textAlign: TextAlign.center)
-          .title,
-    );
-  }
-
-  AppBar _appBar(BuildContext context) {
-    return CustomAppBar.build(
+      leading: Builder(builder: (ctx) {
+        return IconButton(
+          icon: Icon(
+            Icons.menu,
+            color: context.colors.black,
+            size: 24.sp,
+          ),
+          onPressed: () => Scaffold.of(ctx).openDrawer(),
+        );
+      }),
       actions: [
-        InkWell(
-          borderRadius: BorderRadius.circular(8.sp),
-          enableFeedback: true,
-          onTap: () {
-            context.push("/favorite");
-          },
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 16.sp),
-            alignment: Alignment.center,
-            child: const Icon(Icons.favorite, color: Colors.red),
+        Padding(
+          padding: EdgeInsets.only(right: 16.sp),
+          child: GestureDetector(
+            onTap: () => context.push('/favorite'),
+            child: Icon(
+              Icons.star,
+              color: context.colors.primary,
+              size: 28.sp,
+            ),
           ),
         ),
       ],
-      leading: Builder(builder: (context) {
-        return InkWell(
-          enableFeedback: true,
-          borderRadius: BorderRadius.circular(8.sp),
-          onTap: () async => Scaffold.of(context).openDrawer(),
-          child: Container(
-            alignment: Alignment.center,
-            child: Icon(Icons.menu, color: context.colors.primary),
-          ),
+    );
+  }
+
+  Widget _buildBody(BuildContext context) {
+    return ListenableBuilder(
+      listenable: _isLoading,
+      builder: (context, _) {
+        if (_isLoading.value) {
+          return const Center(child: CupertinoActivityIndicator());
+        }
+        return ListenableBuilder(
+          listenable: _filteredNames,
+          builder: (context, _) {
+            final showNameOfTheDay = _searchController.text.isEmpty;
+            return CustomScrollView(
+              physics: const BouncingScrollPhysics(),
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(16.sp, 16.sp, 16.sp, 0),
+                    child: Column(
+                      children: [
+                        _buildSearchBar(context),
+                        if (showNameOfTheDay) SizedBox(height: 16.sp),
+                        if (showNameOfTheDay) _buildNameOfTheDayCard(context),
+                        SizedBox(height: 16.sp),
+                      ],
+                    ),
+                  ),
+                ),
+                SliverPadding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.sp),
+                  sliver: SliverList.separated(
+                    itemCount: _filteredNames.value.length,
+                    separatorBuilder: (_, __) => SizedBox(height: 8.sp),
+                    itemBuilder: (context, i) =>
+                        NameCardWidget(name: _filteredNames.value[i]),
+                  ),
+                ),
+                SliverToBoxAdapter(child: SizedBox(height: 24.sp)),
+              ],
+            );
+          },
         );
-      }),
+      },
+    );
+  }
+
+  Widget _buildSearchBar(BuildContext context) {
+    return Container(
+      height: 52.sp,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16.sp),
+      ),
+      child: TextField(
+        controller: _searchController,
+        style: TextStyle(fontSize: 14.sp, color: context.colors.black),
+        decoration: InputDecoration(
+          hintText: 'Search names, meanings...',
+          hintStyle: TextStyle(
+            color: Colors.grey.shade400,
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w400,
+          ),
+          prefixIcon: Icon(
+            Icons.search,
+            color: Colors.grey.shade400,
+            size: 22.sp,
+          ),
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.symmetric(vertical: 14.sp),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNameOfTheDayCard(BuildContext context) {
+    final name = _nameOfTheDay;
+    if (name == null) return const SizedBox();
+    return GestureDetector(
+      onTap: () => context.push('/name', extra: name),
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.all(20.sp),
+        decoration: BoxDecoration(
+          color: const Color(0xFF2E7D46),
+          borderRadius: BorderRadius.circular(20.sp),
+        ),
+        child: Stack(
+          clipBehavior: Clip.hardEdge,
+          children: [
+            Positioned(
+              right: -8.sp,
+              top: -12.sp,
+              child: Opacity(
+                opacity: 0.12,
+                child: Icon(
+                  Icons.mosque,
+                  size: 110.sp,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'NAME OF THE DAY',
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 11.sp,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1.8,
+                  ),
+                ),
+                SizedBox(height: 10.sp),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            name.transliteration,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 26.sp,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                          SizedBox(height: 4.sp),
+                          Text(
+                            name.translation,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Text(
+                      name.arabe,
+                      style: TextStyle(
+                        color: const Color(0xFF81C784),
+                        fontSize: 30.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      textDirection: TextDirection.rtl,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -139,9 +289,9 @@ class _HomeScreenState extends State<HomeScreen> {
       case NamesLoadedState():
         _isLoading.value = false;
         _names.value = state.names;
+        _filteredNames.value = List.from(state.names);
       case ErrorLoadingNamesState():
         _isLoading.value = false;
-        _names.value.clear();
     }
   }
 }

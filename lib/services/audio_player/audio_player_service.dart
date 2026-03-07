@@ -16,12 +16,16 @@ class AudioPlayerService {
   static late final ValueNotifier<PlayerState> _playerStateNotifier;
   static ValueNotifier<PlayerState> get playerStateNotifier =>
       _playerStateNotifier;
+  static late final ValueNotifier<String?> _currentSourceNotifier;
+  static ValueNotifier<String?> get currentSourceNotifier =>
+      _currentSourceNotifier;
 
   void init() {
     _instance = AudioPlayerService();
     _player = AudioPlayer();
     _playableStream = StreamController<NameAudioSource>();
     _playerStateNotifier = ValueNotifier(PlayerState.stopped);
+    _currentSourceNotifier = ValueNotifier(null);
   }
 
   void dispose() {
@@ -33,6 +37,7 @@ class AudioPlayerService {
     _listenToStateEvent();
     playableStream.stream.listen((nameSource) {
       try {
+        _currentSourceNotifier.value = nameSource.path ?? nameSource.url;
         _player.play(
             AssetSource((nameSource.path ?? nameSource.url ?? '').normalyze));
       } catch (e) {

@@ -2,14 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:ninety/core/extensions/context_extension.dart';
-import 'package:ninety/core/extensions/string_extension.dart';
 import 'package:ninety/presentation/bloc/favorite_cubit.dart';
 
 import '../../domain/entities/name.dart';
 import '../bloc/favorite_state.dart';
-import '../widgets/name_widget.dart';
+import '../widgets/name_card_widget.dart';
 
 class FavoriteNameScreen extends StatefulWidget {
   const FavoriteNameScreen({super.key});
@@ -20,91 +18,182 @@ class FavoriteNameScreen extends StatefulWidget {
 
 class _FavoriteNameScreenState extends State<FavoriteNameScreen> {
   late final ValueNotifier<List<Name>> _names;
+  late final ValueNotifier<List<Name>> _filteredNames;
   late final ValueNotifier<bool> _isLoading;
+  late final TextEditingController _searchController;
 
   @override
   void initState() {
     super.initState();
     _names = ValueNotifier(<Name>[]);
+    _filteredNames = ValueNotifier(<Name>[]);
     _isLoading = ValueNotifier(false);
+    _searchController = TextEditingController();
+    _searchController.addListener(_onSearchChanged);
     BlocProvider.of<FavoriteCubit>(context).loadFavotiresNames();
   }
 
   @override
   void dispose() {
     _names.dispose();
+    _filteredNames.dispose();
     _isLoading.dispose();
+    _searchController.dispose();
     super.dispose();
+  }
+
+  void _onSearchChanged() {
+    final query = _searchController.text.toLowerCase();
+    if (query.isEmpty) {
+      _filteredNames.value = List.from(_names.value);
+    } else {
+      _filteredNames.value = _names.value
+          .where((n) =>
+              n.transliteration.toLowerCase().contains(query) ||
+              n.translation.toLowerCase().contains(query))
+          .toList();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.colors.background,
-      appBar: _appBar(context),
+      appBar: _buildAppBar(context),
       body: BlocListener<FavoriteCubit, FavoriteNamesState>(
-        listener: (context, state) {
-          _watchState(state);
-        },
-        child: _body(context),
+        listener: (context, state) => _watchState(state),
+        child: _buildBody(context),
       ),
     );
   }
 
-  Container _body(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            context.gaps.extra,
-            _buildScreenTitle(context),
-            context.gaps.extra,
-            context.gaps.extra,
-            ListenableBuilder(
-                listenable: _isLoading,
-                builder: (context, _) {
-                  return _isLoading.value
-                      ? const CupertinoActivityIndicator()
-                      : ListenableBuilder(
-                          listenable: _names,
-                          builder: (context, _) {
-                            return _names.value.isEmpty
-                                ? const Center(child: Text('...'))
-                                : NamesWidget(
-                                    names: _names.value,
-                                  );
-                          });
-                }),
-          ],
-        ),
-      ),
-    );
-  }
-
-  AppBar _appBar(BuildContext context) {
+  AppBar _buildAppBar(BuildContext context) {
     return AppBar(
-      elevation: 0,
       backgroundColor: context.colors.background,
-      leading: InkWell(
-        borderRadius: BorderRadius.circular(8.sp),
-        onTap: () => context.pop(),
-        child: Container(
-          alignment: Alignment.center,
-          child: Icon(Icons.arrow_back, color: context.colors.black),
+      elevation: 0,
+      centerTitle: true,
+      title: Text(
+        'Saved',
+        style: TextStyle(
+          fontSize: 20.sp,
+          fontWeight: FontWeight.w800,
+          color: context.colors.black,
+        ),
+      ),
+      leading: IconButton(
+        icon: Icon(Icons.arrow_back, color: context.colors.black, size: 24.sp),
+        onPressed: () => Navigator.of(context).pop(),
+      ),
+    );
+  }
+
+  Widget _buildBody(BuildContext context) {
+    return ListenableBuilder(
+      listenable: _isLoading,
+      builder: (context, _) {
+        if (_isLoading.value) {
+          return const Center(child: CupertinoActivityIndicator());
+        }
+        return ListenableBuilder(
+          listenable: _filteredNames,
+          builder: (context, _) {
+            return CustomScrollView(
+              physics: const BouncingScrollPhysics(),
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(16.sp, 16.sp, 16.sp, 0),
+                    child: Column(
+                      children: [
+                        _buildSearchBar(context),
+                        SizedBox(height: 16.sp),
+                      ],
+                    ),
+                  ),
+                ),
+                if (_filteredNames.value.isEmpty)
+                  SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: _buildEmptyState(context),
+                  )
+                else
+                  SliverPadding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.sp),
+                    sliver: SliverList.separated(
+                      itemCount: _filteredNames.value.length,
+                      separatorBuilder: (_, __) => SizedBox(height: 8.sp),
+                      itemBuilder: (context, i) =>
+                          NameCardWidget(name: _filteredNames.value[i]),
+                    ),
+                  ),
+                SliverToBoxAdapter(child: SizedBox(height: 24.sp)),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildSearchBar(BuildContext context) {
+    return Container(
+      height: 52.sp,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16.sp),
+      ),
+      child: TextField(
+        controller: _searchController,
+        style: TextStyle(fontSize: 14.sp, color: context.colors.black),
+        decoration: InputDecoration(
+          hintText: 'Search names, meanings...',
+          hintStyle: TextStyle(
+            color: Colors.grey.shade400,
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w400,
+          ),
+          prefixIcon: Icon(
+            Icons.search,
+            color: Colors.grey.shade400,
+            size: 22.sp,
+          ),
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.symmetric(vertical: 14.sp),
         ),
       ),
     );
   }
 
-  SizedBox _buildScreenTitle(BuildContext context) {
-    return SizedBox(
-      width: 193.sp,
-      height: 71.sp,
-      child: "Your favorite names"
-          .medium(fontColor: context.colors.black, textAlign: TextAlign.center)
-          .title,
+  Widget _buildEmptyState(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.favorite_border,
+            size: 56.sp,
+            color: Colors.grey.shade300,
+          ),
+          SizedBox(height: 16.sp),
+          Text(
+            'No saved names yet',
+            style: TextStyle(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w600,
+              color: Colors.grey.shade400,
+            ),
+          ),
+          SizedBox(height: 8.sp),
+          Text(
+            'Tap the heart on any name to save it here',
+            style: TextStyle(
+              fontSize: 13.sp,
+              color: Colors.grey.shade400,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
     );
   }
 
@@ -116,21 +205,21 @@ class _FavoriteNameScreenState extends State<FavoriteNameScreen> {
       case FavoriteNamesLoadedState():
         _isLoading.value = false;
         _names.value = state.names;
+        _filteredNames.value = List.from(state.names);
       case ErrorLoadingFavoriteNamesState():
         _isLoading.value = false;
-        _names.value.clear();
+        _names.value = [];
+        _filteredNames.value = [];
       case AddFavoriteNamesState():
       case FavoriteNamesAddedState():
         break;
       case ErrorAddingFavoriteNamesState():
-        _isLoading.value = false;
-        context.showSnackBar((state).error);
+        context.showSnackBar(state.error);
       case RemoveFavoriteNamesState():
       case FavoriteNamesRemovedState():
         break;
       case ErrorRemovingFavoriteNamesState():
-        _isLoading.value = false;
-        context.showSnackBar((state).error);
+        context.showSnackBar(state.error);
     }
   }
 }
