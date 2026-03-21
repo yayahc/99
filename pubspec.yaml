@@ -61,6 +61,7 @@ dev_dependencies:
   drift_dev: ^2.30.1
   build_runner: ^2.4.9
   flutter_gen_runner: ^5.4.0
+  flutter_launcher_icons: ^0.14.4
   flutter_test:
     sdk: flutter
 
@@ -122,6 +123,25 @@ flutter_gen:
     flutter_svg: true    
     rive: true
     lottie: true
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: false
+  image_path: "assets/logo.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/logo.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "assets/logo.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "assets/logo.png"
+
 
 scripts:
   watch: ".fvm/flutter_sdk/bin/flutter pub run build_runner watch"

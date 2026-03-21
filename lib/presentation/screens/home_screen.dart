@@ -7,7 +7,6 @@ import 'package:ninety/core/extensions/context_extension.dart';
 import 'package:ninety/presentation/bloc/favorite_cubit.dart';
 import 'package:ninety/presentation/bloc/name_cubit.dart';
 import 'package:ninety/presentation/bloc/name_state.dart';
-import 'package:ninety/presentation/screens/drawer_menu.dart';
 import 'package:ninety/services/audio_player/audio_player_service.dart';
 
 import '../../domain/entities/name.dart';
@@ -87,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
       elevation: 0,
       // centerTitle: true,
       title: Text(
-        'The 99 Names',
+        'The 99',
         style: TextStyle(
           fontSize: 20.sp,
           fontWeight: FontWeight.w800,
