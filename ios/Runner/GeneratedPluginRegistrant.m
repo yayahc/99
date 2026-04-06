@@ -18,6 +18,12 @@
 @import path_provider_foundation;
 #endif
 
+#if __has_include(<share_plus/FPPSharePlusPlugin.h>)
+#import <share_plus/FPPSharePlusPlugin.h>
+#else
+@import share_plus;
+#endif
+
 #if __has_include(<sqlite3_flutter_libs/Sqlite3FlutterLibsPlugin.h>)
 #import <sqlite3_flutter_libs/Sqlite3FlutterLibsPlugin.h>
 #else
@@ -29,6 +35,7 @@
 + (void)registerWithRegistry:(NSObject<FlutterPluginRegistry>*)registry {
   [AudioplayersDarwinPlugin registerWithRegistrar:[registry registrarForPlugin:@"AudioplayersDarwinPlugin"]];
   [PathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"PathProviderPlugin"]];
+  [FPPSharePlusPlugin registerWithRegistrar:[registry registrarForPlugin:@"FPPSharePlusPlugin"]];
   [Sqlite3FlutterLibsPlugin registerWithRegistrar:[registry registrarForPlugin:@"Sqlite3FlutterLibsPlugin"]];
 }
 

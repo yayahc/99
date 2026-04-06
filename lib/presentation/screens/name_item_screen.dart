@@ -1,13 +1,20 @@
+import 'dart:io';
+import 'dart:ui' as ui;
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:ninety/core/extensions/context_extension.dart';
 import 'package:ninety/core/extensions/name_extension.dart';
 import 'package:ninety/presentation/bloc/favorite_cubit.dart';
 
 import '../../domain/entities/name.dart';
 import '../../services/audio_player/audio_player_service.dart';
+import '../../services/share/share_name_service.dart';
 import '../bloc/favorite_state.dart';
 
 class NameItemScreen extends StatefulWidget {
@@ -20,6 +27,7 @@ class NameItemScreen extends StatefulWidget {
 
 class _NameItemScreenState extends State<NameItemScreen> {
   late final ValueNotifier<bool> _isFavorite;
+  final GlobalKey _shareKey = GlobalKey();
 
   @override
   void initState() {
@@ -76,6 +84,13 @@ class _NameItemScreenState extends State<NameItemScreen> {
       actions: [
         Padding(
           padding: EdgeInsets.only(right: 16.sp),
+          child: GestureDetector(
+            onTap: () => _shareName(context),
+            child: Icon(Icons.share, color: Colors.grey.shade400, size: 26.sp),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(right: 16.sp),
           child: ListenableBuilder(
             listenable: _isFavorite,
             builder: (context, _) => GestureDetector(
@@ -100,83 +115,85 @@ class _NameItemScreenState extends State<NameItemScreen> {
   }
 
   Widget _buildHeroCard(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: const Color(0xFF2E7D46),
-        borderRadius: BorderRadius.circular(20.sp),
-      ),
-      padding: EdgeInsets.all(22.sp),
-      child: Stack(
-        clipBehavior: Clip.hardEdge,
-        children: [
-          Positioned(
-            right: -12.sp,
-            bottom: -16.sp,
-            child: Opacity(
-              opacity: 0.10,
-              child: Icon(Icons.mosque, size: 120.sp, color: Colors.white),
-            ),
+    return RepaintBoundary(
+        key: _shareKey,
+        child: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: const Color(0xFF2E7D46),
+            borderRadius: BorderRadius.circular(20.sp),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          padding: EdgeInsets.all(22.sp),
+          child: Stack(
+            clipBehavior: Clip.hardEdge,
             children: [
-              Text(
-                '# ${widget.name.id}',
-                style: TextStyle(
-                  color: Colors.white54,
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: 1.2,
+              Positioned(
+                right: -12.sp,
+                bottom: -16.sp,
+                child: Opacity(
+                  opacity: 0.10,
+                  child: Icon(Icons.mosque, size: 120.sp, color: Colors.white),
                 ),
               ),
-              SizedBox(height: 10.sp),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.name.transliteration,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 26.sp,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                        SizedBox(height: 4.sp),
-                        Text(
-                          widget.name.translation,
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 13.sp,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                   Text(
-                    widget.name.arabe,
+                    '# ${widget.name.id}',
                     style: TextStyle(
-                      color: const Color(0xFF81C784),
-                      fontSize: 32.sp,
+                      color: Colors.white54,
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.w600,
+                      letterSpacing: 1.2,
                     ),
-                    textDirection: TextDirection.rtl,
                   ),
+                  SizedBox(height: 10.sp),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.name.transliteration,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 26.sp,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                            SizedBox(height: 4.sp),
+                            Text(
+                              widget.name.translation,
+                              style: TextStyle(
+                                color: Colors.white70,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Text(
+                        widget.name.arabe,
+                        style: TextStyle(
+                          color: const Color(0xFF81C784),
+                          fontSize: 32.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textDirection: TextDirection.rtl,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 18.sp),
+                  _buildPlayButton(),
                 ],
               ),
-              SizedBox(height: 18.sp),
-              _buildPlayButton(),
             ],
           ),
-        ],
-      ),
-    );
+        ));
   }
 
   Widget _buildPlayButton() {
@@ -267,6 +284,23 @@ class _NameItemScreenState extends State<NameItemScreen> {
         ],
       ),
     );
+  }
+
+  Future<void> _shareName(BuildContext context) async {
+    final boundary =
+        _shareKey.currentContext?.findRenderObject() as RenderRepaintBoundary?;
+    if (boundary == null) return;
+
+    final image = await boundary.toImage(pixelRatio: 3.0);
+    final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    final pngBytes = byteData!.buffer.asUint8List();
+
+    final directory = await getTemporaryDirectory();
+    final file = File('${directory.path}/shared_name_${widget.name.id}.png');
+    await file.writeAsBytes(pngBytes);
+
+    final shareService = ShareNameService(widget.name.transliteration);
+    await shareService.share(XFile(file.path));
   }
 
   void _watchState(FavoriteNamesState state) {
