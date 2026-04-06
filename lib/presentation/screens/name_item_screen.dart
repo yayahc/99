@@ -50,7 +50,7 @@ class _NameItemScreenState extends State<NameItemScreen> {
         listener: (context, state) => _watchState(state),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          padding: EdgeInsets.fromLTRB(16.sp, 16.sp, 16.sp, 32.sp),
+          padding: EdgeInsets.fromLTRB(16.sp, 16.sp, 16.sp, 100.sp),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -61,6 +61,8 @@ class _NameItemScreenState extends State<NameItemScreen> {
           ),
         ),
       ),
+      floatingActionButton: _buildPlayButton(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 
@@ -128,7 +130,7 @@ class _NameItemScreenState extends State<NameItemScreen> {
             clipBehavior: Clip.hardEdge,
             children: [
               Positioned(
-                right: -12.sp,
+                right: -1.sp,
                 bottom: -16.sp,
                 child: Opacity(
                   opacity: 0.10,
@@ -138,16 +140,7 @@ class _NameItemScreenState extends State<NameItemScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    '# ${widget.name.id}',
-                    style: TextStyle(
-                      color: Colors.white54,
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 1.2,
-                    ),
-                  ),
-                  SizedBox(height: 10.sp),
+                  SizedBox(height: 40.sp),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -187,8 +180,6 @@ class _NameItemScreenState extends State<NameItemScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 18.sp),
-                  _buildPlayButton(),
                 ],
               ),
             ],
@@ -213,11 +204,18 @@ class _NameItemScreenState extends State<NameItemScreen> {
               : AudioPlayerService.playableStream
                   .add(widget.name.toAudioSource),
           child: Container(
-            height: 42.sp,
-            padding: EdgeInsets.symmetric(horizontal: 18.sp),
+            height: 48.sp,
+            padding: EdgeInsets.symmetric(horizontal: 24.sp),
             decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.18),
-              borderRadius: BorderRadius.circular(12.sp),
+              color: const Color(0xFF2E7D46),
+              borderRadius: BorderRadius.circular(24.sp),
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0xFF2E7D46).withValues(alpha: 0.3),
+                  blurRadius: 8,
+                  offset: const Offset(0, 4),
+                ),
+              ],
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -225,14 +223,14 @@ class _NameItemScreenState extends State<NameItemScreen> {
                 Icon(
                   isPlaying ? Icons.pause_circle : Icons.play_circle,
                   color: Colors.white,
-                  size: 22.sp,
+                  size: 24.sp,
                 ),
                 SizedBox(width: 8.sp),
                 Text(
                   isPlaying ? 'Pause' : 'Play audio',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 13.sp,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
