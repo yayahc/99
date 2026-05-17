@@ -107,6 +107,17 @@ class _HomeScreenState extends State<HomeScreen> {
         Padding(
           padding: EdgeInsets.only(right: 16.sp),
           child: GestureDetector(
+            onTap: () => context.push('/quiz'),
+            child: Icon(
+              Icons.quiz,
+              color: context.colors.primary,
+              size: 28.sp,
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(right: 16.sp),
+          child: GestureDetector(
             onTap: () => context.push('/favorite'),
             child: Icon(
               Icons.star,

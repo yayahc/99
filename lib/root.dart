@@ -6,8 +6,10 @@ import 'package:ninety/domain/usecases/favorite/add_name_to_favorite_usecase.dar
 import 'package:ninety/domain/usecases/favorite/get_favorite_names_usecase.dart';
 import 'package:ninety/domain/usecases/favorite/remove_name_to_favorite_usecase.dart';
 import 'package:ninety/domain/usecases/name/get_names_usecase.dart';
+import 'package:ninety/domain/usecases/quiz/get_quiz_questions_usecase.dart';
 import 'package:ninety/presentation/bloc/favorite_cubit.dart';
 import 'package:ninety/presentation/bloc/name_cubit.dart';
+import 'package:ninety/presentation/bloc/quiz_cubit.dart';
 import 'package:ninety/presentation/screens/home_screen.dart';
 import 'package:ninety/router.dart';
 
@@ -26,7 +28,11 @@ class Root extends StatelessWidget {
             locator.get<GetFavoriteNamesUsecase>(),
             locator.get<RemoveNameToFavoriteUsecase>(),
           ),
-        )
+        ),
+        BlocProvider(
+          create: (context) =>
+              QuizCubit(locator.get<GetQuizQuestionsUsecase>()),
+        ),
       ],
       child: ScreenUtilInit(
           designSize: const Size(390, 844),

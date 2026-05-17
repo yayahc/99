@@ -20,17 +20,22 @@ import 'core/theme/gaps/i_app_gap.dart' as _i513;
 import 'core/theme/typography/app_typography.dart' as _i630;
 import 'core/theme/typography/i_app_typography.dart' as _i889;
 import 'data/datasources/i_name_datasource.dart' as _i397;
+import 'data/datasources/i_quiz_datasource.dart' as _i603;
 import 'data/datasources/local/local_name_datasource.dart' as _i672;
+import 'data/datasources/local/local_quiz_datasource.dart' as _i125;
 import 'data/repositories/favorite/favorite_name_repository_impl.dart' as _i856;
 import 'data/repositories/name/name_repository_impl.dart' as _i751;
+import 'data/repositories/quiz/quiz_repository_impl.dart' as _i986;
 import 'database.dart' as _i969;
 import 'domain/repositories/favorite/i_favorite_name_repository.dart' as _i1034;
 import 'domain/repositories/name/i_name_repository.dart' as _i420;
+import 'domain/repositories/quiz/i_quiz_repository.dart' as _i1064;
 import 'domain/usecases/favorite/add_name_to_favorite_usecase.dart' as _i39;
 import 'domain/usecases/favorite/get_favorite_names_usecase.dart' as _i827;
 import 'domain/usecases/favorite/remove_name_to_favorite_usecase.dart' as _i536;
 import 'domain/usecases/name/get_name_usecase.dart' as _i606;
 import 'domain/usecases/name/get_names_usecase.dart' as _i420;
+import 'domain/usecases/quiz/get_quiz_questions_usecase.dart' as _i787;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -50,11 +55,14 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i513.IAppGap>(() => _i403.AppGap());
     gh.singleton<_i884.IAppColor>(() => _i45.LightColor());
+    gh.singleton<_i603.IQuizDatasource>(() => _i125.LocalQuizDatasourceImpl());
     gh.singleton<_i889.IAppTypography>(() => _i630.AppTypography());
     gh.singleton<_i397.INameDatasource>(() => _i672.LocalNameDatasourceImpl(
         gh<_i969.AppDatabase>(instanceName: 'db')));
     gh.singleton<_i420.INameRepository>(
         () => _i751.NameRepositoryImpl(gh<_i397.INameDatasource>()));
+    gh.singleton<_i1064.IQuizRepository>(
+        () => _i986.QuizRepositoryImpl(gh<_i603.IQuizDatasource>()));
     gh.singleton<_i1034.IFavoriteNameRepository>(
         () => _i856.FavoriteNameRepositoryImpl(gh<_i397.INameDatasource>()));
     gh.singleton<_i606.GetNameUsecase>(
@@ -68,6 +76,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i536.RemoveNameToFavoriteUsecase>(() =>
         _i536.RemoveNameToFavoriteUsecase(
             gh<_i1034.IFavoriteNameRepository>()));
+    gh.singleton<_i787.GetQuizQuestionsUsecase>(
+        () => _i787.GetQuizQuestionsUsecase(gh<_i1064.IQuizRepository>()));
     return this;
   }
 }
