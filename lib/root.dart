@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ninety/di.dart';
 import 'package:ninety/domain/usecases/favorite/add_name_to_favorite_usecase.dart';
@@ -42,6 +44,17 @@ class Root extends StatelessWidget {
           builder: (_, child) {
             return MaterialApp.router(
               routerConfig: AppRouter.router,
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: const [
+                Locale('en'),
+                Locale('ar'),
+                Locale('fr'),
+              ],
               builder: (context, child) => child ?? const SizedBox(),
             );
           }),

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ninety/core/extensions/context_extension.dart';
+import 'package:ninety/l10n/app_localizations.dart';
 import 'package:ninety/presentation/bloc/favorite_cubit.dart';
 import 'package:ninety/presentation/bloc/name_cubit.dart';
 import 'package:ninety/presentation/bloc/name_state.dart';
@@ -81,12 +82,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   AppBar _buildAppBar(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return AppBar(
       backgroundColor: context.colors.background,
       elevation: 0,
       // centerTitle: true,
       title: Text(
-        'The 99',
+        l10n.appTitle,
         style: TextStyle(
           fontSize: 20.sp,
           fontWeight: FontWeight.w800,
@@ -176,6 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildSearchBar(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       height: 52.sp,
       decoration: BoxDecoration(
@@ -186,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
         controller: _searchController,
         style: TextStyle(fontSize: 14.sp, color: context.colors.black),
         decoration: InputDecoration(
-          hintText: 'Search names, meanings...',
+          hintText: l10n.searchHint,
           hintStyle: TextStyle(
             color: Colors.grey.shade400,
             fontSize: 14.sp,
@@ -205,6 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildNameOfTheDayCard(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final name = _nameOfTheDay;
     if (name == null) return const SizedBox();
     return GestureDetector(
@@ -235,7 +239,7 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'NAME OF THE DAY',
+                  l10n.nameOfTheDay,
                   style: TextStyle(
                     color: Colors.white70,
                     fontSize: 11.sp,

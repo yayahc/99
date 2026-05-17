@@ -9,10 +9,10 @@ class QuizCubit extends Cubit<QuizState> {
 
   QuizCubit(this._getQuizQuestionsUsecase) : super(const QuizState());
 
-  Future<void> loadQuiz({int questionCount = 10}) async {
+  Future<void> loadQuiz({int questionCount = 10, String locale = 'en'}) async {
     emit(state.copyWith(isLoading: true, clearError: true));
     final result = await _getQuizQuestionsUsecase
-        .trigger(GetQuizQuestionsParam(count: questionCount));
+        .trigger(GetQuizQuestionsParam(count: questionCount, locale: locale));
     result.fold(
       (error) => emit(
         state.copyWith(
@@ -78,8 +78,9 @@ class QuizCubit extends Cubit<QuizState> {
     );
   }
 
-  Future<void> restartQuiz() async {
+  Future<void> restartQuiz({String locale = 'en'}) async {
     await loadQuiz(
-        questionCount: state.questions.isEmpty ? 10 : state.questions.length);
+        questionCount: state.questions.isEmpty ? 10 : state.questions.length,
+        locale: locale);
   }
 }

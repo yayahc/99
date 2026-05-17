@@ -1,0 +1,67 @@
+{
+  "quizTitle": "Quiz",
+  "questionCount": "Question {count} of {total}",
+  "@questionCount": {
+    "description": "Displays current question number and total",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "score": "Score {value}",
+  "@score": {
+    "description": "Shows current quiz score",
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
+  "nextQuestion": "Next question",
+  "correctAnswer": "Correct answer",
+  "wrongAnswer": "Wrong answer, correct one is {answer}",
+  "@wrongAnswer": {
+    "description": "Shows the correct answer when user selects wrong one",
+    "placeholders": {
+      "answer": {
+        "type": "String"
+      }
+    }
+  },
+  "quizCompleted": "Quiz completed",
+  "finalScore": "You scored {score} out of {total}",
+  "@finalScore": {
+    "description": "Shows final quiz results",
+    "placeholders": {
+      "score": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "playAgain": "Play again",
+  "retry": "Retry",
+  "noQuestionsAvailable": "No quiz questions available",
+  "transliterationPrompt": "Which transliteration matches this meaning?",
+  "translationPrompt": "What does this Arabic name mean?",
+  "arabicPrompt": "Which Arabic form matches this name?",
+  "appTitle": "The 99",
+  "appSubtitle": "Asma ul Husna",
+  "searchHint": "Search names, meanings...",
+  "nameOfTheDay": "NAME OF THE DAY",
+  "favoriteTitle": "Favorite",
+  "noSavedNames": "No saved names yet",
+  "noSavedNamesSubtitle": "Tap the heart on any name to save it here",
+  "theme": "THEME",
+  "notifications": "NOTIFICATIONS",
+  "light": "Light",
+  "dark": "Dark",
+  "enable": "Enable",
+  "disable": "Disable"
+}

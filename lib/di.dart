@@ -10,4 +10,4 @@ final GetIt locator = GetIt.instance;
   preferRelativeImports: true, // default
   asExtension: true, // default
 )
-Future<GetIt> configureDependencies() async => await locator.init();
+Future<GetIt> configureDependencies() async => locator.init();

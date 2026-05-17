@@ -1,0 +1,67 @@
+{
+  "quizTitle": "Quiz",
+  "questionCount": "Question {count} sur {total}",
+  "@questionCount": {
+    "description": "Displays current question number and total",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "score": "Score {value}",
+  "@score": {
+    "description": "Shows current quiz score",
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
+  "nextQuestion": "Question suivante",
+  "correctAnswer": "Bonne réponse",
+  "wrongAnswer": "Mauvaise réponse, la bonne est {answer}",
+  "@wrongAnswer": {
+    "description": "Shows the correct answer when user selects wrong one",
+    "placeholders": {
+      "answer": {
+        "type": "String"
+      }
+    }
+  },
+  "quizCompleted": "Quiz terminé",
+  "finalScore": "Vous avez marqué {score} sur {total}",
+  "@finalScore": {
+    "description": "Shows final quiz results",
+    "placeholders": {
+      "score": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "playAgain": "Rejouer",
+  "retry": "Réessayer",
+  "noQuestionsAvailable": "Aucune question de quiz disponible",
+  "transliterationPrompt": "Quelle est la translittération ?",
+  "translationPrompt": "Quelle est la traduction ?",
+  "arabicPrompt": "Quel est le nom en arabe ?",
+  "appTitle": "Les 99",
+  "appSubtitle": "Asma ul Husna",
+  "searchHint": "Rechercher des noms, des significations...",
+  "nameOfTheDay": "NOM DU JOUR",
+  "favoriteTitle": "Favoris",
+  "noSavedNames": "Aucun nom enregistré pour le moment",
+  "noSavedNamesSubtitle": "Appuyez sur le cœur d’un nom pour l’enregistrer ici",
+  "theme": "THÈME",
+  "notifications": "NOTIFICATIONS",
+  "light": "Clair",
+  "dark": "Sombre",
+  "enable": "Activer",
+  "disable": "Désactiver"
+}

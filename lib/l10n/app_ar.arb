@@ -1,0 +1,41 @@
+{
+  "quizTitle": "اختبار",
+  "questionCount": "السؤال {count} من {total}",
+  "@questionCount": {
+    "description": "Displays current question number and total"
+  },
+  "score": "النقاط {value}",
+  "@score": {
+    "description": "Shows current quiz score"
+  },
+  "nextQuestion": "السؤال التالي",
+  "correctAnswer": "إجابة صحيحة",
+  "wrongAnswer": "إجابة خاطئة، الإجابة الصحيحة هي {answer}",
+  "@wrongAnswer": {
+    "description": "Shows the correct answer when user selects wrong one"
+  },
+  "quizCompleted": "انتهى الاختبار",
+  "finalScore": "حصلت على {score} من {total}",
+  "@finalScore": {
+    "description": "Shows final quiz results"
+  },
+  "playAgain": "العب مجددًا",
+  "retry": "حاول مجددًا",
+  "noQuestionsAvailable": "لا توجد أسئلة متاحة",
+  "transliterationPrompt": "أي نطق يطابق هذا المعنى؟",
+  "translationPrompt": "ماذا يعني هذا الاسم العربي؟",
+  "arabicPrompt": "أي الشكل العربي يطابق هذا الاسم؟",
+  "appTitle": "الـ99",
+  "appSubtitle": "أسماء الله الحسنى",
+  "searchHint": "ابحث عن الأسماء والمعاني...",
+  "nameOfTheDay": "اسم اليوم",
+  "favoriteTitle": "المفضلة",
+  "noSavedNames": "لا توجد أسماء محفوظة بعد",
+  "noSavedNamesSubtitle": "اضغط على القلب لحفظ أي اسم هنا",
+  "theme": "المظهر",
+  "notifications": "الإشعارات",
+  "light": "فاتح",
+  "dark": "داكن",
+  "enable": "تفعيل",
+  "disable": "تعطيل"
+}

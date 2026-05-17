@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ninety/core/extensions/context_extension.dart';
+import 'package:ninety/l10n/app_localizations.dart';
 
 import '../widgets/setting_button.dart';
 
@@ -9,6 +10,7 @@ class DrawlerMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Drawer(
       backgroundColor: context.colors.background,
       child: SafeArea(
@@ -23,13 +25,13 @@ class DrawlerMenu extends StatelessWidget {
                 children: [
                   _buildSection(
                     context,
-                    label: 'THEME',
+                    label: l10n.theme,
                     child: _ThemeToggle(),
                   ),
                   SizedBox(height: 24.sp),
                   _buildSection(
                     context,
-                    label: 'NOTIFICATIONS',
+                    label: l10n.notifications,
                     child: _NotificationToggle(),
                   ),
                 ],
@@ -42,6 +44,7 @@ class DrawlerMenu extends StatelessWidget {
   }
 
   Widget _buildHeader(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       padding: EdgeInsets.fromLTRB(20.sp, 20.sp, 8.sp, 16.sp),
       child: Row(
@@ -52,7 +55,7 @@ class DrawlerMenu extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'The 99 Names',
+                l10n.appTitle,
                 style: TextStyle(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.w800,
@@ -61,7 +64,7 @@ class DrawlerMenu extends StatelessWidget {
               ),
               SizedBox(height: 2.sp),
               Text(
-                'Asma ul Husna',
+                l10n.appSubtitle,
                 style: TextStyle(
                   fontSize: 13.sp,
                   color: context.colors.primary,
@@ -118,15 +121,16 @@ class _ThemeToggleState extends State<_ThemeToggle> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Row(
       children: [
         SettingButton(
-          title: 'Light',
+          title: l10n.light,
           isEnable: _light,
         ),
         SizedBox(width: 10.sp),
         SettingButton(
-          title: 'Dark',
+          title: l10n.dark,
           isEnable: _dark,
         ),
       ],
@@ -152,15 +156,16 @@ class _NotificationToggleState extends State<_NotificationToggle> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Row(
       children: [
         SettingButton(
-          title: 'Enable',
+          title: l10n.enable,
           isEnable: _enable,
         ),
         SizedBox(width: 10.sp),
         SettingButton(
-          title: 'Disable',
+          title: l10n.disable,
           isEnable: _disable,
         ),
       ],

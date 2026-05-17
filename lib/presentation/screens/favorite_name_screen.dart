@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ninety/core/extensions/context_extension.dart';
+import 'package:ninety/l10n/app_localizations.dart';
 import 'package:ninety/presentation/bloc/favorite_cubit.dart';
 
 import '../../domain/entities/name.dart';
@@ -68,12 +69,13 @@ class _FavoriteNameScreenState extends State<FavoriteNameScreen> {
   }
 
   AppBar _buildAppBar(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return AppBar(
       backgroundColor: context.colors.background,
       elevation: 0,
       centerTitle: true,
       title: Text(
-        'Favorite',
+        l10n.favoriteTitle,
         style: TextStyle(
           fontSize: 20.sp,
           fontWeight: FontWeight.w800,
@@ -136,6 +138,7 @@ class _FavoriteNameScreenState extends State<FavoriteNameScreen> {
   }
 
   Widget _buildSearchBar(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       height: 52.sp,
       decoration: BoxDecoration(
@@ -146,7 +149,7 @@ class _FavoriteNameScreenState extends State<FavoriteNameScreen> {
         controller: _searchController,
         style: TextStyle(fontSize: 14.sp, color: context.colors.black),
         decoration: InputDecoration(
-          hintText: 'Search names, meanings...',
+          hintText: l10n.searchHint,
           hintStyle: TextStyle(
             color: Colors.grey.shade400,
             fontSize: 14.sp,
@@ -165,6 +168,7 @@ class _FavoriteNameScreenState extends State<FavoriteNameScreen> {
   }
 
   Widget _buildEmptyState(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -176,7 +180,7 @@ class _FavoriteNameScreenState extends State<FavoriteNameScreen> {
           ),
           SizedBox(height: 16.sp),
           Text(
-            'No saved names yet',
+            l10n.noSavedNames,
             style: TextStyle(
               fontSize: 16.sp,
               fontWeight: FontWeight.w600,
@@ -185,7 +189,7 @@ class _FavoriteNameScreenState extends State<FavoriteNameScreen> {
           ),
           SizedBox(height: 8.sp),
           Text(
-            'Tap the heart on any name to save it here',
+            l10n.noSavedNamesSubtitle,
             style: TextStyle(
               fontSize: 13.sp,
               color: Colors.grey.shade400,

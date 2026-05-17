@@ -18,19 +18,22 @@ class LocalQuizDatasourceImpl implements IQuizDatasource {
     final count = param.count.clamp(1, _names.length).toInt();
     final selected = List<Name>.from(_names)..shuffle(_random);
     return List.generate(
-        count, (index) => _buildQuestion(selected[index], index));
+        count, (index) => _buildQuestion(selected[index], index, param.locale));
   }
 
-  QuizQuestion _buildQuestion(Name name, int index) {
+  QuizQuestion _buildQuestion(Name name, int index, String locale) {
     final mode = QuizQuestionMode
         .values[_random.nextInt(QuizQuestionMode.values.length)];
+    final isArabic = locale == 'ar';
     switch (mode) {
       case QuizQuestionMode.transliteration:
         return _questionFromPool(
           id: index + 1,
           name: name,
           mode: mode,
-          prompt: 'Which transliteration matches this meaning?',
+          prompt: isArabic
+              ? 'أي نطق يطابق هذا المعنى؟'
+              : 'Which transliteration matches this meaning?',
           correct: name.transliteration,
           optionsPool: _names.map((item) => item.transliteration).toList(),
         );
@@ -39,7 +42,9 @@ class LocalQuizDatasourceImpl implements IQuizDatasource {
           id: index + 1,
           name: name,
           mode: mode,
-          prompt: 'What does this Arabic name mean?',
+          prompt: isArabic
+              ? 'ماذا يعني هذا الاسم العربي؟'
+              : 'What does this Arabic name mean?',
           correct: name.translation,
           optionsPool: _names.map((item) => item.translation).toList(),
         );
@@ -48,7 +53,9 @@ class LocalQuizDatasourceImpl implements IQuizDatasource {
           id: index + 1,
           name: name,
           mode: mode,
-          prompt: 'Which Arabic form matches this name?',
+          prompt: isArabic
+              ? 'أي الشكل العربي يطابق هذا الاسم؟'
+              : 'Which Arabic form matches this name?',
           correct: name.arabe,
           optionsPool: _names.map((item) => item.arabe).toList(),
         );
