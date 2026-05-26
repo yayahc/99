@@ -122,7 +122,7 @@ class _NameItemScreenState extends State<NameItemScreen> {
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
-            color: const Color(0xFF2E7D46),
+            color: context.colors.emerald,
             borderRadius: BorderRadius.circular(20.sp),
           ),
           padding: EdgeInsets.all(22.sp),
@@ -207,11 +207,11 @@ class _NameItemScreenState extends State<NameItemScreen> {
             height: 48.sp,
             padding: EdgeInsets.symmetric(horizontal: 24.sp),
             decoration: BoxDecoration(
-              color: const Color(0xFF2E7D46),
+              color: context.colors.emerald,
               borderRadius: BorderRadius.circular(24.sp),
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFF2E7D46).withValues(alpha: 0.3),
+                  color: context.colors.emerald.withValues(alpha: 0.3),
                   blurRadius: 8,
                   offset: const Offset(0, 4),
                 ),
@@ -246,13 +246,13 @@ class _NameItemScreenState extends State<NameItemScreen> {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.colors.surface,
         borderRadius: BorderRadius.circular(20.sp),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
+            color: context.colors.emerald.withValues(alpha: 0.06),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
