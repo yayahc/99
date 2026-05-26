@@ -21,7 +21,7 @@ class NameCardWidget extends StatelessWidget {
       onTap: () => context.push('/name', extra: name),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: context.colors.surface,
           borderRadius: BorderRadius.circular(16.sp),
           boxShadow: [
             BoxShadow(

@@ -20,4 +20,7 @@ class LightColor implements IAppColor {
 
   @override
   Color get white => const Color.fromRGBO(250, 246, 246, 1);
+
+  @override
+  Color get surface => const Color(0xFFFFFFFF);
 }

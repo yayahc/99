@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ninety/core/theme/colors/i_app_color.dart';
 
@@ -11,18 +12,25 @@ class AppTheme {
         ? ThemeData.dark(useMaterial3: true)
         : ThemeData.light(useMaterial3: true);
 
+    final isDark = brightness == Brightness.dark;
+
     return base.copyWith(
       brightness: brightness,
       scaffoldBackgroundColor: colors.background,
+      cardColor: colors.surface,
       colorScheme: base.colorScheme.copyWith(
         brightness: brightness,
         primary: colors.primary,
-        surface: colors.background,
+        surface: colors.surface,
+        onSurface: colors.black,
       ),
       appBarTheme: AppBarTheme(
         backgroundColor: colors.background,
         foregroundColor: colors.black,
         elevation: 0,
+        systemOverlayStyle: isDark
+            ? SystemUiOverlayStyle.light
+            : SystemUiOverlayStyle.dark,
       ),
       textTheme: GoogleFonts.poppinsTextTheme(base.textTheme).apply(
         bodyColor: colors.black,

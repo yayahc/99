@@ -107,7 +107,7 @@ class _ModeChip extends StatelessWidget {
       borderRadius: BorderRadius.circular(8.sp),
       child: Container(
         decoration: BoxDecoration(
-          color: selected ? context.colors.black : context.colors.gray,
+          color: selected ? context.colors.primary : context.colors.gray,
           borderRadius: BorderRadius.circular(8.sp),
         ),
         padding: EdgeInsets.symmetric(vertical: 8.sp, horizontal: 32.sp),

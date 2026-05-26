@@ -142,7 +142,7 @@ class _FavoriteNameScreenState extends State<FavoriteNameScreen> {
     return Container(
       height: 52.sp,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.colors.surface,
         borderRadius: BorderRadius.circular(16.sp),
       ),
       child: TextField(
