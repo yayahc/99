@@ -87,7 +87,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   ElevatedButton(
                     onPressed: () => context.read<QuizCubit>().nextQuestion(),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF2E7D46),
+                      backgroundColor: context.colors.emerald,
                       foregroundColor: Colors.white,
                       padding: EdgeInsets.symmetric(vertical: 14.sp),
                       shape: RoundedRectangleBorder(
@@ -117,7 +117,7 @@ class _QuizScreenState extends State<QuizScreen> {
     return Container(
       padding: EdgeInsets.all(18.sp),
       decoration: BoxDecoration(
-        color: const Color(0xFF2E7D46),
+        color: context.colors.emerald,
         borderRadius: BorderRadius.circular(20.sp),
       ),
       child: Row(
@@ -170,7 +170,7 @@ class _QuizScreenState extends State<QuizScreen> {
       width: double.infinity,
       padding: EdgeInsets.all(20.sp),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.colors.surface,
         borderRadius: BorderRadius.circular(20.sp),
         boxShadow: [
           BoxShadow(
@@ -197,7 +197,7 @@ class _QuizScreenState extends State<QuizScreen> {
             style: TextStyle(
               fontSize: 30.sp,
               fontWeight: FontWeight.w600,
-              color: const Color(0xFF2E7D46),
+              color: context.colors.emerald,
             ),
             textDirection: TextDirection.rtl,
           ),
@@ -213,11 +213,11 @@ class _QuizScreenState extends State<QuizScreen> {
     final isCorrectAnswer = question?.correctAnswer == option;
     final activeColor = state.showFeedback
         ? isCorrectAnswer
-            ? const Color(0xFF2E7D46)
+            ? context.colors.emerald
             : isSelected
                 ? Colors.redAccent
-                : Colors.white
-        : Colors.white;
+                : context.colors.surface
+        : context.colors.surface;
 
     return GestureDetector(
       onTap: () => context.read<QuizCubit>().selectAnswer(option),
@@ -229,11 +229,11 @@ class _QuizScreenState extends State<QuizScreen> {
           border: Border.all(
             color: state.showFeedback
                 ? isCorrectAnswer
-                    ? const Color(0xFF2E7D46)
+                    ? context.colors.emerald
                     : isSelected
                         ? Colors.redAccent
                         : Colors.transparent
-                : Colors.grey.shade200,
+                : context.colors.black.withValues(alpha: 0.08),
           ),
         ),
         child: Row(
@@ -289,7 +289,7 @@ class _QuizScreenState extends State<QuizScreen> {
           fontSize: 14.sp,
           fontWeight: FontWeight.w600,
           color: state.isCurrentCorrect == true
-              ? const Color(0xFF2E7D46)
+              ? context.colors.emerald
               : Colors.redAccent,
         ),
       ),
@@ -305,7 +305,7 @@ class _QuizScreenState extends State<QuizScreen> {
           width: double.infinity,
           padding: EdgeInsets.all(24.sp),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: context.colors.surface,
             borderRadius: BorderRadius.circular(24.sp),
             boxShadow: [
               BoxShadow(
@@ -319,7 +319,7 @@ class _QuizScreenState extends State<QuizScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(Icons.emoji_events,
-                  color: const Color(0xFF2E7D46), size: 56.sp),
+                  color: context.colors.emerald, size: 56.sp),
               SizedBox(height: 16.sp),
               Text(
                 l10n.quizCompleted,
@@ -346,7 +346,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   context.read<QuizCubit>().restartQuiz(locale: locale);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2E7D46),
+                  backgroundColor: context.colors.emerald,
                   foregroundColor: Colors.white,
                   padding:
                       EdgeInsets.symmetric(horizontal: 24.sp, vertical: 14.sp),
@@ -395,7 +395,7 @@ class _QuizScreenState extends State<QuizScreen> {
                 context.read<QuizCubit>().loadQuiz(locale: locale);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF2E7D46),
+                backgroundColor: context.colors.emerald,
                 foregroundColor: Colors.white,
               ),
               child: Text(l10n.retry),
