@@ -116,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: GestureDetector(
             onTap: () => context.push('/quiz'),
             child: Icon(
-              Icons.quiz,
+              Icons.school_rounded,
               color: context.colors.primary,
               size: 28.sp,
             ),
@@ -127,18 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: GestureDetector(
             onTap: () => context.push('/favorite'),
             child: Icon(
-              Icons.star,
-              color: context.colors.primary,
-              size: 28.sp,
-            ),
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(right: 16.sp),
-          child: GestureDetector(
-            onTap: () => context.push('/settings'),
-            child: Icon(
-              Icons.settings,
+              Icons.favorite_rounded,
               color: context.colors.primary,
               size: 28.sp,
             ),
