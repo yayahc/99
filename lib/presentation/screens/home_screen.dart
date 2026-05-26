@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () => context.push('/quiz'),
             child: Icon(
               Icons.school_rounded,
-              color: context.colors.primary,
+              color: const Color(0xFF2E7D46),
               size: 28.sp,
             ),
           ),
@@ -128,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () => context.push('/favorite'),
             child: Icon(
               Icons.favorite_rounded,
-              color: context.colors.primary,
+              color: const Color.fromARGB(255, 224, 72, 100),
               size: 28.sp,
             ),
           ),
