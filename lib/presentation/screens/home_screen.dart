@@ -12,6 +12,7 @@ import 'package:ninety/services/audio_player/audio_player_service.dart';
 
 import '../../domain/entities/name.dart';
 import '../widgets/name_card_widget.dart';
+import '../widgets/theme_toggle_button.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -106,6 +107,10 @@ class _HomeScreenState extends State<HomeScreen> {
       //   );
       // }),
       actions: [
+        Padding(
+          padding: EdgeInsets.only(right: 16.sp),
+          child: const ThemeToggleButton(),
+        ),
         Padding(
           padding: EdgeInsets.only(right: 16.sp),
           child: GestureDetector(
