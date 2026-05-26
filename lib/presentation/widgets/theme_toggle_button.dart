@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ninety/core/extensions/context_extension.dart';
 import 'package:ninety/presentation/bloc/theme_cubit.dart';
 
 class ThemeToggleButton extends StatelessWidget {
@@ -27,7 +26,7 @@ class ThemeToggleButton extends StatelessWidget {
             child: Icon(
               isDark ? Icons.dark_mode_rounded : Icons.light_mode_rounded,
               key: ValueKey(isDark),
-              color: context.colors.primary,
+              color: const Color(0xFFD4A24C),
               size: 28.sp,
             ),
           ),
