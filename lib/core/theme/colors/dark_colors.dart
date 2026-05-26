@@ -26,4 +26,13 @@ class DarkColor implements IAppColor {
   /// Slightly elevated above `background` — used for card / search-bar surfaces.
   @override
   Color get surface => const Color(0xFF12241A);
+
+  @override
+  Color get gold => const Color(0xFFD4A24C);
+
+  @override
+  Color get emerald => const Color(0xFF2E7D46);
+
+  @override
+  Color get rose => const Color(0xFFE04864);
 }

@@ -16,4 +16,13 @@ abstract class IAppColor {
 
   /// Elevated surface (cards, search bar, etc.). White-ish in light, dark in dark.
   Color get surface;
+
+  /// Warm gold accent — used for the theme toggle (sun/moon).
+  Color get gold;
+
+  /// Deep emerald accent — used for quiz / "Name of the Day" surfaces.
+  Color get emerald;
+
+  /// Rose / garnet accent — used for the favorite (heart) action.
+  Color get rose;
 }
