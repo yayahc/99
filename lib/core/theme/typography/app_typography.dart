@@ -60,7 +60,7 @@ class TextStyled {
 TextStyle defaultStyle(
     {Color? color, FontWeight? fontWeight, double? fontSize}) {
   return GoogleFonts.poppins(
-    color: color ?? locator.get<IAppColor>().white,
+    color: color ?? locator.get<IAppColor>(instanceName: 'light').white,
     fontSize: fontSize ?? 12,
     fontWeight: fontWeight ?? FontWeight.w400,
   );

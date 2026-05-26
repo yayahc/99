@@ -3,15 +3,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ninety/core/theme/app_theme.dart';
+import 'package:ninety/core/theme/colors/i_app_color.dart';
 import 'package:ninety/di.dart';
 import 'package:ninety/domain/usecases/favorite/add_name_to_favorite_usecase.dart';
 import 'package:ninety/domain/usecases/favorite/get_favorite_names_usecase.dart';
 import 'package:ninety/domain/usecases/favorite/remove_name_to_favorite_usecase.dart';
 import 'package:ninety/domain/usecases/name/get_names_usecase.dart';
 import 'package:ninety/domain/usecases/quiz/get_quiz_questions_usecase.dart';
+import 'package:ninety/domain/usecases/settings/get_theme_mode_usecase.dart';
+import 'package:ninety/domain/usecases/settings/set_theme_mode_usecase.dart';
 import 'package:ninety/presentation/bloc/favorite_cubit.dart';
 import 'package:ninety/presentation/bloc/name_cubit.dart';
 import 'package:ninety/presentation/bloc/quiz_cubit.dart';
+import 'package:ninety/presentation/bloc/theme_cubit.dart';
 import 'package:ninety/presentation/screens/home_screen.dart';
 import 'package:ninety/router.dart';
 
@@ -35,6 +40,12 @@ class Root extends StatelessWidget {
           create: (context) =>
               QuizCubit(locator.get<GetQuizQuestionsUsecase>()),
         ),
+        BlocProvider(
+          create: (context) => ThemeCubit(
+            locator.get<GetThemeModeUsecase>(),
+            locator.get<SetThemeModeUsecase>(),
+          )..loadThemeMode(),
+        ),
       ],
       child: ScreenUtilInit(
           designSize: const Size(390, 844),
@@ -42,20 +53,29 @@ class Root extends StatelessWidget {
           splitScreenMode: true,
           child: const HomeScreen(),
           builder: (_, child) {
-            return MaterialApp.router(
-              routerConfig: AppRouter.router,
-              localizationsDelegates: const [
-                AppLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: const [
-                Locale('en'),
-                Locale('ar'),
-                Locale('fr'),
-              ],
-              builder: (context, child) => child ?? const SizedBox(),
+            return BlocBuilder<ThemeCubit, ThemeMode>(
+              builder: (context, themeMode) {
+                final light = locator.get<IAppColor>(instanceName: 'light');
+                final dark = locator.get<IAppColor>(instanceName: 'dark');
+                return MaterialApp.router(
+                  routerConfig: AppRouter.router,
+                  theme: AppTheme.light(light),
+                  darkTheme: AppTheme.dark(dark),
+                  themeMode: themeMode,
+                  localizationsDelegates: const [
+                    AppLocalizations.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  supportedLocales: const [
+                    Locale('en'),
+                    Locale('ar'),
+                    Locale('fr'),
+                  ],
+                  builder: (context, child) => child ?? const SizedBox(),
+                );
+              },
             );
           }),
     );

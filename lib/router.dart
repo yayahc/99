@@ -5,9 +5,10 @@ import 'package:ninety/presentation/screens/favorite_name_screen.dart';
 import 'package:ninety/presentation/screens/home_screen.dart';
 import 'package:ninety/presentation/screens/name_item_screen.dart';
 import 'package:ninety/presentation/screens/quiz_screen.dart';
+import 'package:ninety/presentation/screens/settings_screen.dart';
 
 class AppRouter {
-  static GoRouter get router =>
+  static final GoRouter router =
       GoRouter(initialLocation: "/home", debugLogDiagnostics: true, routes: [
         GoRoute(
           path: "/home",
@@ -22,6 +23,10 @@ class AppRouter {
           builder: (context, state) => const QuizScreen(),
         ),
         GoRoute(
+          path: "/settings",
+          builder: (context, state) => const SettingsScreen(),
+        ),
+        GoRoute(
           pageBuilder: (context, state) {
             final name = state.extra as Name;
             return MaterialPage<void>(child: NameItemScreen(name: name));
@@ -30,3 +35,4 @@ class AppRouter {
         ),
       ]);
 }
+

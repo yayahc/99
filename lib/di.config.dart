@@ -13,6 +13,7 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 import 'core/modules/storage_module.dart' as _i213;
+import 'core/theme/colors/dark_colors.dart' as _i403;
 import 'core/theme/colors/i_app_color.dart' as _i884;
 import 'core/theme/colors/light_colors.dart' as _i45;
 import 'core/theme/gaps/app_gap.dart' as _i403;
@@ -21,21 +22,27 @@ import 'core/theme/typography/app_typography.dart' as _i630;
 import 'core/theme/typography/i_app_typography.dart' as _i889;
 import 'data/datasources/i_name_datasource.dart' as _i397;
 import 'data/datasources/i_quiz_datasource.dart' as _i603;
+import 'data/datasources/i_settings_datasource.dart' as _i85;
 import 'data/datasources/local/local_name_datasource.dart' as _i672;
 import 'data/datasources/local/local_quiz_datasource.dart' as _i125;
+import 'data/datasources/local/local_settings_datasource.dart' as _i246;
 import 'data/repositories/favorite/favorite_name_repository_impl.dart' as _i856;
 import 'data/repositories/name/name_repository_impl.dart' as _i751;
 import 'data/repositories/quiz/quiz_repository_impl.dart' as _i986;
+import 'data/repositories/settings/settings_repository_impl.dart' as _i273;
 import 'database.dart' as _i969;
 import 'domain/repositories/favorite/i_favorite_name_repository.dart' as _i1034;
 import 'domain/repositories/name/i_name_repository.dart' as _i420;
 import 'domain/repositories/quiz/i_quiz_repository.dart' as _i1064;
+import 'domain/repositories/settings/i_settings_repository.dart' as _i747;
 import 'domain/usecases/favorite/add_name_to_favorite_usecase.dart' as _i39;
 import 'domain/usecases/favorite/get_favorite_names_usecase.dart' as _i827;
 import 'domain/usecases/favorite/remove_name_to_favorite_usecase.dart' as _i536;
 import 'domain/usecases/name/get_name_usecase.dart' as _i606;
 import 'domain/usecases/name/get_names_usecase.dart' as _i420;
 import 'domain/usecases/quiz/get_quiz_questions_usecase.dart' as _i787;
+import 'domain/usecases/settings/get_theme_mode_usecase.dart' as _i983;
+import 'domain/usecases/settings/set_theme_mode_usecase.dart' as _i418;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -49,16 +56,32 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final storageModule = _$StorageModule();
+    gh.singleton<_i884.IAppColor>(
+      () => _i403.DarkColor(),
+      instanceName: 'dark',
+    );
     gh.singleton<_i969.AppDatabase>(
       () => storageModule.instance,
       instanceName: 'db',
     );
+    gh.singleton<_i884.IAppColor>(
+      () => _i45.LightColor(),
+      instanceName: 'light',
+    );
     gh.singleton<_i513.IAppGap>(() => _i403.AppGap());
-    gh.singleton<_i884.IAppColor>(() => _i45.LightColor());
     gh.singleton<_i603.IQuizDatasource>(() => _i125.LocalQuizDatasourceImpl());
+    gh.singleton<_i85.ISettingsDatasource>(() =>
+        _i246.LocalSettingsDatasourceImpl(
+            gh<_i969.AppDatabase>(instanceName: 'db')));
     gh.singleton<_i889.IAppTypography>(() => _i630.AppTypography());
+    gh.singleton<_i747.ISettingsRepository>(
+        () => _i273.SettingsRepositoryImpl(gh<_i85.ISettingsDatasource>()));
     gh.singleton<_i397.INameDatasource>(() => _i672.LocalNameDatasourceImpl(
         gh<_i969.AppDatabase>(instanceName: 'db')));
+    gh.singleton<_i983.GetThemeModeUsecase>(
+        () => _i983.GetThemeModeUsecase(gh<_i747.ISettingsRepository>()));
+    gh.singleton<_i418.SetThemeModeUsecase>(
+        () => _i418.SetThemeModeUsecase(gh<_i747.ISettingsRepository>()));
     gh.singleton<_i420.INameRepository>(
         () => _i751.NameRepositoryImpl(gh<_i397.INameDatasource>()));
     gh.singleton<_i1064.IQuizRepository>(

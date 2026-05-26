@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:injectable/injectable.dart';
 import 'package:ninety/core/theme/colors/i_app_color.dart';
 
+@Named('light')
 @Singleton(as: IAppColor)
 class LightColor implements IAppColor {
   @override

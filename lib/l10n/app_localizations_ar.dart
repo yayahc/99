@@ -96,4 +96,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get disable => 'تعطيل';
+
+  @override
+  String get settingsTitle => 'الإعدادات';
+
+  @override
+  String get system => 'النظام';
 }

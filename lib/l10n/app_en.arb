@@ -63,5 +63,7 @@
   "light": "Light",
   "dark": "Dark",
   "enable": "Enable",
-  "disable": "Disable"
+  "disable": "Disable",
+  "settingsTitle": "Settings",
+  "system": "System"
 }

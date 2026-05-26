@@ -128,6 +128,17 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
+        Padding(
+          padding: EdgeInsets.only(right: 16.sp),
+          child: GestureDetector(
+            onTap: () => context.push('/settings'),
+            child: Icon(
+              Icons.settings,
+              color: context.colors.primary,
+              size: 28.sp,
+            ),
+          ),
+        ),
       ],
     );
   }

@@ -1,7 +1,10 @@
 import 'dart:ui';
 
+import 'package:injectable/injectable.dart';
 import 'package:ninety/core/theme/colors/i_app_color.dart';
 
+@Named('dark')
+@Singleton(as: IAppColor)
 class DarkColor implements IAppColor {
   @override
   Color get background => const Color.fromRGBO(2, 20, 5, 1);

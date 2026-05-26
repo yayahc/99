@@ -63,5 +63,7 @@
   "light": "Clair",
   "dark": "Sombre",
   "enable": "Activer",
-  "disable": "Désactiver"
+  "disable": "Désactiver",
+  "settingsTitle": "Paramètres",
+  "system": "Système"
 }

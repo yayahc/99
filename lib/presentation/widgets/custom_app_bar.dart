@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:ninety/core/theme/colors/i_app_color.dart';
-import 'package:ninety/di.dart';
+import 'package:ninety/core/extensions/context_extension.dart';
 
 class CustomAppBar {
-  static AppBar build({Widget? leading, List<Widget>? actions}) {
+  static AppBar build(BuildContext context,
+      {Widget? leading, List<Widget>? actions}) {
     return AppBar(
         elevation: 0,
-        backgroundColor: locator.get<IAppColor>().background,
+        backgroundColor: context.colors.background,
         actions: actions,
         leading: leading);
   }

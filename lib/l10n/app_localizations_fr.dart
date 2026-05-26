@@ -96,4 +96,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get disable => 'Désactiver';
+
+  @override
+  String get settingsTitle => 'Paramètres';
+
+  @override
+  String get system => 'Système';
 }

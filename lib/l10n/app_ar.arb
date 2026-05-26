@@ -37,5 +37,7 @@
   "light": "فاتح",
   "dark": "داكن",
   "enable": "تفعيل",
-  "disable": "تعطيل"
+  "disable": "تعطيل",
+  "settingsTitle": "الإعدادات",
+  "system": "النظام"
 }
