@@ -29,10 +29,6 @@ class QuranScreen extends StatelessWidget {
                   selected: controller.reciter,
                   onSelect: controller.selectReciter,
                 ),
-                _ReciterStrip(
-                  selected: controller.reciter,
-                  onSelect: controller.selectReciter,
-                ),
                 SizedBox(height: 8.sp),
                 Expanded(
                   child: ListView.separated(
@@ -78,8 +74,7 @@ class QuranScreen extends StatelessWidget {
                 ? controller.playNext
                 : null,
             onPrev: current.number > 1 ? controller.playPrev : null,
-            onSeek: (v) =>
-                controller.seek(Duration(milliseconds: v.toInt())),
+            onSeek: (v) => controller.seek(Duration(milliseconds: v.toInt())),
           );
         },
       ),
@@ -155,8 +150,7 @@ class _Header extends StatelessWidget {
                 ),
             ],
             child: Container(
-              padding:
-                  EdgeInsets.symmetric(horizontal: 12.sp, vertical: 6.sp),
+              padding: EdgeInsets.symmetric(horizontal: 12.sp, vertical: 6.sp),
               decoration: BoxDecoration(
                 color: context.colors.gold.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(20.sp),
@@ -188,55 +182,6 @@ class _Header extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _ReciterStrip extends StatelessWidget {
-  final Reciter selected;
-  final ValueChanged<Reciter> onSelect;
-  const _ReciterStrip({required this.selected, required this.onSelect});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 44.sp,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(horizontal: 16.sp),
-        itemCount: RecitersData.all.length,
-        separatorBuilder: (_, __) => SizedBox(width: 8.sp),
-        itemBuilder: (context, i) {
-          final r = RecitersData.all[i];
-          final isSelected = r.slug == selected.slug;
-          return GestureDetector(
-            onTap: () => onSelect(r),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 8.sp),
-              decoration: BoxDecoration(
-                color:
-                    isSelected ? context.colors.black : context.colors.surface,
-                borderRadius: BorderRadius.circular(20.sp),
-                border: Border.all(
-                  color:
-                      isSelected ? context.colors.black : Colors.grey.shade300,
-                ),
-              ),
-              alignment: Alignment.center,
-              child: Text(
-                r.nameLatin,
-                style: TextStyle(
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w700,
-                  color:
-                      isSelected ? context.colors.white : context.colors.black,
-                ),
-              ),
-            ),
-          );
-        },
       ),
     );
   }
