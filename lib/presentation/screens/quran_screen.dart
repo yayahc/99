@@ -9,8 +9,43 @@ import 'package:ninety/domain/entities/reciter.dart';
 import 'package:ninety/domain/entities/surah.dart';
 import 'package:ninety/services/quran_audio/quran_audio_controller.dart';
 
-class QuranScreen extends StatelessWidget {
+class QuranScreen extends StatefulWidget {
   const QuranScreen({super.key});
+
+  @override
+  State<QuranScreen> createState() => _QuranScreenState();
+}
+
+class _QuranScreenState extends State<QuranScreen> {
+  final TextEditingController _searchController = TextEditingController();
+  String _query = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(() {
+      setState(() => _query = _searchController.text);
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  List<Surah> _filterSurahs() {
+    final raw = _query.trim();
+    if (raw.isEmpty) return SurahsData.all;
+    final lowered = raw.toLowerCase();
+    return SurahsData.all.where((s) {
+      if (s.nameLatin.toLowerCase().contains(lowered)) return true;
+      if (s.meaning.toLowerCase().contains(lowered)) return true;
+      if (s.nameArabic.contains(raw)) return true;
+      if (s.number.toString() == lowered) return true;
+      return false;
+    }).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +55,7 @@ class QuranScreen extends StatelessWidget {
       body: AnimatedBuilder(
         animation: controller,
         builder: (context, _) {
+          final filtered = _filterSurahs();
           return SafeArea(
             bottom: false,
             child: Column(
@@ -29,31 +65,37 @@ class QuranScreen extends StatelessWidget {
                   selected: controller.reciter,
                   onSelect: controller.selectReciter,
                 ),
-                SizedBox(height: 8.sp),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(16.sp, 4.sp, 16.sp, 8.sp),
+                  child: _SurahSearchBar(controller: _searchController),
+                ),
                 Expanded(
-                  child: ListView.separated(
-                    padding: EdgeInsets.fromLTRB(
-                      16.sp,
-                      4.sp,
-                      16.sp,
-                      controller.current == null ? 24.sp : 120.sp,
-                    ),
-                    itemCount: SurahsData.all.length + 1,
-                    separatorBuilder: (_, __) => SizedBox(height: 8.sp),
-                    itemBuilder: (context, i) {
-                      if (i == SurahsData.all.length) {
-                        return const _AudioAttribution();
-                      }
-                      final s = SurahsData.all[i];
-                      final isCurrent = controller.current?.number == s.number;
-                      return _SurahTile(
-                        surah: s,
-                        isCurrent: isCurrent,
-                        isPlaying: isCurrent && controller.isPlaying,
-                        onTap: () => controller.play(s),
-                      );
-                    },
-                  ),
+                  child: filtered.isEmpty
+                      ? const _NoResults()
+                      : ListView.separated(
+                          padding: EdgeInsets.fromLTRB(
+                            16.sp,
+                            4.sp,
+                            16.sp,
+                            controller.current == null ? 24.sp : 120.sp,
+                          ),
+                          itemCount: filtered.length + 1,
+                          separatorBuilder: (_, __) => SizedBox(height: 8.sp),
+                          itemBuilder: (context, i) {
+                            if (i == filtered.length) {
+                              return const _AudioAttribution();
+                            }
+                            final s = filtered[i];
+                            final isCurrent =
+                                controller.current?.number == s.number;
+                            return _SurahTile(
+                              surah: s,
+                              isCurrent: isCurrent,
+                              isPlaying: isCurrent && controller.isPlaying,
+                              onTap: () => controller.play(s),
+                            );
+                          },
+                        ),
                 ),
               ],
             ),
@@ -80,6 +122,89 @@ class QuranScreen extends StatelessWidget {
             onSeek: (v) => controller.seek(Duration(milliseconds: v.toInt())),
           );
         },
+      ),
+    );
+  }
+}
+
+class _SurahSearchBar extends StatelessWidget {
+  final TextEditingController controller;
+  const _SurahSearchBar({required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 48.sp,
+      decoration: BoxDecoration(
+        color: context.colors.surface,
+        borderRadius: BorderRadius.circular(14.sp),
+        border: Border.all(
+          color: context.colors.black.withValues(alpha: 0.06),
+        ),
+      ),
+      child: TextField(
+        controller: controller,
+        textInputAction: TextInputAction.search,
+        style: TextStyle(fontSize: 14.sp, color: context.colors.black),
+        decoration: InputDecoration(
+          hintText: 'Search surah by name, meaning or number',
+          hintStyle: TextStyle(
+            color: Colors.grey.shade400,
+            fontSize: 13.sp,
+            fontWeight: FontWeight.w400,
+          ),
+          prefixIcon: Icon(
+            Icons.search_rounded,
+            color: Colors.grey.shade400,
+            size: 20.sp,
+          ),
+          suffixIcon: ValueListenableBuilder<TextEditingValue>(
+            valueListenable: controller,
+            builder: (context, value, _) {
+              if (value.text.isEmpty) return const SizedBox.shrink();
+              return IconButton(
+                onPressed: controller.clear,
+                icon: Icon(
+                  Icons.close_rounded,
+                  size: 18.sp,
+                  color: Colors.grey.shade400,
+                ),
+              );
+            },
+          ),
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.symmetric(vertical: 12.sp),
+        ),
+      ),
+    );
+  }
+}
+
+class _NoResults extends StatelessWidget {
+  const _NoResults();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(32.sp),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.search_off_rounded,
+            size: 48.sp,
+            color: Colors.grey.shade400,
+          ),
+          SizedBox(height: 12.sp),
+          Text(
+            'No surah matches your search',
+            style: TextStyle(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              color: context.colors.black.withValues(alpha: 0.7),
+            ),
+          ),
+        ],
       ),
     );
   }
