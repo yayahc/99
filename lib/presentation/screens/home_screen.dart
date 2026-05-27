@@ -83,44 +83,15 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   AppBar _buildAppBar(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
     return AppBar(
       backgroundColor: context.colors.background,
       elevation: 0,
-      // centerTitle: true,
-      title: Text(
-        l10n.appTitle,
-        style: TextStyle(
-          fontSize: 20.sp,
-          fontWeight: FontWeight.w800,
-          color: context.colors.black,
-        ),
-      ),
-      // leading: Builder(builder: (ctx) {
-      //   return IconButton(
-      //     icon: Icon(
-      //       Icons.menu,
-      //       color: context.colors.black,
-      //       size: 24.sp,
-      //     ),
-      //     onPressed: () => Scaffold.of(ctx).openDrawer(),
-      //   );
-      // }),
+      titleSpacing: 16.sp,
+      title: _QuranAudioInvite(onTap: () => context.push('/quran')),
       actions: [
         Padding(
           padding: EdgeInsets.only(right: 16.sp),
           child: const ThemeToggleButton(),
-        ),
-        Padding(
-          padding: EdgeInsets.only(right: 16.sp),
-          child: GestureDetector(
-            onTap: () => context.push('/audio-test'),
-            child: Icon(
-              Icons.headphones_rounded,
-              color: context.colors.primary,
-              size: 28.sp,
-            ),
-          ),
         ),
         Padding(
           padding: EdgeInsets.only(right: 16.sp),
@@ -323,5 +294,51 @@ class _HomeScreenState extends State<HomeScreen> {
       case ErrorLoadingNamesState():
         _isLoading.value = false;
     }
+  }
+}
+
+class _QuranAudioInvite extends StatelessWidget {
+  final VoidCallback onTap;
+  const _QuranAudioInvite({required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 12.sp, vertical: 6.sp),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [context.colors.emerald, context.colors.primary],
+          ),
+          borderRadius: BorderRadius.circular(22.sp),
+          boxShadow: [
+            BoxShadow(
+              color: context.colors.emerald.withValues(alpha: 0.25),
+              blurRadius: 12,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.play_arrow_rounded, color: Colors.white, size: 22.sp),
+            SizedBox(width: 4.sp),
+            Text(
+              'Listen Quran',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 0.3,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
