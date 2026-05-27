@@ -113,8 +113,11 @@ class _QuranScreenState extends State<QuranScreen> {
         bottom: false,
         child: Column(
           children: [
-            _Header(onBack: () => context.pop()),
-            _ReciterHero(reciter: _reciter),
+            _Header(
+              onBack: () => context.pop(),
+              selected: _reciter,
+              onSelect: _selectReciter,
+            ),
             _ReciterStrip(
               selected: _reciter,
               onSelect: _selectReciter,
@@ -166,7 +169,13 @@ class _QuranScreenState extends State<QuranScreen> {
 
 class _Header extends StatelessWidget {
   final VoidCallback onBack;
-  const _Header({required this.onBack});
+  final Reciter selected;
+  final ValueChanged<Reciter> onSelect;
+  const _Header({
+    required this.onBack,
+    required this.selected,
+    required this.onSelect,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -187,100 +196,75 @@ class _Header extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 10.sp, vertical: 4.sp),
-            decoration: BoxDecoration(
-              color: context.colors.gold.withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(20.sp),
+          PopupMenuButton<Reciter>(
+            tooltip: 'Select reciter',
+            onSelected: onSelect,
+            offset: Offset(0, 36.sp),
+            color: context.colors.surface,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16.sp),
             ),
-            child: Text(
-              '114 surahs',
-              style: TextStyle(
-                fontSize: 11.sp,
-                fontWeight: FontWeight.w700,
-                color: context.colors.gold,
+            itemBuilder: (_) => [
+              for (final r in RecitersData.all)
+                PopupMenuItem<Reciter>(
+                  value: r,
+                  child: Row(
+                    children: [
+                      Icon(
+                        r.slug == selected.slug
+                            ? Icons.check_circle_rounded
+                            : Icons.circle_outlined,
+                        size: 18.sp,
+                        color: r.slug == selected.slug
+                            ? context.colors.primary
+                            : Colors.grey.shade400,
+                      ),
+                      SizedBox(width: 10.sp),
+                      Flexible(
+                        child: Text(
+                          r.nameLatin,
+                          style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w600,
+                            color: context.colors.black,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+            child: Container(
+              padding:
+                  EdgeInsets.symmetric(horizontal: 12.sp, vertical: 6.sp),
+              decoration: BoxDecoration(
+                color: context.colors.gold.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(20.sp),
               ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ReciterHero extends StatelessWidget {
-  final Reciter reciter;
-  const _ReciterHero({required this.reciter});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.fromLTRB(16.sp, 4.sp, 16.sp, 12.sp),
-      padding: EdgeInsets.all(20.sp),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            context.colors.emerald,
-            context.colors.primary,
-          ],
-        ),
-        borderRadius: BorderRadius.circular(24.sp),
-        boxShadow: [
-          BoxShadow(
-            color: context.colors.emerald.withValues(alpha: 0.25),
-            blurRadius: 24,
-            offset: const Offset(0, 12),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 56.sp,
-            height: 56.sp,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white.withValues(alpha: 0.18),
-            ),
-            alignment: Alignment.center,
-            child: Icon(Icons.graphic_eq_rounded,
-                color: Colors.white, size: 28.sp),
-          ),
-          SizedBox(width: 14.sp),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'NOW RECITING',
-                  style: TextStyle(
-                    fontSize: 10.sp,
-                    letterSpacing: 1.6,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white.withValues(alpha: 0.75),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.record_voice_over_rounded,
+                      size: 14.sp, color: context.colors.gold),
+                  SizedBox(width: 6.sp),
+                  ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: 130.sp),
+                    child: Text(
+                      selected.nameLatin,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 11.sp,
+                        fontWeight: FontWeight.w700,
+                        color: context.colors.gold,
+                      ),
+                    ),
                   ),
-                ),
-                SizedBox(height: 4.sp),
-                Text(
-                  reciter.nameLatin,
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w800,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Text(
-            reciter.nameArabic,
-            textDirection: TextDirection.rtl,
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w700,
-              color: Colors.white,
+                  SizedBox(width: 2.sp),
+                  Icon(Icons.arrow_drop_down_rounded,
+                      size: 18.sp, color: context.colors.gold),
+                ],
+              ),
             ),
           ),
         ],
