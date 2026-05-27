@@ -38,9 +38,12 @@ class QuranScreen extends StatelessWidget {
                       16.sp,
                       controller.current == null ? 24.sp : 120.sp,
                     ),
-                    itemCount: SurahsData.all.length,
+                    itemCount: SurahsData.all.length + 1,
                     separatorBuilder: (_, __) => SizedBox(height: 8.sp),
                     itemBuilder: (context, i) {
+                      if (i == SurahsData.all.length) {
+                        return const _AudioAttribution();
+                      }
                       final s = SurahsData.all[i];
                       final isCurrent = controller.current?.number == s.number;
                       return _SurahTile(
@@ -283,6 +286,34 @@ class _SurahTile extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _AudioAttribution extends StatelessWidget {
+  const _AudioAttribution();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 16.sp),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.headphones_rounded,
+              size: 12.sp, color: Colors.grey.shade400),
+          SizedBox(width: 6.sp),
+          Text(
+            'Audio courtesy of quranicaudio.com',
+            style: TextStyle(
+              fontSize: 10.sp,
+              color: Colors.grey.shade400,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 0.2,
+            ),
+          ),
+        ],
       ),
     );
   }
