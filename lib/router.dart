@@ -5,6 +5,7 @@ import 'package:ninety/presentation/screens/favorite_name_screen.dart';
 import 'package:ninety/presentation/screens/home_screen.dart';
 import 'package:ninety/presentation/screens/name_item_screen.dart';
 import 'package:ninety/presentation/screens/quiz_screen.dart';
+import 'package:ninety/presentation/screens/url_audio_screen.dart';
 
 class AppRouter {
   static final GoRouter router =
@@ -20,6 +21,10 @@ class AppRouter {
     GoRoute(
       path: "/quiz",
       builder: (context, state) => const QuizScreen(),
+    ),
+    GoRoute(
+      path: "/audio-test",
+      builder: (context, state) => const UrlAudioScreen(),
     ),
     GoRoute(
       pageBuilder: (context, state) {
