@@ -43,6 +43,7 @@ import 'domain/usecases/name/get_names_usecase.dart' as _i420;
 import 'domain/usecases/quiz/get_quiz_questions_usecase.dart' as _i787;
 import 'domain/usecases/settings/get_theme_mode_usecase.dart' as _i983;
 import 'domain/usecases/settings/set_theme_mode_usecase.dart' as _i418;
+import 'services/quran_audio/quran_audio_controller.dart' as _i68;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -56,6 +57,7 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final storageModule = _$StorageModule();
+    gh.singleton<_i68.QuranAudioController>(() => _i68.QuranAudioController());
     gh.singleton<_i884.IAppColor>(
       () => _i403.DarkColor(),
       instanceName: 'dark',

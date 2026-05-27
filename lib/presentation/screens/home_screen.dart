@@ -10,9 +10,13 @@ import 'package:ninety/presentation/bloc/name_cubit.dart';
 import 'package:ninety/presentation/bloc/name_state.dart';
 import 'package:ninety/services/audio_player/audio_player_service.dart';
 
+import 'package:ninety/di.dart';
+import 'package:ninety/services/quran_audio/quran_audio_controller.dart';
+
 import '../../domain/entities/name.dart';
 import '../widgets/name_card_widget.dart';
 import '../widgets/theme_toggle_button.dart';
+import '../widgets/wave_bars.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -303,41 +307,77 @@ class _QuranAudioInvite extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = locator.get<QuranAudioController>();
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.sp, vertical: 6.sp),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [context.colors.emerald, context.colors.primary],
-          ),
-          borderRadius: BorderRadius.circular(22.sp),
-          boxShadow: [
-            BoxShadow(
-              color: context.colors.emerald.withValues(alpha: 0.25),
-              blurRadius: 12,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(Icons.play_arrow_rounded, color: Colors.white, size: 22.sp),
-            SizedBox(width: 4.sp),
-            Text(
-              'Listen Quran',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w800,
-                letterSpacing: 0.3,
+      child: AnimatedBuilder(
+        animation: controller,
+        builder: (context, _) {
+          final isPlaying = controller.isPlaying;
+          final surah = controller.current;
+          final label = isPlaying && surah != null
+              ? surah.nameLatin
+              : 'Listen Quran';
+          return Container(
+            padding: EdgeInsets.symmetric(horizontal: 12.sp, vertical: 6.sp),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [context.colors.emerald, context.colors.primary],
               ),
+              borderRadius: BorderRadius.circular(22.sp),
+              boxShadow: [
+                BoxShadow(
+                  color: context.colors.emerald.withValues(alpha: 0.25),
+                  blurRadius: 12,
+                  offset: const Offset(0, 4),
+                ),
+              ],
             ),
-          ],
-        ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 220),
+                  transitionBuilder: (child, anim) =>
+                      ScaleTransition(scale: anim, child: child),
+                  child: isPlaying
+                      ? Padding(
+                          key: const ValueKey('wave'),
+                          padding: EdgeInsets.symmetric(horizontal: 2.sp),
+                          child: WaveBars(
+                            color: Colors.white,
+                            width: 16.sp,
+                            height: 16.sp,
+                          ),
+                        )
+                      : Icon(
+                          Icons.play_arrow_rounded,
+                          key: const ValueKey('play'),
+                          color: Colors.white,
+                          size: 22.sp,
+                        ),
+                ),
+                SizedBox(width: 6.sp),
+                AnimatedSize(
+                  duration: const Duration(milliseconds: 220),
+                  curve: Curves.easeOut,
+                  child: Text(
+                    label,
+                    key: ValueKey(label),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 0.3,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

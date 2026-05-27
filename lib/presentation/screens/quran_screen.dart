@@ -1,168 +1,88 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ninety/core/extensions/context_extension.dart';
 import 'package:ninety/data/datasources/local/reciters_data.dart';
 import 'package:ninety/data/datasources/local/surahs_data.dart';
+import 'package:ninety/di.dart';
 import 'package:ninety/domain/entities/reciter.dart';
 import 'package:ninety/domain/entities/surah.dart';
+import 'package:ninety/services/quran_audio/quran_audio_controller.dart';
 
-class QuranScreen extends StatefulWidget {
+class QuranScreen extends StatelessWidget {
   const QuranScreen({super.key});
 
   @override
-  State<QuranScreen> createState() => _QuranScreenState();
-}
-
-class _QuranScreenState extends State<QuranScreen> {
-  late final AudioPlayer _player;
-
-  Reciter _reciter = RecitersData.all.first;
-  Surah? _current;
-  PlayerState _state = PlayerState.stopped;
-  Duration _position = Duration.zero;
-  Duration _duration = Duration.zero;
-  bool _buffering = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _player = AudioPlayer();
-    _player.onPlayerStateChanged.listen((s) {
-      if (!mounted) return;
-      setState(() {
-        _state = s;
-        if (s == PlayerState.playing) _buffering = false;
-      });
-    });
-    _player.onPositionChanged.listen((p) {
-      if (mounted) setState(() => _position = p);
-    });
-    _player.onDurationChanged.listen((d) {
-      if (mounted) setState(() => _duration = d);
-    });
-    _player.onPlayerComplete.listen((_) => _playNext());
-  }
-
-  @override
-  void dispose() {
-    _player.dispose();
-    super.dispose();
-  }
-
-  Future<void> _selectReciter(Reciter r) async {
-    if (r.slug == _reciter.slug) return;
-    await _player.stop();
-    if (!mounted) return;
-    setState(() {
-      _reciter = r;
-      _current = null;
-      _position = Duration.zero;
-      _duration = Duration.zero;
-      _buffering = false;
-    });
-  }
-
-  Future<void> _play(Surah surah) async {
-    setState(() {
-      _current = surah;
-      _position = Duration.zero;
-      _duration = Duration.zero;
-      _buffering = true;
-    });
-    try {
-      await _player
-          .play(UrlSource(RecitersData.audioUrl(_reciter, surah.number)));
-    } catch (_) {
-      if (mounted) setState(() => _buffering = false);
-    }
-  }
-
-  Future<void> _togglePlay() async {
-    if (_current == null) {
-      await _play(SurahsData.all.first);
-      return;
-    }
-    if (_state == PlayerState.playing) {
-      await _player.pause();
-    } else {
-      await _player.resume();
-    }
-  }
-
-  Future<void> _playNext() async {
-    if (_current == null) return;
-    final next = _current!.number + 1;
-    if (next > SurahsData.all.length) return;
-    await _play(SurahsData.all[next - 1]);
-  }
-
-  Future<void> _playPrev() async {
-    if (_current == null) return;
-    final prev = _current!.number - 1;
-    if (prev < 1) return;
-    await _play(SurahsData.all[prev - 1]);
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final controller = locator.get<QuranAudioController>();
     return Scaffold(
       backgroundColor: context.colors.background,
-      body: SafeArea(
-        bottom: false,
-        child: Column(
-          children: [
-            _Header(
-              onBack: () => context.pop(),
-              selected: _reciter,
-              onSelect: _selectReciter,
-            ),
-            _ReciterStrip(
-              selected: _reciter,
-              onSelect: _selectReciter,
-            ),
-            SizedBox(height: 8.sp),
-            Expanded(
-              child: ListView.separated(
-                padding: EdgeInsets.fromLTRB(
-                  16.sp,
-                  4.sp,
-                  16.sp,
-                  _current == null ? 24.sp : 120.sp,
+      body: AnimatedBuilder(
+        animation: controller,
+        builder: (context, _) {
+          return SafeArea(
+            bottom: false,
+            child: Column(
+              children: [
+                _Header(
+                  onBack: () => context.pop(),
+                  selected: controller.reciter,
+                  onSelect: controller.selectReciter,
                 ),
-                itemCount: SurahsData.all.length,
-                separatorBuilder: (_, __) => SizedBox(height: 8.sp),
-                itemBuilder: (context, i) {
-                  final s = SurahsData.all[i];
-                  final isCurrent = _current?.number == s.number;
-                  return _SurahTile(
-                    surah: s,
-                    isCurrent: isCurrent,
-                    isPlaying: isCurrent && _state == PlayerState.playing,
-                    onTap: () => _play(s),
-                  );
-                },
-              ),
+                _ReciterStrip(
+                  selected: controller.reciter,
+                  onSelect: controller.selectReciter,
+                ),
+                SizedBox(height: 8.sp),
+                Expanded(
+                  child: ListView.separated(
+                    padding: EdgeInsets.fromLTRB(
+                      16.sp,
+                      4.sp,
+                      16.sp,
+                      controller.current == null ? 24.sp : 120.sp,
+                    ),
+                    itemCount: SurahsData.all.length,
+                    separatorBuilder: (_, __) => SizedBox(height: 8.sp),
+                    itemBuilder: (context, i) {
+                      final s = SurahsData.all[i];
+                      final isCurrent = controller.current?.number == s.number;
+                      return _SurahTile(
+                        surah: s,
+                        isCurrent: isCurrent,
+                        isPlaying: isCurrent && controller.isPlaying,
+                        onTap: () => controller.play(s),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
-      bottomSheet: _current == null
-          ? null
-          : _MiniPlayer(
-              reciter: _reciter,
-              surah: _current!,
-              position: _position,
-              duration: _duration,
-              isPlaying: _state == PlayerState.playing,
-              isBuffering: _buffering,
-              onPlayPause: _togglePlay,
-              onNext:
-                  _current!.number < SurahsData.all.length ? _playNext : null,
-              onPrev: _current!.number > 1 ? _playPrev : null,
-              onSeek: (v) => _player.seek(Duration(milliseconds: v.toInt())),
-            ),
+      bottomSheet: AnimatedBuilder(
+        animation: controller,
+        builder: (context, _) {
+          final current = controller.current;
+          if (current == null) return const SizedBox.shrink();
+          return _MiniPlayer(
+            reciter: controller.reciter,
+            surah: current,
+            position: controller.position,
+            duration: controller.duration,
+            isPlaying: controller.isPlaying,
+            isBuffering: controller.buffering,
+            onPlayPause: controller.togglePlay,
+            onNext: current.number < SurahsData.all.length
+                ? controller.playNext
+                : null,
+            onPrev: current.number > 1 ? controller.playPrev : null,
+            onSeek: (v) =>
+                controller.seek(Duration(milliseconds: v.toInt())),
+          );
+        },
+      ),
     );
   }
 }
