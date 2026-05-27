@@ -7,7 +7,8 @@ import 'root.dart';
 Future<void> main() async {
   await init();
   AudioPlayerService().init();
-  SystemChrome.setPreferredOrientations(
-          [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
-      .then((value) => runApp(const Root()));
+  AudioPlayerService.instance.listen();
+  await SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  runApp(const Root());
 }

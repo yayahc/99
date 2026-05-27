@@ -8,7 +8,6 @@ import 'package:ninety/l10n/app_localizations.dart';
 import 'package:ninety/presentation/bloc/favorite_cubit.dart';
 import 'package:ninety/presentation/bloc/name_cubit.dart';
 import 'package:ninety/presentation/bloc/name_state.dart';
-import 'package:ninety/services/audio_player/audio_player_service.dart';
 
 import 'package:ninety/di.dart';
 import 'package:ninety/services/quran_audio/quran_audio_controller.dart';
@@ -40,7 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
     _searchController = TextEditingController();
     BlocProvider.of<FavoriteCubit>(context).loadFavotiresNames();
     BlocProvider.of<NameCubit>(context).loadNames();
-    AudioPlayerService.instance.listen();
     _searchController.addListener(_onSearchChanged);
   }
 

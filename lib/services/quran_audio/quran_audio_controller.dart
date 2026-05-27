@@ -1,16 +1,19 @@
 import 'dart:async';
 
-import 'package:audioplayers/audioplayers.dart';
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:just_audio/just_audio.dart' hide PlayerState;
 import 'package:ninety/data/datasources/local/reciters_data.dart';
 import 'package:ninety/data/datasources/local/surahs_data.dart';
 import 'package:ninety/domain/entities/reciter.dart';
 import 'package:ninety/domain/entities/surah.dart';
+import 'package:ninety/services/audio/background_audio_handler.dart';
+import 'package:ninety/services/audio_player/audio_player_service.dart';
 
 @singleton
 class QuranAudioController extends ChangeNotifier {
-  final AudioPlayer _player = AudioPlayer();
+  final BackgroundAudioHandler _handler;
   final List<StreamSubscription<dynamic>> _subs = [];
 
   Reciter _reciter = RecitersData.all.first;
@@ -28,31 +31,61 @@ class QuranAudioController extends ChangeNotifier {
   Duration get duration => _duration;
   bool get buffering => _buffering;
 
-  QuranAudioController() {
-    _subs.add(_player.onPlayerStateChanged.listen((s) {
-      _state = s;
-      if (s == PlayerState.playing) _buffering = false;
+  QuranAudioController(this._handler) {
+    _handler.onComplete = _onTrackComplete;
+
+    _subs.add(_handler.player.playerStateStream.listen((s) {
+      if (_handler.kind != AudioKind.quran) {
+        if (_state != PlayerState.stopped) {
+          _state = PlayerState.stopped;
+          _buffering = false;
+          notifyListeners();
+        }
+        return;
+      }
+      final processing = s.processingState;
+      _buffering = processing == ProcessingState.loading ||
+          processing == ProcessingState.buffering;
+      if (processing == ProcessingState.completed) {
+        _state = PlayerState.completed;
+      } else if (s.playing) {
+        _state = PlayerState.playing;
+      } else {
+        _state = PlayerState.paused;
+      }
       notifyListeners();
     }));
-    _subs.add(_player.onPositionChanged.listen((p) {
+
+    _subs.add(_handler.player.positionStream.listen((p) {
+      if (_handler.kind != AudioKind.quran) return;
       _position = p;
       notifyListeners();
     }));
-    _subs.add(_player.onDurationChanged.listen((d) {
-      _duration = d;
+
+    _subs.add(_handler.player.durationStream.listen((d) {
+      if (_handler.kind != AudioKind.quran) return;
+      _duration = d ?? Duration.zero;
       notifyListeners();
     }));
-    _subs.add(_player.onPlayerComplete.listen((_) => playNext()));
+  }
+
+  void _onTrackComplete() {
+    if (_handler.kind == AudioKind.quran) {
+      playNext();
+    }
   }
 
   Future<void> selectReciter(Reciter r) async {
     if (r.slug == _reciter.slug) return;
-    await _player.stop();
+    if (_handler.kind == AudioKind.quran) {
+      await _handler.stop();
+    }
     _reciter = r;
     _current = null;
     _position = Duration.zero;
     _duration = Duration.zero;
     _buffering = false;
+    _state = PlayerState.stopped;
     notifyListeners();
   }
 
@@ -63,8 +96,16 @@ class QuranAudioController extends ChangeNotifier {
     _buffering = true;
     notifyListeners();
     try {
-      await _player
-          .play(UrlSource(RecitersData.audioUrl(_reciter, surah.number)));
+      await _handler.playUrl(
+        url: RecitersData.audioUrl(_reciter, surah.number),
+        kind: AudioKind.quran,
+        item: MediaItem(
+          id: 'quran/${_reciter.slug}/${surah.number}',
+          album: 'Holy Quran',
+          title: '${surah.number}. ${surah.nameLatin} · ${surah.meaning}',
+          artist: _reciter.nameLatin,
+        ),
+      );
     } catch (_) {
       _buffering = false;
       notifyListeners();
@@ -76,10 +117,15 @@ class QuranAudioController extends ChangeNotifier {
       await play(SurahsData.all.first);
       return;
     }
+    if (_handler.kind != AudioKind.quran) {
+      // Something else (a Name) is on the shared player — restart the surah.
+      await play(_current!);
+      return;
+    }
     if (_state == PlayerState.playing) {
-      await _player.pause();
+      await _handler.pause();
     } else {
-      await _player.resume();
+      await _handler.play();
     }
   }
 
@@ -97,14 +143,16 @@ class QuranAudioController extends ChangeNotifier {
     await play(SurahsData.all[prev - 1]);
   }
 
-  Future<void> seek(Duration d) => _player.seek(d);
+  Future<void> seek(Duration d) => _handler.seek(d);
 
   @override
   void dispose() {
     for (final s in _subs) {
       s.cancel();
     }
-    _player.dispose();
+    if (_handler.onComplete == _onTrackComplete) {
+      _handler.onComplete = null;
+    }
     super.dispose();
   }
 }

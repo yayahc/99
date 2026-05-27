@@ -12,6 +12,7 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import 'core/modules/audio_module.dart' as _i726;
 import 'core/modules/storage_module.dart' as _i213;
 import 'core/theme/colors/dark_colors.dart' as _i403;
 import 'core/theme/colors/i_app_color.dart' as _i884;
@@ -43,21 +44,28 @@ import 'domain/usecases/name/get_names_usecase.dart' as _i420;
 import 'domain/usecases/quiz/get_quiz_questions_usecase.dart' as _i787;
 import 'domain/usecases/settings/get_theme_mode_usecase.dart' as _i983;
 import 'domain/usecases/settings/set_theme_mode_usecase.dart' as _i418;
+import 'services/audio/background_audio_handler.dart' as _i966;
 import 'services/quran_audio/quran_audio_controller.dart' as _i68;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
-  _i174.GetIt init({
+  Future<_i174.GetIt> init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
-  }) {
+  }) async {
     final gh = _i526.GetItHelper(
       this,
       environment,
       environmentFilter,
     );
+    final audioModule = _$AudioModule();
     final storageModule = _$StorageModule();
-    gh.singleton<_i68.QuranAudioController>(() => _i68.QuranAudioController());
+    await gh.singletonAsync<_i966.BackgroundAudioHandler>(
+      () => audioModule.audioHandler,
+      preResolve: true,
+    );
+    gh.singleton<_i68.QuranAudioController>(
+        () => _i68.QuranAudioController(gh<_i966.BackgroundAudioHandler>()));
     gh.singleton<_i884.IAppColor>(
       () => _i403.DarkColor(),
       instanceName: 'dark',
@@ -106,5 +114,7 @@ extension GetItInjectableX on _i174.GetIt {
     return this;
   }
 }
+
+class _$AudioModule extends _i726.AudioModule {}
 
 class _$StorageModule extends _i213.StorageModule {}
