@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_name_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/widget_background"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/widget_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name of the Day"
+        android:textColor="#9FE8D6"
+        android:textSize="11sp"
+        android:letterSpacing="0.08"
+        android:textAllCaps="true" />
+
+    <TextView
+        android:id="@+id/widget_name_arabe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/widget_name_translit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="#EAFBF4"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/widget_name_translation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textColor="#9FE8D6"
+        android:textSize="13sp"
+        android:text="" />
+
+</LinearLayout>

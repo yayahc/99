@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_np_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:background="@drawable/widget_background"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/widget_np_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quran audio"
+        android:textColor="#9FE8D6"
+        android:textSize="11sp"
+        android:letterSpacing="0.08"
+        android:textAllCaps="true" />
+
+    <TextView
+        android:id="@+id/widget_np_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Tap to listen"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:maxLines="2"
+        android:ellipsize="end" />
+
+</LinearLayout>
