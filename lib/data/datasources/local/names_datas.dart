@@ -281,7 +281,6 @@ class NamesDatas {
       reference: ["Surah 2 : Al Baqara (The Cow) - Verse: 245"],
       audioPath: Assets.audios.twenty,
     ),
-    // [1]
     Name(
       id: 21,
       arabe: "ٱلْبَاسِطُ",
@@ -420,7 +419,6 @@ class NamesDatas {
       ],
       audioPath: Assets.audios.thirteen,
     ),
-    // [2]
     Name(
       id: 31,
       arabe: "ٱلْخَبِيرُ",
@@ -580,7 +578,6 @@ class NamesDatas {
       ],
       audioPath: Assets.audios.forty,
     ),
-    // [3] keep id
     Name(
       id: 41,
       arabe: "ٱلْجَلِيلُ",
@@ -739,7 +736,6 @@ class NamesDatas {
       ],
       audioPath: Assets.audios.fiftyone,
     ),
-    // [4] keep id
     Name(
       id: 52,
       arabe: "ٱلْوَكِيلُ",
@@ -881,26 +877,13 @@ class NamesDatas {
       ],
       audioPath: Assets.audios.sixty,
     ),
-    // [5] keep id
-    Name(
-      id: 60,
-      arabe: "ٱلْقَيُّومُ",
-      transliteration: "Al-Qayyūm",
-      translation: "Celui qui Subsiste par lui-même",
-      details:
-          "Celui qui est éternellement auto-subsistant. Il est indépendant et maintient toute la création.",
-      sampleDoua: [],
-      benefite: "",
-      reference: [],
-      audioPath: "",
-    ),
     Name(
       id: 61,
-      arabe: "ٱلْمَجِيبُ",
-      transliteration: "Al-Mujīb",
-      translation: "L'EEnuceur",
+      arabe: "ٱلْمُمِيتُ",
+      transliteration: "Al-Mumīt",
+      translation: "The Inflictor of Death",
       details:
-          "Celui qui répond à toutes les supplications et prières. Il accorde ce qui est le mieux pour Ses créatures.",
+          "The Creator of Death, The Destroyer, The One who renders the living dead.",
       sampleDoua: [],
       benefite: "",
       reference: [],
@@ -908,11 +891,11 @@ class NamesDatas {
     ),
     Name(
       id: 62,
-      arabe: "ٱلْوَاسِعُ",
-      transliteration: "Al-Wāsiʿ",
-      translation: "L'Infiniment Vaste",
+      arabe: "ٱلْحَيُّ",
+      transliteration: "Al-Ḥayy",
+      translation: "The Eternally Living One",
       details:
-          "Celui dont la générosité, la miséricorde et la bonté sont illimitées. Son pardon et Ses bienfaits sont infinis.",
+          "The Alive, The One attributed with a life that is unlike our life and is not that of a combination of soul, flesh or blood.",
       sampleDoua: [],
       benefite: "",
       reference: [],
@@ -920,11 +903,11 @@ class NamesDatas {
     ),
     Name(
       id: 63,
-      arabe: "ٱلْحَكِيمُ",
-      transliteration: "Al-Ḥakīm",
-      translation: "Le Enge",
+      arabe: "ٱلْقَيُّومُ",
+      transliteration: "Al-Qayyūm",
+      translation: "The Self-Subsisting One",
       details:
-          "Celui qui possède une sagesse parfaite et incontestée. Toutes Ses décisions et lois sont empreintes de sagesse.",
+          "The Self-Subsisting, The Self-Existing One upon Whom all others depend",
       sampleDoua: [],
       benefite: "",
       reference: [],
@@ -932,11 +915,11 @@ class NamesDatas {
     ),
     Name(
       id: 64,
-      arabe: "ٱلْوَدُودُ",
-      transliteration: "Al-Wadūd",
-      translation: "L'AEnant",
+      arabe: "ٱلْوَاجِدُ",
+      transliteration: "Al-Wājid",
+      translation: "The Pointing One",
       details:
-          "Celui qui est plein d'amour et de bienveillance envers Ses créatures. Il aime Ses serviteurs et est aimé en retour.",
+          "The Perceiver, The Finder, The Rich who is never poor. Al-Wajid is Richness.",
       sampleDoua: [],
       benefite: "",
       reference: [],
@@ -944,11 +927,10 @@ class NamesDatas {
     ),
     Name(
       id: 65,
-      arabe: "ٱلْمَجِيدُ",
-      transliteration: "Al-Majīd",
-      translation: "Le Enorieux",
-      details:
-          "Celui qui est digne de toute gloire et de toute magnificence. Sa grandeur est incomparable.",
+      arabe: "ٱلْمَاجِدُ",
+      transliteration: "Al-Mājid",
+      translation: "The All-Noble One",
+      details: "The Glorious, He who is Most Glorious.",
       sampleDoua: [],
       benefite: "",
       reference: [],
@@ -956,11 +938,10 @@ class NamesDatas {
     ),
     Name(
       id: 66,
-      arabe: "ٱلْبَاعِثُ",
-      transliteration: "Al-Bāʿith",
-      translation: "Le Ensurrecteur",
-      details:
-          "Celui qui ressuscite les morts au Jour de la Résurrection. Il est le Créateur et le Résurrecteur de toute vie.",
+      arabe: "ٱلْوَاحِدُ",
+      transliteration: "The Only One",
+      translation: "The Unique, The One, The One without a partner.",
+      details: "",
       sampleDoua: [],
       benefite: "",
       reference: [],
@@ -968,11 +949,10 @@ class NamesDatas {
     ),
     Name(
       id: 67,
-      arabe: "ٱلشَّهِيدُ",
-      transliteration: "Ash-Shahīd",
-      translation: "Le Enmoin",
-      details:
-          "Celui qui est témoin de tout ce qui se passe. Il est conscient de chaque action et rien ne Lui échappe.",
+      arabe: "ٱلْأَحَدُ",
+      transliteration: "Al-Aḥad",
+      translation: "The Sole One",
+      details: "The One.",
       sampleDoua: [],
       benefite: "",
       reference: [],
@@ -980,11 +960,11 @@ class NamesDatas {
     ),
     Name(
       id: 68,
-      arabe: "ٱلْحَقُّ",
-      transliteration: "Al-Ḥaqq",
-      translation: "La Enrité",
+      arabe: "ٱلصَّمَدُ",
+      transliteration: "Aṣ-Ṣamad",
+      translation: "The Supreme Provider",
       details:
-          "Celui qui incarne la vérité absolue. Sa parole est véridique et Il est la réalité ultime de l'existence.",
+          "The Eternal, The Independent, The Master who is relied upon in matters and reverted to in ones needs. He is the only one a person should turn to when feeling helpless.",
       sampleDoua: [],
       benefite: "",
       reference: [],
@@ -992,11 +972,10 @@ class NamesDatas {
     ),
     Name(
       id: 69,
-      arabe: "ٱلْوَكِيلُ",
-      transliteration: "Al-Wakīl",
-      translation: "Le Dépositaire de toute confiance",
-      details:
-          "Celui en qui on peut placer sa confiance en toute circonstance. Il est le gardien de toute chose.",
+      arabe: "ٱلْقَادِرُ",
+      transliteration: "Al-Qādir",
+      translation: "The All-Powerful",
+      details: "The Able, The Capable, The One attributed with Power.",
       sampleDoua: [],
       benefite: "",
       reference: [],
@@ -1004,16 +983,17 @@ class NamesDatas {
     ),
     Name(
       id: 70,
-      arabe: "ٱلْقَوِيُّ",
-      transliteration: "Al-Qawwiyy",
-      translation: "Le Enrt",
+      arabe: "ٱلْمُقْتَدِرُ",
+      transliteration: "Al-Muqtadir",
+      translation: "The All Authoritative One",
       details:
-          "Celui qui possède une force inébranlable. Il est capable de tout et rien ne Lui est impossible.",
+          "The Powerful, The Dominant, The One with the perfect Power that nothing is withheld from Him.",
       sampleDoua: [],
       benefite: "",
       reference: [],
       audioPath: "",
     ),
+    // [6] keep id --last try get source with refern,eces
     Name(
       id: 71,
       arabe: "ٱلْمَتِينُ",
