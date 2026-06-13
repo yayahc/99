@@ -72,10 +72,10 @@ class HomeWidgetService {
             (n) => n.id == id,
             orElse: () => names.first,
           );
-          AppRouter.router.go('/name', extra: name);
+          AppRouter.router.push('/name', extra: name);
           break;
         case 'quran':
-          AppRouter.router.go('/quran');
+          AppRouter.router.push('/quran');
           break;
       }
     });
