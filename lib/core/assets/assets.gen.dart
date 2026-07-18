@@ -23,6 +23,36 @@ class $AssetsAudiosGen {
   /// File path: assets/audios/eighteen.wav
   String get eighteen => 'assets/audios/eighteen.wav';
 
+  /// File path: assets/audios/eighty.mp3
+  String get eighty => 'assets/audios/eighty.mp3';
+
+  /// File path: assets/audios/eightyeight.mp3
+  String get eightyeight => 'assets/audios/eightyeight.mp3';
+
+  /// File path: assets/audios/eightyfive.mp3
+  String get eightyfive => 'assets/audios/eightyfive.mp3';
+
+  /// File path: assets/audios/eightyfour.mp3
+  String get eightyfour => 'assets/audios/eightyfour.mp3';
+
+  /// File path: assets/audios/eightynine.mp3
+  String get eightynine => 'assets/audios/eightynine.mp3';
+
+  /// File path: assets/audios/eightyone.mp3
+  String get eightyone => 'assets/audios/eightyone.mp3';
+
+  /// File path: assets/audios/eightyseven.mp3
+  String get eightyseven => 'assets/audios/eightyseven.mp3';
+
+  /// File path: assets/audios/eightysix.mp3
+  String get eightysix => 'assets/audios/eightysix.mp3';
+
+  /// File path: assets/audios/eightythree.mp3
+  String get eightythree => 'assets/audios/eightythree.mp3';
+
+  /// File path: assets/audios/eightytwo.mp3
+  String get eightytwo => 'assets/audios/eightytwo.mp3';
+
   /// File path: assets/audios/eleven.wav
   String get eleven => 'assets/audios/eleven.wav';
 
@@ -104,6 +134,36 @@ class $AssetsAudiosGen {
   /// File path: assets/audios/nineteen.wav
   String get nineteen => 'assets/audios/nineteen.wav';
 
+  /// File path: assets/audios/ninety.mp3
+  String get ninety => 'assets/audios/ninety.mp3';
+
+  /// File path: assets/audios/ninetyeight.mp3
+  String get ninetyeight => 'assets/audios/ninetyeight.mp3';
+
+  /// File path: assets/audios/ninetyfive.mp3
+  String get ninetyfive => 'assets/audios/ninetyfive.mp3';
+
+  /// File path: assets/audios/ninetyfour.mp3
+  String get ninetyfour => 'assets/audios/ninetyfour.mp3';
+
+  /// File path: assets/audios/ninetynine.mp3
+  String get ninetynine => 'assets/audios/ninetynine.mp3';
+
+  /// File path: assets/audios/ninetyone.mp3
+  String get ninetyone => 'assets/audios/ninetyone.mp3';
+
+  /// File path: assets/audios/ninetyseven.mp3
+  String get ninetyseven => 'assets/audios/ninetyseven.mp3';
+
+  /// File path: assets/audios/ninetysix.mp3
+  String get ninetysix => 'assets/audios/ninetysix.mp3';
+
+  /// File path: assets/audios/ninetythree.mp3
+  String get ninetythree => 'assets/audios/ninetythree.mp3';
+
+  /// File path: assets/audios/ninetytwo.mp3
+  String get ninetytwo => 'assets/audios/ninetytwo.mp3';
+
   /// File path: assets/audios/one.wav
   String get one => 'assets/audios/one.wav';
 
@@ -113,6 +173,36 @@ class $AssetsAudiosGen {
   /// File path: assets/audios/seventeen.wav
   String get seventeen => 'assets/audios/seventeen.wav';
 
+  /// File path: assets/audios/seventy.mp3
+  String get seventy => 'assets/audios/seventy.mp3';
+
+  /// File path: assets/audios/seventyeight.mp3
+  String get seventyeight => 'assets/audios/seventyeight.mp3';
+
+  /// File path: assets/audios/seventyfive.mp3
+  String get seventyfive => 'assets/audios/seventyfive.mp3';
+
+  /// File path: assets/audios/seventyfour.mp3
+  String get seventyfour => 'assets/audios/seventyfour.mp3';
+
+  /// File path: assets/audios/seventynine.mp3
+  String get seventynine => 'assets/audios/seventynine.mp3';
+
+  /// File path: assets/audios/seventyone.mp3
+  String get seventyone => 'assets/audios/seventyone.mp3';
+
+  /// File path: assets/audios/seventyseven.mp3
+  String get seventyseven => 'assets/audios/seventyseven.mp3';
+
+  /// File path: assets/audios/seventysix.mp3
+  String get seventysix => 'assets/audios/seventysix.mp3';
+
+  /// File path: assets/audios/seventythree.mp3
+  String get seventythree => 'assets/audios/seventythree.mp3';
+
+  /// File path: assets/audios/seventytwo.mp3
+  String get seventytwo => 'assets/audios/seventytwo.mp3';
+
   /// File path: assets/audios/six.wav
   String get six => 'assets/audios/six.wav';
 
@@ -121,6 +211,33 @@ class $AssetsAudiosGen {
 
   /// File path: assets/audios/sixty.wav
   String get sixty => 'assets/audios/sixty.wav';
+
+  /// File path: assets/audios/sixtyeight.mp3
+  String get sixtyeight => 'assets/audios/sixtyeight.mp3';
+
+  /// File path: assets/audios/sixtyfive.mp3
+  String get sixtyfive => 'assets/audios/sixtyfive.mp3';
+
+  /// File path: assets/audios/sixtyfour.mp3
+  String get sixtyfour => 'assets/audios/sixtyfour.mp3';
+
+  /// File path: assets/audios/sixtynine.mp3
+  String get sixtynine => 'assets/audios/sixtynine.mp3';
+
+  /// File path: assets/audios/sixtyone.mp3
+  String get sixtyone => 'assets/audios/sixtyone.mp3';
+
+  /// File path: assets/audios/sixtyseven.mp3
+  String get sixtyseven => 'assets/audios/sixtyseven.mp3';
+
+  /// File path: assets/audios/sixtysix.mp3
+  String get sixtysix => 'assets/audios/sixtysix.mp3';
+
+  /// File path: assets/audios/sixtythree.mp3
+  String get sixtythree => 'assets/audios/sixtythree.mp3';
+
+  /// File path: assets/audios/sixtytwo.mp3
+  String get sixtytwo => 'assets/audios/sixtytwo.mp3';
 
   /// File path: assets/audios/ten.wav
   String get ten => 'assets/audios/ten.wav';
@@ -201,6 +318,16 @@ class $AssetsAudiosGen {
   List<String> get values => [
         eight,
         eighteen,
+        eighty,
+        eightyeight,
+        eightyfive,
+        eightyfour,
+        eightynine,
+        eightyone,
+        eightyseven,
+        eightysix,
+        eightythree,
+        eightytwo,
         eleven,
         fifteen,
         fifty,
@@ -228,12 +355,41 @@ class $AssetsAudiosGen {
         fourteen,
         nine,
         nineteen,
+        ninety,
+        ninetyeight,
+        ninetyfive,
+        ninetyfour,
+        ninetynine,
+        ninetyone,
+        ninetyseven,
+        ninetysix,
+        ninetythree,
+        ninetytwo,
         one,
         seven,
         seventeen,
+        seventy,
+        seventyeight,
+        seventyfive,
+        seventyfour,
+        seventynine,
+        seventyone,
+        seventyseven,
+        seventysix,
+        seventythree,
+        seventytwo,
         six,
         sixteen,
         sixty,
+        sixtyeight,
+        sixtyfive,
+        sixtyfour,
+        sixtynine,
+        sixtyone,
+        sixtyseven,
+        sixtysix,
+        sixtythree,
+        sixtytwo,
         ten,
         thirteen,
         thirty,
