@@ -68,6 +68,28 @@ class AppLocalizationsFr extends AppLocalizations {
   String get searchHint => 'Rechercher des noms, des significations...';
 
   @override
+  String get quranTitle => 'Coran';
+
+  @override
+  String get searchSurahHint =>
+      'Rechercher une sourate par nom, sens ou numéro';
+
+  @override
+  String get noSurahMatches => 'Aucune sourate ne correspond à votre recherche';
+
+  @override
+  String get selectReciter => 'Sélectionner un récitant';
+
+  @override
+  String get meaning => 'Signification';
+
+  @override
+  String get playAudio => 'Lire l\'audio';
+
+  @override
+  String get pause => 'Pause';
+
+  @override
   String get nameOfTheDay => 'NOM DU JOUR';
 
   @override
@@ -77,7 +99,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get noSavedNames => 'Aucun nom enregistré pour le moment';
 
   @override
-  String get noSavedNamesSubtitle => 'Appuyez sur le cœur d’un nom pour l’enregistrer ici';
+  String get noSavedNamesSubtitle =>
+      'Appuyez sur le cœur d’un nom pour l’enregistrer ici';
 
   @override
   String get theme => 'THÈME';

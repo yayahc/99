@@ -68,6 +68,27 @@ class AppLocalizationsAr extends AppLocalizations {
   String get searchHint => 'ابحث عن الأسماء والمعاني...';
 
   @override
+  String get quranTitle => 'القرآن';
+
+  @override
+  String get searchSurahHint => 'ابحث عن السورة بالاسم أو المعنى أو الرقم';
+
+  @override
+  String get noSurahMatches => 'لا توجد سورة تطابق بحثك';
+
+  @override
+  String get selectReciter => 'اختر القارئ';
+
+  @override
+  String get meaning => 'المعنى';
+
+  @override
+  String get playAudio => 'تشغيل الصوت';
+
+  @override
+  String get pause => 'إيقاف';
+
+  @override
   String get nameOfTheDay => 'اسم اليوم';
 
   @override

@@ -9,6 +9,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:ninety/core/extensions/context_extension.dart';
 import 'package:ninety/core/extensions/name_extension.dart';
+import 'package:ninety/l10n/app_localizations.dart';
 import 'package:ninety/presentation/bloc/favorite_cubit.dart';
 
 import '../../domain/entities/name.dart';
@@ -60,7 +61,7 @@ class _NameItemScreenState extends State<NameItemScreen> {
           ),
         ),
       ),
-      floatingActionButton: _buildPlayButton(),
+      floatingActionButton: _buildPlayButton(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
@@ -186,7 +187,8 @@ class _NameItemScreenState extends State<NameItemScreen> {
         ));
   }
 
-  Widget _buildPlayButton() {
+  Widget _buildPlayButton(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return ListenableBuilder(
       listenable: Listenable.merge([
         AudioPlayerService.playerStateNotifier,
@@ -227,7 +229,7 @@ class _NameItemScreenState extends State<NameItemScreen> {
                 ),
                 SizedBox(width: 8.sp),
                 Text(
-                  isPlaying ? 'Pause' : 'Play audio',
+                  isPlaying ? l10n.pause : l10n.playAudio,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 14.sp,
@@ -243,6 +245,7 @@ class _NameItemScreenState extends State<NameItemScreen> {
   }
 
   Widget _buildDetailsCard(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -261,7 +264,7 @@ class _NameItemScreenState extends State<NameItemScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'MEANING',
+            l10n.meaning.toUpperCase(),
             style: TextStyle(
               fontSize: 11.sp,
               fontWeight: FontWeight.w700,

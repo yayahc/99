@@ -50,7 +50,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noQuestionsAvailable => 'No quiz questions available';
 
   @override
-  String get transliterationPrompt => 'Which transliteration matches this meaning?';
+  String get transliterationPrompt =>
+      'Which transliteration matches this meaning?';
 
   @override
   String get translationPrompt => 'What does this Arabic name mean?';
@@ -68,6 +69,27 @@ class AppLocalizationsEn extends AppLocalizations {
   String get searchHint => 'Search names, meanings...';
 
   @override
+  String get quranTitle => 'Quran';
+
+  @override
+  String get searchSurahHint => 'Search surah by name, meaning or number';
+
+  @override
+  String get noSurahMatches => 'No surah matches your search';
+
+  @override
+  String get selectReciter => 'Select reciter';
+
+  @override
+  String get meaning => 'Meaning';
+
+  @override
+  String get playAudio => 'Play audio';
+
+  @override
+  String get pause => 'Pause';
+
+  @override
   String get nameOfTheDay => 'NAME OF THE DAY';
 
   @override
@@ -77,7 +99,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noSavedNames => 'No saved names yet';
 
   @override
-  String get noSavedNamesSubtitle => 'Tap the heart on any name to save it here';
+  String get noSavedNamesSubtitle =>
+      'Tap the heart on any name to save it here';
 
   @override
   String get theme => 'THEME';

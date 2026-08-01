@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ninety/core/extensions/context_extension.dart';
 import 'package:ninety/data/datasources/local/reciters_data.dart';
+import 'package:ninety/l10n/app_localizations.dart';
 import 'package:ninety/data/datasources/local/surahs_data.dart';
 import 'package:ninety/di.dart';
 import 'package:ninety/domain/entities/reciter.dart';
@@ -133,6 +134,7 @@ class _SurahSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       height: 48.sp,
       decoration: BoxDecoration(
@@ -147,7 +149,7 @@ class _SurahSearchBar extends StatelessWidget {
         textInputAction: TextInputAction.search,
         style: TextStyle(fontSize: 14.sp, color: context.colors.black),
         decoration: InputDecoration(
-          hintText: 'Search surah by name, meaning or number',
+          hintText: l10n.searchSurahHint,
           hintStyle: TextStyle(
             color: Colors.grey.shade400,
             fontSize: 13.sp,
@@ -185,6 +187,7 @@ class _NoResults extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: EdgeInsets.all(32.sp),
       child: Column(
@@ -197,7 +200,7 @@ class _NoResults extends StatelessWidget {
           ),
           SizedBox(height: 12.sp),
           Text(
-            'No surah matches your search',
+            l10n.noSurahMatches,
             style: TextStyle(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
@@ -222,6 +225,7 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: EdgeInsets.fromLTRB(8.sp, 8.sp, 16.sp, 8.sp),
       child: Row(
@@ -231,7 +235,7 @@ class _Header extends StatelessWidget {
             icon: Icon(Icons.arrow_back_rounded, color: context.colors.black),
           ),
           Text(
-            'Quran',
+            l10n.quranTitle,
             style: TextStyle(
               fontSize: 20.sp,
               fontWeight: FontWeight.w800,
@@ -240,7 +244,7 @@ class _Header extends StatelessWidget {
           ),
           const Spacer(),
           PopupMenuButton<Reciter>(
-            tooltip: 'Select reciter',
+            tooltip: l10n.selectReciter,
             onSelected: onSelect,
             offset: Offset(0, 36.sp),
             color: context.colors.surface,
