@@ -28,7 +28,7 @@ class DarkColor implements IAppColor {
   Color get surface => const Color(0xFF12241A);
 
   @override
-  Color get gold => const Color(0xFFD4A24C);
+  Color get gold => const Color.fromARGB(255, 218, 189, 137);
 
   @override
   Color get emerald => const Color(0xFF2E7D46);
