@@ -143,7 +143,11 @@ class QuranAudioController extends ChangeNotifier {
     await play(SurahsData.all[prev - 1]);
   }
 
-  Future<void> seek(Duration d) => _handler.seek(d);
+  Future<void> seek(Duration d) {
+    _position = d;
+    notifyListeners();
+    return _handler.seek(d);
+  }
 
   @override
   void dispose() {

@@ -608,6 +608,7 @@ class _MiniPlayer extends StatelessWidget {
                 activeColor: context.colors.primary,
                 inactiveColor: Colors.grey.shade300,
                 onChanged: duration == Duration.zero ? null : onSeek,
+                onChangeEnd: duration == Duration.zero ? null : onSeek,
               ),
             ),
             Padding(
