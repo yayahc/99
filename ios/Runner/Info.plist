@@ -32,6 +32,10 @@
 	<array>
 		<string>audio</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app uses your location to provide location-based content and improve your experience.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app uses the microphone for audio-related features and voice input when you choose to use them.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
