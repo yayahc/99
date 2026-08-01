@@ -137,7 +137,7 @@ class _SurahSearchBar extends StatelessWidget {
       height: 48.sp,
       decoration: BoxDecoration(
         color: context.colors.surface,
-        borderRadius: BorderRadius.circular(14.sp),
+        borderRadius: BorderRadius.circular(8.sp),
         border: Border.all(
           color: context.colors.black.withValues(alpha: 0.06),
         ),
@@ -338,7 +338,7 @@ class _SurahTile extends StatelessWidget {
           color: isCurrent
               ? context.colors.primary.withValues(alpha: 0.10)
               : context.colors.surface,
-          borderRadius: BorderRadius.circular(16.sp),
+          borderRadius: BorderRadius.circular(8.sp),
           border: Border.all(
             color: isCurrent ? context.colors.primary : Colors.transparent,
             width: 1.4,

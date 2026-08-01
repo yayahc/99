@@ -122,7 +122,7 @@ class _NameItemScreenState extends State<NameItemScreen> {
           width: double.infinity,
           decoration: BoxDecoration(
             color: context.colors.emerald,
-            borderRadius: BorderRadius.circular(20.sp),
+            borderRadius: BorderRadius.circular(8.sp),
           ),
           padding: EdgeInsets.all(22.sp),
           child: Stack(
@@ -203,8 +203,9 @@ class _NameItemScreenState extends State<NameItemScreen> {
               : AudioPlayerService.playableStream
                   .add(widget.name.toAudioSource),
           child: Container(
-            height: 48.sp,
-            padding: EdgeInsets.symmetric(horizontal: 24.sp),
+            height: 50.sp,
+            margin: EdgeInsets.symmetric(horizontal: 24.sp),
+            padding: EdgeInsets.symmetric(horizontal: 16.sp),
             decoration: BoxDecoration(
               color: context.colors.emerald,
               borderRadius: BorderRadius.circular(24.sp),
@@ -217,7 +218,7 @@ class _NameItemScreenState extends State<NameItemScreen> {
               ],
             ),
             child: Row(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Icon(
                   isPlaying ? Icons.pause_circle : Icons.play_circle,
@@ -246,7 +247,7 @@ class _NameItemScreenState extends State<NameItemScreen> {
       width: double.infinity,
       decoration: BoxDecoration(
         color: context.colors.surface,
-        borderRadius: BorderRadius.circular(20.sp),
+        borderRadius: BorderRadius.circular(8.sp),
         boxShadow: [
           BoxShadow(
             color: context.colors.emerald.withValues(alpha: 0.06),

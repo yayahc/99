@@ -172,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
       height: 52.sp,
       decoration: BoxDecoration(
         color: context.colors.surface,
-        borderRadius: BorderRadius.circular(16.sp),
+        borderRadius: BorderRadius.circular(8.sp),
       ),
       child: TextField(
         controller: _searchController,
@@ -207,7 +207,7 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: EdgeInsets.all(20.sp),
         decoration: BoxDecoration(
           color: context.colors.emerald,
-          borderRadius: BorderRadius.circular(20.sp),
+          borderRadius: BorderRadius.circular(8.sp),
         ),
         child: Stack(
           clipBehavior: Clip.hardEdge,
@@ -313,9 +313,8 @@ class _QuranAudioInvite extends StatelessWidget {
         builder: (context, _) {
           final isPlaying = controller.isPlaying;
           final surah = controller.current;
-          final label = isPlaying && surah != null
-              ? surah.nameLatin
-              : 'Listen Quran';
+          final label =
+              isPlaying && surah != null ? surah.nameLatin : 'Listen Quran';
           return Container(
             padding: EdgeInsets.symmetric(horizontal: 12.sp, vertical: 6.sp),
             decoration: BoxDecoration(

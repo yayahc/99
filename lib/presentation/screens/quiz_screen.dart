@@ -104,7 +104,7 @@ class _QuizScreenState extends State<QuizScreen> {
           padding: EdgeInsets.all(28.sp),
           decoration: BoxDecoration(
             color: context.colors.surface,
-            borderRadius: BorderRadius.circular(28.sp),
+            borderRadius: BorderRadius.circular(8.sp),
             boxShadow: [
               BoxShadow(
                 color: context.colors.emerald.withValues(alpha: 0.08),
@@ -179,7 +179,7 @@ class _QuizScreenState extends State<QuizScreen> {
                     foregroundColor: Colors.white,
                     padding: EdgeInsets.symmetric(vertical: 16.sp),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.sp),
+                      borderRadius: BorderRadius.circular(8.sp),
                     ),
                   ),
                   child: Text(
@@ -309,7 +309,7 @@ class _ProgressHeader extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 14.sp, vertical: 9.sp),
           decoration: BoxDecoration(
             color: context.colors.gold.withValues(alpha: 0.15),
-            borderRadius: BorderRadius.circular(99),
+            borderRadius: BorderRadius.circular(8),
             border: Border.all(
               color: context.colors.gold.withValues(alpha: 0.35),
               width: 1,
@@ -376,7 +376,7 @@ class _QuestionHero extends StatelessWidget {
           end: Alignment.bottomRight,
           colors: [emerald, emerald.withValues(alpha: 0.78)],
         ),
-        borderRadius: BorderRadius.circular(24.sp),
+        borderRadius: BorderRadius.circular(8.sp),
         boxShadow: [
           BoxShadow(
             color: emerald.withValues(alpha: 0.30),
@@ -521,7 +521,7 @@ class _OptionTile extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 14.sp, vertical: 8.sp),
         decoration: BoxDecoration(
           color: bg,
-          borderRadius: BorderRadius.circular(18.sp),
+          borderRadius: BorderRadius.circular(8.sp),
           border: Border.all(color: border, width: 1.2),
         ),
         child: Row(
@@ -590,7 +590,7 @@ class _Feedback extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 14.sp),
       decoration: BoxDecoration(
         color: tint.withValues(alpha: 0.10),
-        borderRadius: BorderRadius.circular(16.sp),
+        borderRadius: BorderRadius.circular(8.sp),
         border: Border.all(color: tint.withValues(alpha: 0.35)),
       ),
       child: Row(
@@ -629,7 +629,7 @@ class _NextButton extends StatelessWidget {
           foregroundColor: Colors.white,
           padding: EdgeInsets.symmetric(vertical: 16.sp),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18.sp),
+            borderRadius: BorderRadius.circular(8.sp),
           ),
           elevation: 0,
         ),
