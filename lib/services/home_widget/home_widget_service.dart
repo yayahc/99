@@ -22,14 +22,18 @@ class HomeWidgetService {
   BackgroundAudioHandler get _handler => locator<BackgroundAudioHandler>();
 
   Future<void> init() async {
-    await refreshNameOfDay();
-    await _refreshNowPlaying(_handler.mediaItem.valueOrNull);
+    try {
+      await refreshNameOfDay();
+      await _refreshNowPlaying(_handler.mediaItem.valueOrNull);
 
-    _mediaSub ??= _handler.mediaItem.listen(_refreshNowPlaying);
-    HomeWidget.widgetClicked.listen(_handleUri);
+      _mediaSub ??= _handler.mediaItem.listen(_refreshNowPlaying);
+      HomeWidget.widgetClicked.listen(_handleUri);
 
-    final launchUri = await HomeWidget.initiallyLaunchedFromHomeWidget();
-    _handleUri(launchUri);
+      final launchUri = await HomeWidget.initiallyLaunchedFromHomeWidget();
+      _handleUri(launchUri);
+    } catch (error) {
+      debugPrint('HomeWidgetService init failed: $error');
+    }
   }
 
   Future<void> refreshNameOfDay() async {
@@ -55,11 +59,17 @@ class HomeWidgetService {
     await _update(_nowPlayingProvider);
   }
 
-  Future<void> _update(String provider) => HomeWidget.updateWidget(
+  Future<void> _update(String provider) async {
+    try {
+      await HomeWidget.updateWidget(
         name: provider,
         androidName: provider,
         qualifiedAndroidName: '$_pkg.$provider',
       );
+    } catch (error) {
+      debugPrint('HomeWidget update failed for $provider: $error');
+    }
+  }
 
   void _handleUri(Uri? uri) {
     if (uri == null) return;
