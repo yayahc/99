@@ -1,3 +1,5 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -86,9 +88,30 @@ class _HomeScreenState extends State<HomeScreen> {
 
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: context.colors.background,
+      backgroundColor: Colors.transparent,
       elevation: 0,
+      scrolledUnderElevation: 0,
       titleSpacing: 16.sp,
+      flexibleSpace: ClipRRect(
+        child: BackdropFilter(
+          filter: ui.ImageFilter.blur(sigmaX: 24, sigmaY: 24),
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.white.withValues(alpha: 0.18),
+                  Colors.white.withValues(alpha: 0.04),
+                ],
+              ),
+              border: Border(
+                bottom: BorderSide(color: Colors.white.withValues(alpha: 0.10)),
+              ),
+            ),
+          ),
+        ),
+      ),
       title: _QuranAudioInvite(onTap: () => context.push('/quran')),
       actions: [
         Padding(
