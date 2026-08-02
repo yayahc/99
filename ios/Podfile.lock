@@ -5,6 +5,8 @@ PODS:
   - audio_session (0.0.1):
     - Flutter
   - Flutter (1.0.0)
+  - flutter_local_notifications (0.0.1):
+    - Flutter
   - home_widget (0.0.1):
     - Flutter
   - just_audio (0.0.1):
@@ -97,6 +99,7 @@ DEPENDENCIES:
   - audio_service (from `.symlinks/plugins/audio_service/darwin`)
   - audio_session (from `.symlinks/plugins/audio_session/ios`)
   - Flutter (from `Flutter`)
+  - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - home_widget (from `.symlinks/plugins/home_widget/ios`)
   - just_audio (from `.symlinks/plugins/just_audio/darwin`)
   - onesignal_flutter (from `.symlinks/plugins/onesignal_flutter/ios`)
@@ -117,6 +120,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/audio_session/ios"
   Flutter:
     :path: Flutter
+  flutter_local_notifications:
+    :path: ".symlinks/plugins/flutter_local_notifications/ios"
   home_widget:
     :path: ".symlinks/plugins/home_widget/ios"
   just_audio:
@@ -136,6 +141,7 @@ SPEC CHECKSUMS:
   audio_service: aa99a6ba2ae7565996015322b0bb024e1d25c6fd
   audio_session: 9bb7f6c970f21241b19f5a3658097ae459681ba0
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_local_notifications: 395056b3175ba4f08480a7c5de30cd36d69827e4
   home_widget: 54b4f6b36ed8d64cfee594a476225c35c3e45091
   just_audio: 4e391f57b79cad2b0674030a00453ca5ce817eed
   onesignal_flutter: 4b1dcdcebf7d586e69360a97403c8da1fcc62107
