@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:ninety/init_app.dart';
 import 'package:ninety/services/audio_player/audio_player_service.dart';
 import 'package:ninety/services/home_widget/home_widget_service.dart';
+import 'package:ninety/services/notifications/daily_notification_service.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'root.dart';
 
@@ -11,6 +12,12 @@ Future<void> main() async {
   AudioPlayerService().init();
   AudioPlayerService.instance.listen();
   await HomeWidgetService.instance.init();
+  await DailyNotificationService.initialize();
+  await DailyNotificationService.requestPermissions();
+  await DailyNotificationService.scheduleDailyReminder(
+    hour: 9,
+    minute: 0,
+  );
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const Root());
