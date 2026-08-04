@@ -125,4 +125,45 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get system => 'System';
+
+  @override
+  String notifNameOfDayTitle(String arabe, String transliteration) {
+    return '$arabe — $transliteration';
+  }
+
+  @override
+  String notifNameOfDayBody(String translation, String details) {
+    return '$translation · $details';
+  }
+
+  @override
+  String get notifEveningTitle => 'Stay with Allah';
+
+  @override
+  String get notifEveningBody1 =>
+      'Close your day with His remembrance — SubhanAllah, Alhamdulillah, Allahu Akbar.';
+
+  @override
+  String get notifEveningBody2 =>
+      'Before you sleep, ask Him for forgiveness. He is Al-Ghafoor, The Forgiving.';
+
+  @override
+  String get notifEveningBody3 =>
+      'Whatever the day held, He was never absent. Turn to Him now.';
+
+  @override
+  String get notifEveningBody4 =>
+      'Send peace upon the Prophet ﷺ and let your heart rest.';
+
+  @override
+  String get notifEveningBody5 =>
+      'Say Alhamdulillah for what you were given today, seen and unseen.';
+
+  @override
+  String get notifEveningBody6 =>
+      'Sleep upon dhikr, wake upon light. Remember Him and He remembers you.';
+
+  @override
+  String get notifEveningBody7 =>
+      'One more day closer to Him. Do not end it heedless.';
 }

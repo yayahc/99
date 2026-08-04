@@ -46,5 +46,15 @@
   "enable": "تفعيل",
   "disable": "تعطيل",
   "settingsTitle": "الإعدادات",
-  "system": "النظام"
+  "system": "النظام",
+  "notifNameOfDayTitle": "{arabe} — {transliteration}",
+  "notifNameOfDayBody": "{translation} · {details}",
+  "notifEveningTitle": "ابقَ مع الله",
+  "notifEveningBody1": "اختم يومك بذكره — سبحان الله، الحمد لله، الله أكبر.",
+  "notifEveningBody2": "قبل أن تنام، استغفره؛ فهو الغفور الرحيم.",
+  "notifEveningBody3": "مهما حمل يومك، لم يغب عنك سبحانه. عُد إليه الآن.",
+  "notifEveningBody4": "صلِّ على النبي ﷺ ودع قلبك يطمئن.",
+  "notifEveningBody5": "قل الحمد لله على ما رُزقت اليوم، ما علمتَ منه وما لم تعلم.",
+  "notifEveningBody6": "نَم على ذكر، تستيقظ على نور. اذكره يذكرك.",
+  "notifEveningBody7": "يوم آخر يقرّبك إليه، فلا تختمه بغفلة."
 }

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/widgets.dart';
 import 'package:home_widget/home_widget.dart';
+import 'package:ninety/core/helpers/name_of_day.dart';
 import 'package:ninety/data/datasources/local/names_datas.dart';
 import 'package:ninety/di.dart';
 import 'package:ninety/domain/entities/name.dart';
@@ -37,12 +38,9 @@ class HomeWidgetService {
   }
 
   Future<void> refreshNameOfDay() async {
-    final names = NamesDatas.names;
-    if (names.isEmpty) return;
+    if (NamesDatas.names.isEmpty) return;
 
-    final now = DateTime.now();
-    final dayIndex = now.difference(DateTime(now.year)).inDays;
-    final Name name = names[dayIndex % names.length];
+    final Name name = NameOfDay.today;
 
     await HomeWidget.saveWidgetData<String>('name_arabe', name.arabe);
     await HomeWidget.saveWidgetData<String>(

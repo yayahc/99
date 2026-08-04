@@ -315,6 +315,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'System'**
   String get system;
+
+  /// Title of the morning Name of the Day notification
+  ///
+  /// In en, this message translates to:
+  /// **'{arabe} — {transliteration}'**
+  String notifNameOfDayTitle(String arabe, String transliteration);
+
+  /// Body of the morning Name of the Day notification
+  ///
+  /// In en, this message translates to:
+  /// **'{translation} · {details}'**
+  String notifNameOfDayBody(String translation, String details);
+
+  /// No description provided for @notifEveningTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stay with Allah'**
+  String get notifEveningTitle;
+
+  /// No description provided for @notifEveningBody1.
+  ///
+  /// In en, this message translates to:
+  /// **'Close your day with His remembrance — SubhanAllah, Alhamdulillah, Allahu Akbar.'**
+  String get notifEveningBody1;
+
+  /// No description provided for @notifEveningBody2.
+  ///
+  /// In en, this message translates to:
+  /// **'Before you sleep, ask Him for forgiveness. He is Al-Ghafoor, The Forgiving.'**
+  String get notifEveningBody2;
+
+  /// No description provided for @notifEveningBody3.
+  ///
+  /// In en, this message translates to:
+  /// **'Whatever the day held, He was never absent. Turn to Him now.'**
+  String get notifEveningBody3;
+
+  /// No description provided for @notifEveningBody4.
+  ///
+  /// In en, this message translates to:
+  /// **'Send peace upon the Prophet ﷺ and let your heart rest.'**
+  String get notifEveningBody4;
+
+  /// No description provided for @notifEveningBody5.
+  ///
+  /// In en, this message translates to:
+  /// **'Say Alhamdulillah for what you were given today, seen and unseen.'**
+  String get notifEveningBody5;
+
+  /// No description provided for @notifEveningBody6.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep upon dhikr, wake upon light. Remember Him and He remembers you.'**
+  String get notifEveningBody6;
+
+  /// No description provided for @notifEveningBody7.
+  ///
+  /// In en, this message translates to:
+  /// **'One more day closer to Him. Do not end it heedless.'**
+  String get notifEveningBody7;
 }
 
 class _AppLocalizationsDelegate

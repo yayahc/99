@@ -15,9 +15,11 @@ Future<void> main() async {
   try {
     await DailyNotificationService.initialize();
     await DailyNotificationService.requestPermissions();
-    await DailyNotificationService.scheduleDailyReminder(
-      hour: 7,
-      minute: 20,
+    await DailyNotificationService.scheduleDailyReminders(
+      morningHour: 9,
+      morningMinute: 0,
+      eveningHour: 21,
+      eveningMinute: 0,
     );
   } catch (e, s) {
     debugPrint('Daily notification setup failed: $e\n$s');

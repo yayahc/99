@@ -72,5 +72,15 @@
   "enable": "Activer",
   "disable": "Désactiver",
   "settingsTitle": "Paramètres",
-  "system": "Système"
+  "system": "Système",
+  "notifNameOfDayTitle": "{arabe} — {transliteration}",
+  "notifNameOfDayBody": "{translation} · {details}",
+  "notifEveningTitle": "Reste avec Allah",
+  "notifEveningBody1": "Termine ta journée par Son rappel — SubhanAllah, Alhamdulillah, Allahu Akbar.",
+  "notifEveningBody2": "Avant de dormir, demande-Lui pardon. Il est Al-Ghafour, Le Pardonneur.",
+  "notifEveningBody3": "Quoi qu’ait porté ce jour, Il n’était jamais absent. Reviens à Lui.",
+  "notifEveningBody4": "Prie sur le Prophète ﷺ et laisse ton cœur s’apaiser.",
+  "notifEveningBody5": "Dis Alhamdulillah pour ce qui t’a été donné aujourd’hui, visible et invisible.",
+  "notifEveningBody6": "Dors sur un dhikr, réveille-toi dans la lumière. Rappelle-toi de Lui, Il se rappelle de toi.",
+  "notifEveningBody7": "Un jour de plus qui te rapproche de Lui. Ne le termine pas dans l’insouciance."
 }
