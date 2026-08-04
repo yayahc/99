@@ -12,12 +12,16 @@ Future<void> main() async {
   AudioPlayerService().init();
   AudioPlayerService.instance.listen();
   await HomeWidgetService.instance.init();
-  await DailyNotificationService.initialize();
-  await DailyNotificationService.requestPermissions();
-  await DailyNotificationService.scheduleDailyReminder(
-    hour: 9,
-    minute: 0,
-  );
+  try {
+    await DailyNotificationService.initialize();
+    await DailyNotificationService.requestPermissions();
+    await DailyNotificationService.scheduleDailyReminder(
+      hour: 7,
+      minute: 20,
+    );
+  } catch (e, s) {
+    debugPrint('Daily notification setup failed: $e\n$s');
+  }
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const Root());
