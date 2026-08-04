@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:injectable/injectable.dart';
+import 'package:ninety/core/extensions/localized_name_extensions.dart';
 import 'package:ninety/data/datasources/i_quiz_datasource.dart';
 import 'package:ninety/data/datasources/local/names_datas.dart';
 import 'package:ninety/domain/entities/name.dart';
@@ -36,6 +37,7 @@ class LocalQuizDatasourceImpl implements IQuizDatasource {
               : 'Which transliteration matches this meaning?',
           correct: name.transliteration,
           optionsPool: _names.map((item) => item.transliteration).toList(),
+          locale: locale,
         );
       case QuizQuestionMode.translation:
         return _questionFromPool(
@@ -45,8 +47,10 @@ class LocalQuizDatasourceImpl implements IQuizDatasource {
           prompt: isArabic
               ? 'ماذا يعني هذا الاسم العربي؟'
               : 'What does this Arabic name mean?',
-          correct: name.translation,
-          optionsPool: _names.map((item) => item.translation).toList(),
+          correct: name.translationIn(locale),
+          optionsPool:
+              _names.map((item) => item.translationIn(locale)).toList(),
+          locale: locale,
         );
       case QuizQuestionMode.arabic:
         return _questionFromPool(
@@ -58,6 +62,7 @@ class LocalQuizDatasourceImpl implements IQuizDatasource {
               : 'Which Arabic form matches this name?',
           correct: name.arabe,
           optionsPool: _names.map((item) => item.arabe).toList(),
+          locale: locale,
         );
     }
   }
@@ -69,6 +74,7 @@ class LocalQuizDatasourceImpl implements IQuizDatasource {
     required String prompt,
     required String correct,
     required List<String> optionsPool,
+    required String locale,
   }) {
     final pool = optionsPool.where((value) => value != correct).toSet().toList()
       ..shuffle(_random);
@@ -76,7 +82,7 @@ class LocalQuizDatasourceImpl implements IQuizDatasource {
       ..shuffle(_random);
     return QuizQuestion(
       id: id,
-      prompt: '$prompt ${_questionLabel(mode, name)}',
+      prompt: '$prompt ${_questionLabel(mode, name, locale)}',
       options: options,
       correctIndex: options.indexOf(correct),
       name: name,
@@ -84,10 +90,10 @@ class LocalQuizDatasourceImpl implements IQuizDatasource {
     );
   }
 
-  String _questionLabel(QuizQuestionMode mode, Name name) {
+  String _questionLabel(QuizQuestionMode mode, Name name, String locale) {
     switch (mode) {
       case QuizQuestionMode.transliteration:
-        return name.translation;
+        return name.translationIn(locale);
       case QuizQuestionMode.translation:
         return name.arabe;
       case QuizQuestionMode.arabic:

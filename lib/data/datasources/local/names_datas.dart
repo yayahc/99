@@ -298,7 +298,7 @@ class NamesDatas {
     Name(
       id: 22,
       arabe: "ٱلْخَافِضُ",
-      transliteration: " Al-Khafid",
+      transliteration: "Al-Khafid",
       translation: "The Reducer",
       details:
           "The Abaser, The One who lowers whoever He willed by His Destruction and raises whoever He willed by His Endowment",
@@ -310,7 +310,7 @@ class NamesDatas {
     Name(
       id: 23,
       arabe: "ٱلْرَّافِعُ",
-      transliteration: " Ar-Rafi",
+      transliteration: "Ar-Rafi",
       translation: "The Elevating One",
       details:
           "The Exalter, The Elevator, The One who lowers whoever He willed by His Destruction and raises whoever He willed by His Endowment",
@@ -337,7 +337,7 @@ class NamesDatas {
     Name(
       id: 25,
       arabe: "ٱلْمُذِلُّ",
-      transliteration: " Al-Mudhill",
+      transliteration: "Al-Mudhill",
       translation: "The Giver of Dishonor",
       details:
           "The Dishonourer, The Humiliator, He gives esteem to whoever He willed, hence there is no one to degrade Him; And He degrades whoever He willed, hence there is no one to give Him esteem",
@@ -349,7 +349,7 @@ class NamesDatas {
     Name(
       id: 26,
       arabe: "ٱلْسَّمِيعُ",
-      transliteration: " As-Samee' ",
+      transliteration: "As-Samee",
       translation: "The All-Hearer",
       details:
           "The Hearer, The One who Hears all things that are heard by His Eternal Hearing without an ear, instrument or organ",
@@ -385,8 +385,7 @@ class NamesDatas {
       arabe: "ٱلْحَكَمُ",
       transliteration: "Al-Hakam",
       translation: "The Impartial Judge",
-      details:
-          "The Judge, He is the Ruler andThe Judge, He is the Ruler and His judgment is His Word. His judgment is His Word",
+      details: "The Judge, He is the Ruler and His judgment is His Word",
       sampleDoua: [],
       benefite: "",
       reference: ["Surah 22 : Al Hajj (The Pilgrimage) - Verse: 69"],
@@ -555,7 +554,7 @@ class NamesDatas {
       id: 39,
       arabe: "ٱلْمُقِيتُ",
       transliteration: "Al-Muqit",
-      translation: "The Sustaining One)",
+      translation: "The Sustaining One",
       details:
           "The Maintainer, The Guardian, The Feeder, The One who has the Power",
       sampleDoua: [],
@@ -685,7 +684,7 @@ class NamesDatas {
       id: 48,
       arabe: "ٱلْمَجِيدُ",
       transliteration: "Al-Majeed",
-      translation: "The Glorious On",
+      translation: "The Glorious One",
       details:
           "The Most Glorious One, The One who is with perfect Power, High Status, Compassion, Generosity and Kindness",
       sampleDoua: [],
@@ -939,9 +938,9 @@ class NamesDatas {
     Name(
       id: 66,
       arabe: "ٱلْوَاحِدُ",
-      transliteration: "The Only One",
-      translation: "The Unique, The One, The One without a partner.",
-      details: "",
+      transliteration: "Al-Wahid",
+      translation: "The Only One",
+      details: "The Unique, The One without a partner",
       sampleDoua: [],
       benefite: "",
       reference: [],
@@ -1159,7 +1158,7 @@ class NamesDatas {
       id: 85,
       arabe: "ذُو ٱلْجَلَالِ وَٱلْإِكْرَامِ",
       transliteration: "Dhul-Jalaali-Wal-Ikram",
-      translation: "he Possessor of Majesty and Honour",
+      translation: "The Possessor of Majesty and Honour",
       details: "The Lord of Majesty and Bounty.",
       sampleDoua: [],
       benefite: "",
