@@ -18,6 +18,7 @@ import '../../domain/entities/name.dart';
 import '../widgets/name_card_widget.dart';
 import '../widgets/theme_toggle_button.dart';
 import '../widgets/wave_bars.dart';
+import 'package:ninety/core/extensions/localized_name_extensions.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -55,13 +56,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _onSearchChanged() {
     final query = _searchController.text.toLowerCase();
+    final lang = context.languageCode;
     if (query.isEmpty) {
       _filteredNames.value = List.from(_names.value);
     } else {
       _filteredNames.value = _names.value
           .where((n) =>
               n.transliteration.toLowerCase().contains(query) ||
-              n.translation.toLowerCase().contains(query))
+              n.translationIn(lang).toLowerCase().contains(query))
           .toList();
     }
   }
@@ -278,7 +280,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           SizedBox(height: 4.sp),
                           Text(
-                            name.translation,
+                            name.translationOf(context),
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 13.sp,

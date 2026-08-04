@@ -66,7 +66,10 @@ class NamesWidget extends StatelessWidget {
                   name.transliteration
                       .regular(fontColor: context.colors.black)
                       .body,
-                  name.translation.light(fontColor: context.colors.black).label
+                  name
+                      .translationOf(context)
+                      .light(fontColor: context.colors.black)
+                      .label
                 ],
               ),
               name.arabe.medium(fontColor: context.colors.primary).title

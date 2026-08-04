@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
+import 'package:ninety/core/extensions/localized_name_extensions.dart';
 import 'package:ninety/core/helpers/name_of_day.dart';
 import 'package:ninety/domain/entities/name.dart';
 import 'package:ninety/l10n/app_localizations.dart';
@@ -71,6 +72,7 @@ class DailyNotificationService {
     Locale? locale,
   }) async {
     final l10n = await _localizations(locale);
+    final lang = _languageCode(locale);
     final scheduleMode = await _androidScheduleMode();
     final now = tz.TZDateTime.now(tz.local);
 
@@ -90,7 +92,8 @@ class DailyNotificationService {
         id: _morningIdBase + i,
         when: slot,
         title: l10n.notifNameOfDayTitle(name.arabe, name.transliteration),
-        body: l10n.notifNameOfDayBody(name.translation, name.details),
+        body: l10n.notifNameOfDayBody(
+            name.translationIn(lang), name.detailsIn(lang)),
         channelId: _morningChannelId,
         channelName: 'Name of the day',
         channelDescription: 'The daily name of Allah (SWT)',
@@ -133,10 +136,10 @@ class DailyNotificationService {
   }) {
     final slots = <tz.TZDateTime>[];
     for (var offset = 0; slots.length < days; offset++) {
-      final base =
-          DateTime.utc(now.year, now.month, now.day).add(Duration(days: offset));
-      final slot =
-          tz.TZDateTime(tz.local, base.year, base.month, base.day, hour, minute);
+      final base = DateTime.utc(now.year, now.month, now.day)
+          .add(Duration(days: offset));
+      final slot = tz.TZDateTime(
+          tz.local, base.year, base.month, base.day, hour, minute);
       if (slot.isAfter(now)) slots.add(slot);
     }
     return slots;
@@ -206,13 +209,16 @@ class DailyNotificationService {
     }
   }
 
-  static Future<AppLocalizations> _localizations(Locale? override) async {
+  static Future<AppLocalizations> _localizations(Locale? override) async =>
+      AppLocalizations.delegate.load(Locale(_languageCode(override)));
+
+  /// The app locale the reminder text should use, resolved against the
+  /// locales the app actually ships.
+  static String _languageCode(Locale? override) {
     final device = override ?? PlatformDispatcher.instance.locale;
-    final match = AppLocalizations.supportedLocales.firstWhere(
-      (l) => l.languageCode == device.languageCode,
-      orElse: () => const Locale('en'),
-    );
-    return AppLocalizations.delegate.load(match);
+    return AppLocalizations.supportedLocales
+        .map((l) => l.languageCode)
+        .firstWhere((code) => code == device.languageCode, orElse: () => 'en');
   }
 
   /// On Android 12+ exact alarms need a permission that is denied by default
@@ -238,13 +244,15 @@ class DailyNotificationService {
   /// pipeline (channel, icon, permissions) without waiting for the real slot.
   static Future<void> debugFireTestNotification({Locale? locale}) async {
     final l10n = await _localizations(locale);
+    final lang = _languageCode(locale);
     final name = NameOfDay.today;
 
     await _schedule(
       id: _debugId,
       when: tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
       title: l10n.notifNameOfDayTitle(name.arabe, name.transliteration),
-      body: l10n.notifNameOfDayBody(name.translation, name.details),
+      body: l10n.notifNameOfDayBody(
+          name.translationIn(lang), name.detailsIn(lang)),
       channelId: _morningChannelId,
       channelName: 'Name of the day',
       channelDescription: 'The daily name of Allah (SWT)',

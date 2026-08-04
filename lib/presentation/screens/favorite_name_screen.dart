@@ -9,6 +9,7 @@ import 'package:ninety/presentation/bloc/favorite_cubit.dart';
 import '../../domain/entities/name.dart';
 import '../bloc/favorite_state.dart';
 import '../widgets/name_card_widget.dart';
+import 'package:ninety/core/extensions/localized_name_extensions.dart';
 
 class FavoriteNameScreen extends StatefulWidget {
   const FavoriteNameScreen({super.key});
@@ -45,13 +46,14 @@ class _FavoriteNameScreenState extends State<FavoriteNameScreen> {
 
   void _onSearchChanged() {
     final query = _searchController.text.toLowerCase();
+    final lang = context.languageCode;
     if (query.isEmpty) {
       _filteredNames.value = List.from(_names.value);
     } else {
       _filteredNames.value = _names.value
           .where((n) =>
               n.transliteration.toLowerCase().contains(query) ||
-              n.translation.toLowerCase().contains(query))
+              n.translationIn(lang).toLowerCase().contains(query))
           .toList();
     }
   }

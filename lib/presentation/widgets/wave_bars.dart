@@ -54,8 +54,7 @@ class _WaveBarsState extends State<WaveBars>
             children: List.generate(widget.barCount, (i) {
               final phase = i * math.pi / 2;
               final h = 0.30 +
-                  0.70 *
-                      (0.5 + 0.5 * math.sin(_c.value * 2 * math.pi + phase));
+                  0.70 * (0.5 + 0.5 * math.sin(_c.value * 2 * math.pi + phase));
               return Container(
                 width: barWidth,
                 height: widget.height * h,

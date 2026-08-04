@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/widgets.dart';
 import 'package:home_widget/home_widget.dart';
+import 'package:ninety/core/extensions/localized_name_extensions.dart';
 import 'package:ninety/core/helpers/name_of_day.dart';
 import 'package:ninety/data/datasources/local/names_datas.dart';
 import 'package:ninety/di.dart';
@@ -41,12 +43,13 @@ class HomeWidgetService {
     if (NamesDatas.names.isEmpty) return;
 
     final Name name = NameOfDay.today;
+    final lang = PlatformDispatcher.instance.locale.languageCode;
 
     await HomeWidget.saveWidgetData<String>('name_arabe', name.arabe);
     await HomeWidget.saveWidgetData<String>(
         'name_transliteration', name.transliteration);
     await HomeWidget.saveWidgetData<String>(
-        'name_translation', name.translation);
+        'name_translation', name.translationIn(lang));
     await HomeWidget.saveWidgetData<int>('name_id', name.id);
     await _update(_nameProvider);
   }

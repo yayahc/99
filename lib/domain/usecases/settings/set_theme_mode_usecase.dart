@@ -13,7 +13,6 @@ class SetThemeModeUsecase implements Usecase<SetThemeModeParam, void> {
 
   @override
   Future<Either<AppError, void>> trigger(SetThemeModeParam param) async {
-    return await ErrorCatcher.trycatch(
-        _settingsRepository.setThemeMode(param));
+    return await ErrorCatcher.trycatch(_settingsRepository.setThemeMode(param));
   }
 }

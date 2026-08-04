@@ -16,6 +16,7 @@ import '../../domain/entities/name.dart';
 import '../../services/audio_player/audio_player_service.dart';
 import '../../services/share/share_name_service.dart';
 import '../bloc/favorite_state.dart';
+import 'package:ninety/core/extensions/localized_name_extensions.dart';
 
 class NameItemScreen extends StatefulWidget {
   final Name name;
@@ -159,7 +160,7 @@ class _NameItemScreenState extends State<NameItemScreen> {
                             ),
                             SizedBox(height: 4.sp),
                             Text(
-                              widget.name.translation,
+                              widget.name.translationOf(context),
                               style: TextStyle(
                                 color: Colors.white70,
                                 fontSize: 13.sp,
@@ -274,7 +275,7 @@ class _NameItemScreenState extends State<NameItemScreen> {
           ),
           SizedBox(height: 10.sp),
           Text(
-            widget.name.details,
+            widget.name.detailsOf(context),
             style: TextStyle(
               fontSize: 14.sp,
               color: context.colors.black,

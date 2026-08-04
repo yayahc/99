@@ -8,6 +8,7 @@ import 'package:ninety/domain/entities/name.dart';
 import 'package:ninety/presentation/bloc/favorite_cubit.dart';
 import 'package:ninety/presentation/bloc/favorite_state.dart';
 import 'package:ninety/services/audio_player/audio_player_service.dart';
+import 'package:ninety/core/extensions/localized_name_extensions.dart';
 
 class NameCardWidget extends StatelessWidget {
   final Name name;
@@ -60,7 +61,7 @@ class NameCardWidget extends StatelessWidget {
                   ),
                   SizedBox(height: 3.sp),
                   Text(
-                    name.translation,
+                    name.translationOf(context),
                     style: TextStyle(
                       fontSize: 12.sp,
                       color: Colors.grey.shade500,

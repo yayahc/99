@@ -1,6 +1,5 @@
 import 'package:ninety/data/datasources/local/i18n/localized_name_text.dart';
 
-/// Arabic meanings and explanations, keyed by [Name.id].
 const Map<int, LocalizedNameText> namesAr = {
   1: LocalizedNameText(
     'واسع الرحمة',

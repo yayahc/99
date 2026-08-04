@@ -28,9 +28,8 @@ class AppTheme {
         backgroundColor: colors.background,
         foregroundColor: colors.black,
         elevation: 0,
-        systemOverlayStyle: isDark
-            ? SystemUiOverlayStyle.light
-            : SystemUiOverlayStyle.dark,
+        systemOverlayStyle:
+            isDark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark,
       ),
       textTheme: GoogleFonts.poppinsTextTheme(base.textTheme).apply(
         bodyColor: colors.black,
