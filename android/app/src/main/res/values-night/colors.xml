@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Mirrors DarkColors.background in lib/core/theme/colors/dark_colors.dart -->
+    <color name="splash_background">#021405</color>
+</resources>
