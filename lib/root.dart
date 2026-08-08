@@ -82,6 +82,7 @@ class Root extends StatelessWidget {
                   routerConfig: AppRouter.router,
                   theme: AppTheme.light(light),
                   darkTheme: AppTheme.dark(dark),
+                  debugShowCheckedModeBanner: false,
                   themeMode: themeMode,
                   locale: language.locale,
                   localizationsDelegates: const [
