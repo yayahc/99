@@ -15,7 +15,6 @@ import 'package:ninety/di.dart';
 import 'package:ninety/services/quran_audio/quran_audio_controller.dart';
 
 import '../../domain/entities/name.dart';
-import '../widgets/glass_surface.dart';
 import '../widgets/name_card_widget.dart';
 import '../widgets/wave_bars.dart';
 import 'package:ninety/core/extensions/localized_name_extensions.dart';
@@ -83,12 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: _buildAppBar(context),
       body: BlocListener<NameCubit, NameState>(
         listener: (context, state) => _watchState(state),
-        child: Stack(
-          children: [
-            const _AmbientBackground(),
-            _buildBody(context),
-          ],
-        ),
+        child: _buildBody(context),
       ),
     );
   }
@@ -124,10 +118,10 @@ class _HomeScreenState extends State<HomeScreen> {
         Padding(
           padding: EdgeInsets.only(right: 16.sp),
           child: GestureDetector(
-            onTap: () => context.push('/settings'),
+            onTap: () => context.push('/favorite'),
             child: Icon(
-              Icons.settings_rounded,
-              color: context.colors.gold,
+              Icons.favorite_rounded,
+              color: context.colors.rose,
               size: 28.sp,
             ),
           ),
@@ -146,10 +140,10 @@ class _HomeScreenState extends State<HomeScreen> {
         Padding(
           padding: EdgeInsets.only(right: 16.sp),
           child: GestureDetector(
-            onTap: () => context.push('/favorite'),
+            onTap: () => context.push('/settings'),
             child: Icon(
-              Icons.favorite_rounded,
-              color: context.colors.rose,
+              Icons.settings_rounded,
+              color: context.colors.gold,
               size: 28.sp,
             ),
           ),
@@ -205,28 +199,29 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildSearchBar(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    return GlassSurface(
-      borderRadius: 16.sp,
-      child: SizedBox(
-        height: 52.sp,
-        child: TextField(
-          controller: _searchController,
-          style: TextStyle(fontSize: 14.sp, color: context.colors.black),
-          decoration: InputDecoration(
-            hintText: l10n.searchHint,
-            hintStyle: TextStyle(
-              color: Colors.grey.shade400,
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w400,
-            ),
-            prefixIcon: Icon(
-              Icons.search,
-              color: Colors.grey.shade400,
-              size: 22.sp,
-            ),
-            border: InputBorder.none,
-            contentPadding: EdgeInsets.symmetric(vertical: 14.sp),
+    return Container(
+      height: 52.sp,
+      decoration: BoxDecoration(
+        color: context.colors.surface,
+        borderRadius: BorderRadius.circular(8.sp),
+      ),
+      child: TextField(
+        controller: _searchController,
+        style: TextStyle(fontSize: 14.sp, color: context.colors.black),
+        decoration: InputDecoration(
+          hintText: l10n.searchHint,
+          hintStyle: TextStyle(
+            color: Colors.grey.shade400,
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w400,
           ),
+          prefixIcon: Icon(
+            Icons.search,
+            color: Colors.grey.shade400,
+            size: 22.sp,
+          ),
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.symmetric(vertical: 14.sp),
         ),
       ),
     );
@@ -244,37 +239,10 @@ class _HomeScreenState extends State<HomeScreen> {
         decoration: BoxDecoration(
           color: context.colors.emerald,
           borderRadius: BorderRadius.circular(8.sp),
-          border: Border.all(
-            color: Colors.white.withValues(alpha: 0.18),
-            width: 1,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: context.colors.emerald.withValues(alpha: 0.35),
-              blurRadius: 20,
-              offset: const Offset(0, 8),
-            ),
-          ],
         ),
         child: Stack(
           clipBehavior: Clip.hardEdge,
           children: [
-            Positioned.fill(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.sp),
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Colors.white.withValues(alpha: 0.18),
-                      Colors.transparent,
-                    ],
-                    stops: const [0.0, 0.5],
-                  ),
-                ),
-              ),
-            ),
             Positioned(
               right: -8.sp,
               top: -12.sp,
@@ -359,52 +327,6 @@ class _HomeScreenState extends State<HomeScreen> {
       case ErrorLoadingNamesState():
         _isLoading.value = false;
     }
-  }
-}
-
-class _AmbientBackground extends StatelessWidget {
-  const _AmbientBackground();
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned.fill(
-      child: IgnorePointer(
-        child: Stack(
-          children: [
-            Positioned(
-              top: -60.sp,
-              left: -40.sp,
-              child:
-                  _blob(context.colors.emerald.withValues(alpha: 0.22), 220.sp),
-            ),
-            Positioned(
-              top: 120.sp,
-              right: -70.sp,
-              child: _blob(context.colors.gold.withValues(alpha: 0.14), 200.sp),
-            ),
-            Positioned(
-              bottom: -80.sp,
-              left: -30.sp,
-              child:
-                  _blob(context.colors.primary.withValues(alpha: 0.12), 240.sp),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _blob(Color color, double size) {
-    return Container(
-      width: size,
-      height: size,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: RadialGradient(
-          colors: [color, color.withValues(alpha: 0)],
-        ),
-      ),
-    );
   }
 }
 

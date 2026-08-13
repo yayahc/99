@@ -5,8 +5,6 @@ import 'package:ninety/core/extensions/context_extension.dart';
 import 'package:ninety/l10n/app_localizations.dart';
 import 'package:ninety/presentation/bloc/theme_cubit.dart';
 
-import '../widgets/glass_surface.dart';
-
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
@@ -72,8 +70,18 @@ class _ThemeModeSelector extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     return BlocBuilder<ThemeCubit, ThemeMode>(
       builder: (context, mode) {
-        return GlassSurface(
-          borderRadius: 12.sp,
+        return Container(
+          decoration: BoxDecoration(
+            color: context.colors.surface,
+            borderRadius: BorderRadius.circular(8.sp),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.05),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
           padding: EdgeInsets.all(6.sp),
           child: Column(
             children: [
