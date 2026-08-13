@@ -1,0 +1,3 @@
+class GetQuranAutoPlayParam {
+  GetQuranAutoPlayParam();
+}

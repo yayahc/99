@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ninety/data/datasources/i_settings_datasource.dart';
 import 'package:ninety/database.dart';
+import 'package:ninety/domain/entities/quran_auto_play.dart';
+import 'package:ninety/domain/params/settings/set_quran_auto_play_param.dart';
 import 'package:ninety/domain/params/settings/set_theme_mode_param.dart';
 
 @Singleton(as: ISettingsDatasource)
@@ -14,9 +16,7 @@ class LocalSettingsDatasourceImpl implements ISettingsDatasource {
 
   @override
   Future<String> getThemeMode() async {
-    final row = await (db.select(db.appSettingsModel)
-          ..where((t) => t.id.equals(_rowId)))
-        .getSingleOrNull();
+    final row = await _row();
     return row?.themeMode ?? _encode(ThemeMode.system);
   }
 
@@ -29,6 +29,32 @@ class LocalSettingsDatasourceImpl implements ISettingsDatasource {
             themeMode: Value(value),
           ),
         );
+  }
+
+  @override
+  Future<QuranAutoPlay> getQuranAutoPlay() async {
+    final row = await _row();
+    if (row == null) return const QuranAutoPlay.disabled();
+    return QuranAutoPlay(
+      enabled: row.autoPlayQuran,
+      volume: row.autoPlayQuranVolume,
+    );
+  }
+
+  @override
+  Future<void> setQuranAutoPlay(SetQuranAutoPlayParam param) async {
+    await db.into(db.appSettingsModel).insertOnConflictUpdate(
+          AppSettingsModelCompanion.insert(
+            id: const Value(_rowId),
+            autoPlayQuran: Value(param.autoPlay.enabled),
+            autoPlayQuranVolume: Value(param.autoPlay.volume),
+          ),
+        );
+  }
+
+  Future<AppSettingsModelData?> _row() {
+    return (db.select(db.appSettingsModel)..where((t) => t.id.equals(_rowId)))
+        .getSingleOrNull();
   }
 
   static String _encode(ThemeMode mode) {

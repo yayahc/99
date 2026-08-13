@@ -107,6 +107,21 @@ class AppLocalizationsAr extends AppLocalizations {
   String get notifications => 'الإشعارات';
 
   @override
+  String get quranSection => 'القرآن';
+
+  @override
+  String get autoPlayQuran => 'التشغيل عند فتح التطبيق';
+
+  @override
+  String get autoPlayQuranSubtitle => 'تبدأ تلاوة هادئة في الخلفية في كل مرة تفتح فيها التطبيق';
+
+  @override
+  String get backgroundVolume => 'مستوى الصوت في الخلفية';
+
+  @override
+  String get volume => 'مستوى الصوت';
+
+  @override
   String get light => 'فاتح';
 
   @override
@@ -138,22 +153,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get notifEveningTitle => 'ابقَ مع الله';
 
   @override
-  String get notifEveningBody1 =>
-      'اختم يومك بذكره — سبحان الله، الحمد لله، الله أكبر.';
+  String get notifEveningBody1 => 'اختم يومك بذكره — سبحان الله، الحمد لله، الله أكبر.';
 
   @override
   String get notifEveningBody2 => 'قبل أن تنام، استغفره؛ فهو الغفور الرحيم.';
 
   @override
-  String get notifEveningBody3 =>
-      'مهما حمل يومك، لم يغب عنك سبحانه. عُد إليه الآن.';
+  String get notifEveningBody3 => 'مهما حمل يومك، لم يغب عنك سبحانه. عُد إليه الآن.';
 
   @override
   String get notifEveningBody4 => 'صلِّ على النبي ﷺ ودع قلبك يطمئن.';
 
   @override
-  String get notifEveningBody5 =>
-      'قل الحمد لله على ما رُزقت اليوم، ما علمتَ منه وما لم تعلم.';
+  String get notifEveningBody5 => 'قل الحمد لله على ما رُزقت اليوم، ما علمتَ منه وما لم تعلم.';
 
   @override
   String get notifEveningBody6 => 'نَم على ذكر، تستيقظ على نور. اذكره يذكرك.';

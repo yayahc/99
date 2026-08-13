@@ -11,12 +11,16 @@ import 'package:ninety/domain/usecases/favorite/get_favorite_names_usecase.dart'
 import 'package:ninety/domain/usecases/favorite/remove_name_to_favorite_usecase.dart';
 import 'package:ninety/domain/usecases/name/get_names_usecase.dart';
 import 'package:ninety/domain/usecases/quiz/get_quiz_questions_usecase.dart';
+import 'package:ninety/domain/usecases/settings/get_quran_auto_play_usecase.dart';
 import 'package:ninety/domain/usecases/settings/get_theme_mode_usecase.dart';
+import 'package:ninety/domain/usecases/settings/set_quran_auto_play_usecase.dart';
 import 'package:ninety/domain/usecases/settings/set_theme_mode_usecase.dart';
 import 'package:ninety/presentation/bloc/favorite_cubit.dart';
 import 'package:ninety/presentation/bloc/name_cubit.dart';
 import 'package:ninety/presentation/bloc/quiz_cubit.dart';
+import 'package:ninety/presentation/bloc/quran_auto_play_cubit.dart';
 import 'package:ninety/presentation/bloc/theme_cubit.dart';
+import 'package:ninety/services/quran_audio/quran_audio_controller.dart';
 import 'package:ninety/presentation/screens/home_screen.dart';
 import 'package:ninety/router.dart';
 
@@ -45,6 +49,13 @@ class Root extends StatelessWidget {
             locator.get<GetThemeModeUsecase>(),
             locator.get<SetThemeModeUsecase>(),
           )..loadThemeMode(),
+        ),
+        BlocProvider(
+          create: (context) => QuranAutoPlayCubit(
+            locator.get<GetQuranAutoPlayUsecase>(),
+            locator.get<SetQuranAutoPlayUsecase>(),
+            locator.get<QuranAudioController>(),
+          )..loadAutoPlay(),
         ),
       ],
       child: ScreenUtilInit(

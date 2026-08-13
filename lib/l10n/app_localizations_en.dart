@@ -50,8 +50,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noQuestionsAvailable => 'No quiz questions available';
 
   @override
-  String get transliterationPrompt =>
-      'Which transliteration matches this meaning?';
+  String get transliterationPrompt => 'Which transliteration matches this meaning?';
 
   @override
   String get translationPrompt => 'What does this Arabic name mean?';
@@ -99,14 +98,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noSavedNames => 'No saved names yet';
 
   @override
-  String get noSavedNamesSubtitle =>
-      'Tap the heart on any name to save it here';
+  String get noSavedNamesSubtitle => 'Tap the heart on any name to save it here';
 
   @override
   String get theme => 'THEME';
 
   @override
   String get notifications => 'NOTIFICATIONS';
+
+  @override
+  String get quranSection => 'QURAN';
+
+  @override
+  String get autoPlayQuran => 'Play on app launch';
+
+  @override
+  String get autoPlayQuranSubtitle => 'Start a quiet recitation in the background every time you open the app';
+
+  @override
+  String get backgroundVolume => 'Background volume';
+
+  @override
+  String get volume => 'Volume';
 
   @override
   String get light => 'Light';
@@ -140,30 +153,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notifEveningTitle => 'Stay with Allah';
 
   @override
-  String get notifEveningBody1 =>
-      'Close your day with His remembrance — SubhanAllah, Alhamdulillah, Allahu Akbar.';
+  String get notifEveningBody1 => 'Close your day with His remembrance — SubhanAllah, Alhamdulillah, Allahu Akbar.';
 
   @override
-  String get notifEveningBody2 =>
-      'Before you sleep, ask Him for forgiveness. He is Al-Ghafoor, The Forgiving.';
+  String get notifEveningBody2 => 'Before you sleep, ask Him for forgiveness. He is Al-Ghafoor, The Forgiving.';
 
   @override
-  String get notifEveningBody3 =>
-      'Whatever the day held, He was never absent. Turn to Him now.';
+  String get notifEveningBody3 => 'Whatever the day held, He was never absent. Turn to Him now.';
 
   @override
-  String get notifEveningBody4 =>
-      'Send peace upon the Prophet ﷺ and let your heart rest.';
+  String get notifEveningBody4 => 'Send peace upon the Prophet ﷺ and let your heart rest.';
 
   @override
-  String get notifEveningBody5 =>
-      'Say Alhamdulillah for what you were given today, seen and unseen.';
+  String get notifEveningBody5 => 'Say Alhamdulillah for what you were given today, seen and unseen.';
 
   @override
-  String get notifEveningBody6 =>
-      'Sleep upon dhikr, wake upon light. Remember Him and He remembers you.';
+  String get notifEveningBody6 => 'Sleep upon dhikr, wake upon light. Remember Him and He remembers you.';
 
   @override
-  String get notifEveningBody7 =>
-      'One more day closer to Him. Do not end it heedless.';
+  String get notifEveningBody7 => 'One more day closer to Him. Do not end it heedless.';
 }

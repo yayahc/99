@@ -22,7 +22,11 @@ class QuranAudioController extends ChangeNotifier {
   Duration _position = Duration.zero;
   Duration _duration = Duration.zero;
   bool _buffering = false;
+  double _volume = 1;
+  bool _startedAutomatically = false;
 
+  double get volume => _volume;
+  bool get startedAutomatically => _startedAutomatically;
   Reciter get reciter => _reciter;
   Surah? get current => _current;
   PlayerState get state => _state;
@@ -89,16 +93,40 @@ class QuranAudioController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> play(Surah surah) async {
+  Future<void> play(Surah surah) {
+    _startedAutomatically = false;
+    return _play(surah, volume: 1);
+  }
+
+  Future<void> playInBackground(Surah surah, double volume) {
+    _startedAutomatically = true;
+    return _play(surah, volume: volume);
+  }
+
+  Future<void> stop() async {
+    if (_handler.kind != AudioKind.quran) return;
+    await _handler.stop();
+    _current = null;
+    _position = Duration.zero;
+    _duration = Duration.zero;
+    _buffering = false;
+    _startedAutomatically = false;
+    _state = PlayerState.stopped;
+    notifyListeners();
+  }
+
+  Future<void> _play(Surah surah, {required double volume}) async {
     _current = surah;
     _position = Duration.zero;
     _duration = Duration.zero;
     _buffering = true;
+    _volume = volume.clamp(0, 1);
     notifyListeners();
     try {
       await _handler.playUrl(
         url: RecitersData.audioUrl(_reciter, surah.number),
         kind: AudioKind.quran,
+        volume: _volume,
         item: MediaItem(
           id: 'quran/${_reciter.slug}/${surah.number}',
           album: 'Holy Quran',
@@ -112,14 +140,25 @@ class QuranAudioController extends ChangeNotifier {
     }
   }
 
+  Future<void> setVolume(double value) async {
+    final next = value.clamp(0.0, 1.0);
+    if (next == _volume) return;
+    _volume = next;
+    notifyListeners();
+    if (_handler.kind == AudioKind.quran) {
+      await _handler.setVolume(next);
+    }
+  }
+
   Future<void> togglePlay() async {
+    _startedAutomatically = false;
     if (_current == null) {
       await play(SurahsData.all.first);
       return;
     }
     if (_handler.kind != AudioKind.quran) {
       // Something else (a Name) is on the shared player — restart the surah.
-      await play(_current!);
+      await _play(_current!, volume: _volume);
       return;
     }
     if (_state == PlayerState.playing) {
@@ -133,14 +172,14 @@ class QuranAudioController extends ChangeNotifier {
     if (_current == null) return;
     final next = _current!.number + 1;
     if (next > SurahsData.all.length) return;
-    await play(SurahsData.all[next - 1]);
+    await _play(SurahsData.all[next - 1], volume: _volume);
   }
 
   Future<void> playPrev() async {
     if (_current == null) return;
     final prev = _current!.number - 1;
     if (prev < 1) return;
-    await play(SurahsData.all[prev - 1]);
+    await _play(SurahsData.all[prev - 1], volume: _volume);
   }
 
   Future<void> seek(Duration d) {

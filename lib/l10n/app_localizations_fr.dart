@@ -71,8 +71,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get quranTitle => 'Coran';
 
   @override
-  String get searchSurahHint =>
-      'Rechercher une sourate par nom, sens ou numéro';
+  String get searchSurahHint => 'Rechercher une sourate par nom, sens ou numéro';
 
   @override
   String get noSurahMatches => 'Aucune sourate ne correspond à votre recherche';
@@ -99,14 +98,28 @@ class AppLocalizationsFr extends AppLocalizations {
   String get noSavedNames => 'Aucun nom enregistré pour le moment';
 
   @override
-  String get noSavedNamesSubtitle =>
-      'Appuyez sur le cœur d’un nom pour l’enregistrer ici';
+  String get noSavedNamesSubtitle => 'Appuyez sur le cœur d’un nom pour l’enregistrer ici';
 
   @override
   String get theme => 'THÈME';
 
   @override
   String get notifications => 'NOTIFICATIONS';
+
+  @override
+  String get quranSection => 'CORAN';
+
+  @override
+  String get autoPlayQuran => 'Lecture au démarrage';
+
+  @override
+  String get autoPlayQuranSubtitle => 'Lance une récitation discrète en arrière-plan à chaque ouverture de l\'application';
+
+  @override
+  String get backgroundVolume => 'Volume en arrière-plan';
+
+  @override
+  String get volume => 'Volume';
 
   @override
   String get light => 'Clair';
@@ -140,30 +153,23 @@ class AppLocalizationsFr extends AppLocalizations {
   String get notifEveningTitle => 'Reste avec Allah';
 
   @override
-  String get notifEveningBody1 =>
-      'Termine ta journée par Son rappel — SubhanAllah, Alhamdulillah, Allahu Akbar.';
+  String get notifEveningBody1 => 'Termine ta journée par Son rappel — SubhanAllah, Alhamdulillah, Allahu Akbar.';
 
   @override
-  String get notifEveningBody2 =>
-      'Avant de dormir, demande-Lui pardon. Il est Al-Ghafour, Le Pardonneur.';
+  String get notifEveningBody2 => 'Avant de dormir, demande-Lui pardon. Il est Al-Ghafour, Le Pardonneur.';
 
   @override
-  String get notifEveningBody3 =>
-      'Quoi qu’ait porté ce jour, Il n’était jamais absent. Reviens à Lui.';
+  String get notifEveningBody3 => 'Quoi qu’ait porté ce jour, Il n’était jamais absent. Reviens à Lui.';
 
   @override
-  String get notifEveningBody4 =>
-      'Prie sur le Prophète ﷺ et laisse ton cœur s’apaiser.';
+  String get notifEveningBody4 => 'Prie sur le Prophète ﷺ et laisse ton cœur s’apaiser.';
 
   @override
-  String get notifEveningBody5 =>
-      'Dis Alhamdulillah pour ce qui t’a été donné aujourd’hui, visible et invisible.';
+  String get notifEveningBody5 => 'Dis Alhamdulillah pour ce qui t’a été donné aujourd’hui, visible et invisible.';
 
   @override
-  String get notifEveningBody6 =>
-      'Dors sur un dhikr, réveille-toi dans la lumière. Rappelle-toi de Lui, Il se rappelle de toi.';
+  String get notifEveningBody6 => 'Dors sur un dhikr, réveille-toi dans la lumière. Rappelle-toi de Lui, Il se rappelle de toi.';
 
   @override
-  String get notifEveningBody7 =>
-      'Un jour de plus qui te rapproche de Lui. Ne le termine pas dans l’insouciance.';
+  String get notifEveningBody7 => 'Un jour de plus qui te rapproche de Lui. Ne le termine pas dans l’insouciance.';
 }

@@ -43,10 +43,12 @@ class BackgroundAudioHandler extends BaseAudioHandler with SeekHandler {
     required String assetPath,
     required AudioKind kind,
     required MediaItem item,
+    double volume = 1,
   }) async {
     _kind = kind;
     _currentId = item.id;
     mediaItem.add(item);
+    await _player.setVolume(volume);
     await _player.setAsset(assetPath);
     await _player.play();
   }
@@ -55,13 +57,17 @@ class BackgroundAudioHandler extends BaseAudioHandler with SeekHandler {
     required String url,
     required AudioKind kind,
     required MediaItem item,
+    double volume = 1,
   }) async {
     _kind = kind;
     _currentId = item.id;
     mediaItem.add(item);
+    await _player.setVolume(volume);
     await _player.setUrl(url);
     await _player.play();
   }
+
+  Future<void> setVolume(double volume) => _player.setVolume(volume);
 
   @override
   Future<void> play() => _player.play();

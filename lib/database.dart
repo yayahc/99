@@ -11,6 +11,9 @@ class FavoriteNameModel extends Table {
 class AppSettingsModel extends Table {
   IntColumn get id => integer().withDefault(const Constant(1))();
   TextColumn get themeMode => text().withDefault(const Constant('system'))();
+  BoolColumn get autoPlayQuran => boolean().withDefault(const Constant(false))();
+  RealColumn get autoPlayQuranVolume =>
+      real().withDefault(const Constant(0.2))();
 
   @override
   Set<Column> get primaryKey => {id};
@@ -21,7 +24,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -35,6 +38,10 @@ class AppDatabase extends _$AppDatabase {
             await m.createTable(appSettingsModel);
             await into(appSettingsModel)
                 .insert(AppSettingsModelCompanion.insert());
+          } else if (from < 3) {
+            await m.addColumn(appSettingsModel, appSettingsModel.autoPlayQuran);
+            await m.addColumn(
+                appSettingsModel, appSettingsModel.autoPlayQuranVolume);
           }
         },
       );
