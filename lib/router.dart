@@ -6,6 +6,7 @@ import 'package:ninety/presentation/screens/home_screen.dart';
 import 'package:ninety/presentation/screens/name_item_screen.dart';
 import 'package:ninety/presentation/screens/quiz_screen.dart';
 import 'package:ninety/presentation/screens/quran_screen.dart';
+import 'package:ninety/presentation/screens/settings_screen.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -42,6 +43,14 @@ class AppRouter {
           context,
           state,
           const QuranScreen(),
+        ),
+      ),
+      GoRoute(
+        path: "/settings",
+        pageBuilder: (context, state) => _buildPageWithSlideTransition(
+          context,
+          state,
+          const SettingsScreen(),
         ),
       ),
       GoRoute(

@@ -10,6 +10,8 @@ import 'package:ninety/presentation/bloc/favorite_state.dart';
 import 'package:ninety/services/audio_player/audio_player_service.dart';
 import 'package:ninety/core/extensions/localized_name_extensions.dart';
 
+import 'glass_surface.dart';
+
 class NameCardWidget extends StatelessWidget {
   final Name name;
 
@@ -17,82 +19,71 @@ class NameCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return GlassSurface(
       onTap: () => context.push('/name', extra: name),
-      child: Container(
-        decoration: BoxDecoration(
-          color: context.colors.surface,
-          borderRadius: BorderRadius.circular(8.sp),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.05),
-              blurRadius: 8,
-              offset: const Offset(0, 2),
-            ),
-          ],
-        ),
-        padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 14.sp),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: 20.sp,
-              child: Text(
-                '${name.id}',
-                style: TextStyle(
-                  fontSize: 13.sp,
-                  color: Colors.grey.shade400,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ),
-            SizedBox(width: 12.sp),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    name.transliteration,
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w700,
-                      color: context.colors.black,
-                    ),
-                  ),
-                  SizedBox(height: 3.sp),
-                  Text(
-                    name.translationOf(context),
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      color: Colors.grey.shade500,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(width: 8.sp),
-            Text(
-              name.arabe,
+      borderRadius: 8.sp,
+      blur: 10,
+      padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 14.sp),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 20.sp,
+            child: Text(
+              '${name.id}',
               style: TextStyle(
-                fontSize: 22.sp,
-                color: context.colors.primary,
-                fontWeight: FontWeight.w500,
+                fontSize: 13.sp,
+                color: Colors.grey.shade400,
+                fontWeight: FontWeight.w400,
               ),
-              textDirection: TextDirection.rtl,
             ),
-            SizedBox(width: 12.sp),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+          ),
+          SizedBox(width: 12.sp),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _PlayButton(name: name),
-                SizedBox(height: 8.sp),
-                _FavoriteButton(name: name),
+                Text(
+                  name.transliteration,
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w700,
+                    color: context.colors.black,
+                  ),
+                ),
+                SizedBox(height: 3.sp),
+                Text(
+                  name.translationOf(context),
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    color: Colors.grey.shade500,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
               ],
             ),
-          ],
-        ),
+          ),
+          SizedBox(width: 8.sp),
+          Text(
+            name.arabe,
+            style: TextStyle(
+              fontSize: 22.sp,
+              color: context.colors.primary,
+              fontWeight: FontWeight.w500,
+            ),
+            textDirection: TextDirection.rtl,
+          ),
+          SizedBox(width: 12.sp),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              _PlayButton(name: name),
+              SizedBox(height: 8.sp),
+              _FavoriteButton(name: name),
+            ],
+          ),
+        ],
       ),
     );
   }
