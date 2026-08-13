@@ -16,6 +16,7 @@ import '../../domain/entities/name.dart';
 import '../../services/audio_player/audio_player_service.dart';
 import '../../services/share/share_name_service.dart';
 import '../bloc/favorite_state.dart';
+import '../widgets/glass_app_bar.dart';
 import 'package:ninety/core/extensions/localized_name_extensions.dart';
 
 class NameItemScreen extends StatefulWidget {
@@ -67,49 +68,31 @@ class _NameItemScreenState extends State<NameItemScreen> {
     );
   }
 
-  AppBar _buildAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: context.colors.background,
-      elevation: 0,
-      centerTitle: true,
-      title: Text(
-        widget.name.transliteration,
-        style: TextStyle(
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w800,
-          color: context.colors.black,
-        ),
-      ),
-      leading: IconButton(
-        icon: Icon(Icons.arrow_back, color: context.colors.black, size: 24.sp),
-        onPressed: () => Navigator.of(context).pop(),
-      ),
+  GlassAppBar _buildAppBar(BuildContext context) {
+    return GlassAppBar(
+      title: widget.name.transliteration,
+      titleFontSize: 18.sp,
+      showBack: true,
       actions: [
-        Padding(
-          padding: EdgeInsets.only(right: 16.sp),
-          child: GestureDetector(
-            onTap: () => _shareName(context),
-            child: Icon(Icons.share, color: Colors.grey.shade400, size: 26.sp),
-          ),
+        GestureDetector(
+          onTap: () => _shareName(context),
+          child: Icon(Icons.share, color: Colors.grey.shade400, size: 26.sp),
         ),
-        Padding(
-          padding: EdgeInsets.only(right: 16.sp),
-          child: ListenableBuilder(
-            listenable: _isFavorite,
-            builder: (context, _) => GestureDetector(
-              onTap: () => _isFavorite.value
-                  ? context
-                      .read<FavoriteCubit>()
-                      .removeNameToFavorite(widget.name.id)
-                  : context
-                      .read<FavoriteCubit>()
-                      .addNameToFavorite(widget.name.id),
-              child: Icon(
-                _isFavorite.value ? Icons.favorite : Icons.favorite_border,
-                color:
-                    _isFavorite.value ? Colors.redAccent : Colors.grey.shade400,
-                size: 26.sp,
-              ),
+        ListenableBuilder(
+          listenable: _isFavorite,
+          builder: (context, _) => GestureDetector(
+            onTap: () => _isFavorite.value
+                ? context
+                    .read<FavoriteCubit>()
+                    .removeNameToFavorite(widget.name.id)
+                : context
+                    .read<FavoriteCubit>()
+                    .addNameToFavorite(widget.name.id),
+            child: Icon(
+              _isFavorite.value ? Icons.favorite : Icons.favorite_border,
+              color:
+                  _isFavorite.value ? Colors.redAccent : Colors.grey.shade400,
+              size: 26.sp,
             ),
           ),
         ),

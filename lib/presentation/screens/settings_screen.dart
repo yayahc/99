@@ -9,6 +9,7 @@ import 'package:ninety/l10n/app_localizations.dart';
 import 'package:ninety/presentation/bloc/language_cubit.dart';
 import 'package:ninety/presentation/bloc/quran_auto_play_cubit.dart';
 import 'package:ninety/presentation/bloc/theme_cubit.dart';
+import 'package:ninety/presentation/widgets/glass_app_bar.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -19,24 +20,7 @@ class SettingsScreen extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: context.colors.background,
-      appBar: AppBar(
-        backgroundColor: context.colors.background,
-        elevation: 0,
-        centerTitle: true,
-        title: Text(
-          l10n.settingsTitle,
-          style: TextStyle(
-            fontSize: 20.sp,
-            fontWeight: FontWeight.w800,
-            color: context.colors.black,
-          ),
-        ),
-        leading: IconButton(
-          icon:
-              Icon(Icons.arrow_back, color: context.colors.black, size: 24.sp),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ),
+      appBar: GlassAppBar(title: l10n.settingsTitle, showBack: true),
       body: ListView(
         physics: const BouncingScrollPhysics(),
         padding: EdgeInsets.fromLTRB(16.sp, 8.sp, 16.sp, 24.sp),
@@ -64,13 +48,16 @@ class _SectionLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: 11.sp,
-        fontWeight: FontWeight.w700,
-        color: Colors.grey.shade500,
-        letterSpacing: context.languageCode == 'ar' ? 0 : 1.4,
+    return Padding(
+      padding: EdgeInsetsDirectional.only(start: 4.sp),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 11.sp,
+          fontWeight: FontWeight.w800,
+          color: context.colors.emerald,
+          letterSpacing: context.languageCode == 'ar' ? 0 : 1.4,
+        ),
       ),
     );
   }
@@ -138,7 +125,7 @@ class _QuranAutoPlayCard extends StatelessWidget {
                       size: 22.sp,
                       color: autoPlay.enabled
                           ? context.colors.emerald
-                          : context.colors.black,
+                          : context.colors.black.withValues(alpha: 0.45),
                     ),
                     SizedBox(width: 14.sp),
                     Expanded(
@@ -261,7 +248,7 @@ class _VolumeSlider extends StatelessWidget {
               divisions: 19,
               value: value.clamp(0.05, 1),
               activeColor: context.colors.emerald,
-              inactiveColor: Colors.grey.shade300,
+              inactiveColor: context.colors.emerald.withValues(alpha: 0.15),
               onChanged: onChanged,
               onChangeEnd: onChangeEnd,
             ),
@@ -282,9 +269,12 @@ class _SettingsCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: context.colors.surface,
         borderRadius: BorderRadius.circular(8.sp),
+        border: Border.all(
+          color: context.colors.emerald.withValues(alpha: 0.10),
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
+            color: context.colors.emerald.withValues(alpha: 0.06),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -412,6 +402,11 @@ class _SelectableOption extends StatelessWidget {
           color: selected
               ? context.colors.primary.withValues(alpha: 0.14)
               : Colors.transparent,
+          border: Border.all(
+            color: selected
+                ? context.colors.primary.withValues(alpha: 0.35)
+                : Colors.transparent,
+          ),
           borderRadius: BorderRadius.circular(8.sp),
         ),
         child: Row(
@@ -424,7 +419,7 @@ class _SelectableOption extends StatelessWidget {
                       size: 22.sp,
                       color: selected
                           ? context.colors.primary
-                          : context.colors.black,
+                          : context.colors.black.withValues(alpha: 0.45),
                     )
                   : Text(
                       badge!,
@@ -434,7 +429,7 @@ class _SelectableOption extends StatelessWidget {
                         fontWeight: FontWeight.w800,
                         color: selected
                             ? context.colors.primary
-                            : context.colors.black,
+                            : context.colors.black.withValues(alpha: 0.45),
                       ),
                     ),
             ),

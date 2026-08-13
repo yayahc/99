@@ -1,5 +1,3 @@
-import 'dart:ui' as ui;
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,6 +13,7 @@ import 'package:ninety/di.dart';
 import 'package:ninety/services/quran_audio/quran_audio_controller.dart';
 
 import '../../domain/entities/name.dart';
+import '../widgets/glass_app_bar.dart';
 import '../widgets/name_card_widget.dart';
 import '../widgets/wave_bars.dart';
 import 'package:ninety/core/extensions/localized_name_extensions.dart';
@@ -87,65 +86,34 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  AppBar _buildAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      scrolledUnderElevation: 0,
+  GlassAppBar _buildAppBar(BuildContext context) {
+    return GlassAppBar(
       titleSpacing: 16.sp,
-      flexibleSpace: ClipRRect(
-        child: BackdropFilter(
-          filter: ui.ImageFilter.blur(sigmaX: 24, sigmaY: 24),
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.white.withValues(alpha: 0.18),
-                  Colors.white.withValues(alpha: 0.04),
-                ],
-              ),
-              border: Border(
-                bottom: BorderSide(color: Colors.white.withValues(alpha: 0.10)),
-              ),
-            ),
-          ),
-        ),
-      ),
-      title: _QuranAudioInvite(onTap: () => context.push('/quran')),
+      centerTitle: false,
+      titleWidget: _QuranAudioInvite(onTap: () => context.push('/quran')),
       actions: [
-        Padding(
-          padding: EdgeInsets.only(right: 16.sp),
-          child: GestureDetector(
-            onTap: () => context.push('/favorite'),
-            child: Icon(
-              Icons.favorite_rounded,
-              color: context.colors.rose,
-              size: 28.sp,
-            ),
+        GestureDetector(
+          onTap: () => context.push('/favorite'),
+          child: Icon(
+            Icons.favorite_rounded,
+            color: context.colors.rose,
+            size: 28.sp,
           ),
         ),
-        Padding(
-          padding: EdgeInsets.only(right: 16.sp),
-          child: GestureDetector(
-            onTap: () => context.push('/quiz'),
-            child: Icon(
-              Icons.school_rounded,
-              color: context.colors.emerald,
-              size: 28.sp,
-            ),
+        GestureDetector(
+          onTap: () => context.push('/quiz'),
+          child: Icon(
+            Icons.school_rounded,
+            color: context.colors.emerald,
+            size: 28.sp,
           ),
         ),
-        Padding(
-          padding: EdgeInsets.only(right: 16.sp),
-          child: GestureDetector(
-            onTap: () => context.push('/settings'),
-            child: Icon(
-              Icons.settings_rounded,
-              color: context.colors.gold,
-              size: 28.sp,
-            ),
+        GestureDetector(
+          onTap: () => context.push('/settings'),
+          child: Icon(
+            Icons.settings_rounded,
+            color: context.colors.gold,
+            size: 28.sp,
           ),
         ),
       ],

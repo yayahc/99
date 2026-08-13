@@ -6,6 +6,7 @@ import 'package:ninety/domain/entities/quiz_question.dart';
 import 'package:ninety/l10n/app_localizations.dart';
 import 'package:ninety/presentation/bloc/quiz_cubit.dart';
 import 'package:ninety/presentation/bloc/quiz_state.dart';
+import 'package:ninety/presentation/widgets/glass_app_bar.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key});
@@ -30,23 +31,9 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.colors.background,
-      appBar: AppBar(
-        backgroundColor: context.colors.background,
-        elevation: 0,
-        centerTitle: true,
-        title: Text(
-          AppLocalizations.of(context)!.quizTitle,
-          style: TextStyle(
-            fontSize: 20.sp,
-            fontWeight: FontWeight.w800,
-            color: context.colors.black,
-          ),
-        ),
-        leading: IconButton(
-          icon:
-              Icon(Icons.arrow_back, color: context.colors.black, size: 24.sp),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+      appBar: GlassAppBar(
+        title: AppLocalizations.of(context)!.quizTitle,
+        showBack: true,
       ),
       body: BlocBuilder<QuizCubit, QuizState>(
         builder: (context, state) {
@@ -559,7 +546,7 @@ class _OptionTile extends StatelessWidget {
             ),
             if (showFeedback && (isCorrect || isSelected))
               Padding(
-                padding: EdgeInsets.only(left: 8.sp),
+                padding: EdgeInsetsDirectional.only(start: 8.sp),
                 child: Icon(
                   isCorrect ? Icons.check_circle_rounded : Icons.cancel_rounded,
                   color: Colors.white,

@@ -8,6 +8,7 @@ import 'package:ninety/presentation/bloc/favorite_cubit.dart';
 
 import '../../domain/entities/name.dart';
 import '../bloc/favorite_state.dart';
+import '../widgets/glass_app_bar.dart';
 import '../widgets/name_card_widget.dart';
 import 'package:ninety/core/extensions/localized_name_extensions.dart';
 
@@ -70,25 +71,9 @@ class _FavoriteNameScreenState extends State<FavoriteNameScreen> {
     );
   }
 
-  AppBar _buildAppBar(BuildContext context) {
+  GlassAppBar _buildAppBar(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    return AppBar(
-      backgroundColor: context.colors.background,
-      elevation: 0,
-      centerTitle: true,
-      title: Text(
-        l10n.favoriteTitle,
-        style: TextStyle(
-          fontSize: 20.sp,
-          fontWeight: FontWeight.w800,
-          color: context.colors.black,
-        ),
-      ),
-      leading: IconButton(
-        icon: Icon(Icons.arrow_back, color: context.colors.black, size: 24.sp),
-        onPressed: () => Navigator.of(context).pop(),
-      ),
-    );
+    return GlassAppBar(title: l10n.favoriteTitle, showBack: true);
   }
 
   Widget _buildBody(BuildContext context) {
