@@ -50,8 +50,6 @@ class SettingsScreen extends StatelessWidget {
           _SectionLabel(text: l10n.language),
           SizedBox(height: 10.sp),
           const _LanguageSelector(),
-          SizedBox(height: 24.sp),
-          _SectionLabel(text: l10n.quranSection),
           SizedBox(height: 28.sp),
           const _AppVersionLabel(),
         ],
@@ -132,7 +130,7 @@ class _QuranAutoPlayCard extends StatelessWidget {
             children: [
               Padding(
                 padding:
-                    EdgeInsets.symmetric(horizontal: 14.sp, vertical: 8.sp),
+                    EdgeInsets.symmetric(horizontal: 10.sp, vertical: 8.sp),
                 child: Row(
                   children: [
                     Icon(
@@ -161,7 +159,7 @@ class _QuranAutoPlayCard extends StatelessWidget {
                           Text(
                             l10n.autoPlayQuranSubtitle,
                             style: TextStyle(
-                              fontSize: 11.sp,
+                              fontSize: 10.sp,
                               height: 1.35,
                               fontWeight: FontWeight.w400,
                               color: Colors.grey.shade500,
