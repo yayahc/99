@@ -191,9 +191,17 @@ class $AppSettingsModelTable extends AppSettingsModel
           type: DriftSqlType.double,
           requiredDuringInsert: false,
           defaultValue: const Constant(0.2));
+  static const VerificationMeta _languageCodeMeta =
+      const VerificationMeta('languageCode');
+  @override
+  late final GeneratedColumn<String> languageCode = GeneratedColumn<String>(
+      'language_code', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultValue: const Constant('system'));
   @override
   List<GeneratedColumn> get $columns =>
-      [id, themeMode, autoPlayQuran, autoPlayQuranVolume];
+      [id, themeMode, autoPlayQuran, autoPlayQuranVolume, languageCode];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -224,6 +232,12 @@ class $AppSettingsModelTable extends AppSettingsModel
           autoPlayQuranVolume.isAcceptableOrUnknown(
               data['auto_play_quran_volume']!, _autoPlayQuranVolumeMeta));
     }
+    if (data.containsKey('language_code')) {
+      context.handle(
+          _languageCodeMeta,
+          languageCode.isAcceptableOrUnknown(
+              data['language_code']!, _languageCodeMeta));
+    }
     return context;
   }
 
@@ -242,6 +256,8 @@ class $AppSettingsModelTable extends AppSettingsModel
       autoPlayQuranVolume: attachedDatabase.typeMapping.read(
           DriftSqlType.double,
           data['${effectivePrefix}auto_play_quran_volume'])!,
+      languageCode: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}language_code'])!,
     );
   }
 
@@ -257,11 +273,13 @@ class AppSettingsModelData extends DataClass
   final String themeMode;
   final bool autoPlayQuran;
   final double autoPlayQuranVolume;
+  final String languageCode;
   const AppSettingsModelData(
       {required this.id,
       required this.themeMode,
       required this.autoPlayQuran,
-      required this.autoPlayQuranVolume});
+      required this.autoPlayQuranVolume,
+      required this.languageCode});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -269,6 +287,7 @@ class AppSettingsModelData extends DataClass
     map['theme_mode'] = Variable<String>(themeMode);
     map['auto_play_quran'] = Variable<bool>(autoPlayQuran);
     map['auto_play_quran_volume'] = Variable<double>(autoPlayQuranVolume);
+    map['language_code'] = Variable<String>(languageCode);
     return map;
   }
 
@@ -278,6 +297,7 @@ class AppSettingsModelData extends DataClass
       themeMode: Value(themeMode),
       autoPlayQuran: Value(autoPlayQuran),
       autoPlayQuranVolume: Value(autoPlayQuranVolume),
+      languageCode: Value(languageCode),
     );
   }
 
@@ -290,6 +310,7 @@ class AppSettingsModelData extends DataClass
       autoPlayQuran: serializer.fromJson<bool>(json['autoPlayQuran']),
       autoPlayQuranVolume:
           serializer.fromJson<double>(json['autoPlayQuranVolume']),
+      languageCode: serializer.fromJson<String>(json['languageCode']),
     );
   }
   @override
@@ -300,6 +321,7 @@ class AppSettingsModelData extends DataClass
       'themeMode': serializer.toJson<String>(themeMode),
       'autoPlayQuran': serializer.toJson<bool>(autoPlayQuran),
       'autoPlayQuranVolume': serializer.toJson<double>(autoPlayQuranVolume),
+      'languageCode': serializer.toJson<String>(languageCode),
     };
   }
 
@@ -307,12 +329,14 @@ class AppSettingsModelData extends DataClass
           {int? id,
           String? themeMode,
           bool? autoPlayQuran,
-          double? autoPlayQuranVolume}) =>
+          double? autoPlayQuranVolume,
+          String? languageCode}) =>
       AppSettingsModelData(
         id: id ?? this.id,
         themeMode: themeMode ?? this.themeMode,
         autoPlayQuran: autoPlayQuran ?? this.autoPlayQuran,
         autoPlayQuranVolume: autoPlayQuranVolume ?? this.autoPlayQuranVolume,
+        languageCode: languageCode ?? this.languageCode,
       );
   AppSettingsModelData copyWithCompanion(AppSettingsModelCompanion data) {
     return AppSettingsModelData(
@@ -324,6 +348,9 @@ class AppSettingsModelData extends DataClass
       autoPlayQuranVolume: data.autoPlayQuranVolume.present
           ? data.autoPlayQuranVolume.value
           : this.autoPlayQuranVolume,
+      languageCode: data.languageCode.present
+          ? data.languageCode.value
+          : this.languageCode,
     );
   }
 
@@ -333,14 +360,15 @@ class AppSettingsModelData extends DataClass
           ..write('id: $id, ')
           ..write('themeMode: $themeMode, ')
           ..write('autoPlayQuran: $autoPlayQuran, ')
-          ..write('autoPlayQuranVolume: $autoPlayQuranVolume')
+          ..write('autoPlayQuranVolume: $autoPlayQuranVolume, ')
+          ..write('languageCode: $languageCode')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode =>
-      Object.hash(id, themeMode, autoPlayQuran, autoPlayQuranVolume);
+  int get hashCode => Object.hash(
+      id, themeMode, autoPlayQuran, autoPlayQuranVolume, languageCode);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -348,7 +376,8 @@ class AppSettingsModelData extends DataClass
           other.id == this.id &&
           other.themeMode == this.themeMode &&
           other.autoPlayQuran == this.autoPlayQuran &&
-          other.autoPlayQuranVolume == this.autoPlayQuranVolume);
+          other.autoPlayQuranVolume == this.autoPlayQuranVolume &&
+          other.languageCode == this.languageCode);
 }
 
 class AppSettingsModelCompanion extends UpdateCompanion<AppSettingsModelData> {
@@ -356,23 +385,27 @@ class AppSettingsModelCompanion extends UpdateCompanion<AppSettingsModelData> {
   final Value<String> themeMode;
   final Value<bool> autoPlayQuran;
   final Value<double> autoPlayQuranVolume;
+  final Value<String> languageCode;
   const AppSettingsModelCompanion({
     this.id = const Value.absent(),
     this.themeMode = const Value.absent(),
     this.autoPlayQuran = const Value.absent(),
     this.autoPlayQuranVolume = const Value.absent(),
+    this.languageCode = const Value.absent(),
   });
   AppSettingsModelCompanion.insert({
     this.id = const Value.absent(),
     this.themeMode = const Value.absent(),
     this.autoPlayQuran = const Value.absent(),
     this.autoPlayQuranVolume = const Value.absent(),
+    this.languageCode = const Value.absent(),
   });
   static Insertable<AppSettingsModelData> custom({
     Expression<int>? id,
     Expression<String>? themeMode,
     Expression<bool>? autoPlayQuran,
     Expression<double>? autoPlayQuranVolume,
+    Expression<String>? languageCode,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -380,6 +413,7 @@ class AppSettingsModelCompanion extends UpdateCompanion<AppSettingsModelData> {
       if (autoPlayQuran != null) 'auto_play_quran': autoPlayQuran,
       if (autoPlayQuranVolume != null)
         'auto_play_quran_volume': autoPlayQuranVolume,
+      if (languageCode != null) 'language_code': languageCode,
     });
   }
 
@@ -387,12 +421,14 @@ class AppSettingsModelCompanion extends UpdateCompanion<AppSettingsModelData> {
       {Value<int>? id,
       Value<String>? themeMode,
       Value<bool>? autoPlayQuran,
-      Value<double>? autoPlayQuranVolume}) {
+      Value<double>? autoPlayQuranVolume,
+      Value<String>? languageCode}) {
     return AppSettingsModelCompanion(
       id: id ?? this.id,
       themeMode: themeMode ?? this.themeMode,
       autoPlayQuran: autoPlayQuran ?? this.autoPlayQuran,
       autoPlayQuranVolume: autoPlayQuranVolume ?? this.autoPlayQuranVolume,
+      languageCode: languageCode ?? this.languageCode,
     );
   }
 
@@ -412,6 +448,9 @@ class AppSettingsModelCompanion extends UpdateCompanion<AppSettingsModelData> {
       map['auto_play_quran_volume'] =
           Variable<double>(autoPlayQuranVolume.value);
     }
+    if (languageCode.present) {
+      map['language_code'] = Variable<String>(languageCode.value);
+    }
     return map;
   }
 
@@ -421,7 +460,8 @@ class AppSettingsModelCompanion extends UpdateCompanion<AppSettingsModelData> {
           ..write('id: $id, ')
           ..write('themeMode: $themeMode, ')
           ..write('autoPlayQuran: $autoPlayQuran, ')
-          ..write('autoPlayQuranVolume: $autoPlayQuranVolume')
+          ..write('autoPlayQuranVolume: $autoPlayQuranVolume, ')
+          ..write('languageCode: $languageCode')
           ..write(')'))
         .toString();
   }
@@ -559,6 +599,7 @@ typedef $$AppSettingsModelTableCreateCompanionBuilder
   Value<String> themeMode,
   Value<bool> autoPlayQuran,
   Value<double> autoPlayQuranVolume,
+  Value<String> languageCode,
 });
 typedef $$AppSettingsModelTableUpdateCompanionBuilder
     = AppSettingsModelCompanion Function({
@@ -566,6 +607,7 @@ typedef $$AppSettingsModelTableUpdateCompanionBuilder
   Value<String> themeMode,
   Value<bool> autoPlayQuran,
   Value<double> autoPlayQuranVolume,
+  Value<String> languageCode,
 });
 
 class $$AppSettingsModelTableFilterComposer
@@ -589,6 +631,9 @@ class $$AppSettingsModelTableFilterComposer
   ColumnFilters<double> get autoPlayQuranVolume => $composableBuilder(
       column: $table.autoPlayQuranVolume,
       builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get languageCode => $composableBuilder(
+      column: $table.languageCode, builder: (column) => ColumnFilters(column));
 }
 
 class $$AppSettingsModelTableOrderingComposer
@@ -613,6 +658,10 @@ class $$AppSettingsModelTableOrderingComposer
   ColumnOrderings<double> get autoPlayQuranVolume => $composableBuilder(
       column: $table.autoPlayQuranVolume,
       builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get languageCode => $composableBuilder(
+      column: $table.languageCode,
+      builder: (column) => ColumnOrderings(column));
 }
 
 class $$AppSettingsModelTableAnnotationComposer
@@ -635,6 +684,9 @@ class $$AppSettingsModelTableAnnotationComposer
 
   GeneratedColumn<double> get autoPlayQuranVolume => $composableBuilder(
       column: $table.autoPlayQuranVolume, builder: (column) => column);
+
+  GeneratedColumn<String> get languageCode => $composableBuilder(
+      column: $table.languageCode, builder: (column) => column);
 }
 
 class $$AppSettingsModelTableTableManager extends RootTableManager<
@@ -669,24 +721,28 @@ class $$AppSettingsModelTableTableManager extends RootTableManager<
             Value<String> themeMode = const Value.absent(),
             Value<bool> autoPlayQuran = const Value.absent(),
             Value<double> autoPlayQuranVolume = const Value.absent(),
+            Value<String> languageCode = const Value.absent(),
           }) =>
               AppSettingsModelCompanion(
             id: id,
             themeMode: themeMode,
             autoPlayQuran: autoPlayQuran,
             autoPlayQuranVolume: autoPlayQuranVolume,
+            languageCode: languageCode,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
             Value<String> themeMode = const Value.absent(),
             Value<bool> autoPlayQuran = const Value.absent(),
             Value<double> autoPlayQuranVolume = const Value.absent(),
+            Value<String> languageCode = const Value.absent(),
           }) =>
               AppSettingsModelCompanion.insert(
             id: id,
             themeMode: themeMode,
             autoPlayQuran: autoPlayQuran,
             autoPlayQuranVolume: autoPlayQuranVolume,
+            languageCode: languageCode,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))

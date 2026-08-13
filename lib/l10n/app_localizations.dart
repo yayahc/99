@@ -271,6 +271,30 @@ abstract class AppLocalizations {
   /// **'THEME'**
   String get theme;
 
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'LANGUAGE'**
+  String get language;
+
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// No description provided for @french.
+  ///
+  /// In en, this message translates to:
+  /// **'Français'**
+  String get french;
+
+  /// No description provided for @arabic.
+  ///
+  /// In en, this message translates to:
+  /// **'العربية'**
+  String get arabic;
+
   /// No description provided for @notifications.
   ///
   /// In en, this message translates to:

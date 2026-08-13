@@ -42,8 +42,10 @@ import 'domain/usecases/favorite/remove_name_to_favorite_usecase.dart' as _i536;
 import 'domain/usecases/name/get_name_usecase.dart' as _i606;
 import 'domain/usecases/name/get_names_usecase.dart' as _i420;
 import 'domain/usecases/quiz/get_quiz_questions_usecase.dart' as _i787;
+import 'domain/usecases/settings/get_language_usecase.dart' as _i801;
 import 'domain/usecases/settings/get_quran_auto_play_usecase.dart' as _i511;
 import 'domain/usecases/settings/get_theme_mode_usecase.dart' as _i983;
+import 'domain/usecases/settings/set_language_usecase.dart' as _i734;
 import 'domain/usecases/settings/set_quran_auto_play_usecase.dart' as _i106;
 import 'domain/usecases/settings/set_theme_mode_usecase.dart' as _i418;
 import 'services/audio/background_audio_handler.dart' as _i966;
@@ -91,10 +93,14 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i273.SettingsRepositoryImpl(gh<_i85.ISettingsDatasource>()));
     gh.singleton<_i397.INameDatasource>(() => _i672.LocalNameDatasourceImpl(
         gh<_i969.AppDatabase>(instanceName: 'db')));
+    gh.singleton<_i801.GetLanguageUsecase>(
+        () => _i801.GetLanguageUsecase(gh<_i747.ISettingsRepository>()));
     gh.singleton<_i511.GetQuranAutoPlayUsecase>(
         () => _i511.GetQuranAutoPlayUsecase(gh<_i747.ISettingsRepository>()));
     gh.singleton<_i983.GetThemeModeUsecase>(
         () => _i983.GetThemeModeUsecase(gh<_i747.ISettingsRepository>()));
+    gh.singleton<_i734.SetLanguageUsecase>(
+        () => _i734.SetLanguageUsecase(gh<_i747.ISettingsRepository>()));
     gh.singleton<_i106.SetQuranAutoPlayUsecase>(
         () => _i106.SetQuranAutoPlayUsecase(gh<_i747.ISettingsRepository>()));
     gh.singleton<_i418.SetThemeModeUsecase>(

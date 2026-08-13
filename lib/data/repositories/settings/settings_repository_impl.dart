@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ninety/data/datasources/i_settings_datasource.dart';
+import 'package:ninety/domain/entities/app_language.dart';
 import 'package:ninety/domain/entities/quran_auto_play.dart';
+import 'package:ninety/domain/params/settings/set_language_param.dart';
 import 'package:ninety/domain/params/settings/set_quran_auto_play_param.dart';
 import 'package:ninety/domain/params/settings/set_theme_mode_param.dart';
 import 'package:ninety/domain/repositories/settings/i_settings_repository.dart';
@@ -30,6 +32,16 @@ class SettingsRepositoryImpl implements ISettingsRepository {
   @override
   Future<void> setQuranAutoPlay(SetQuranAutoPlayParam param) =>
       _settingsDatasource.setQuranAutoPlay(param);
+
+  @override
+  Future<AppLanguage> getLanguage() async {
+    final code = await _settingsDatasource.getLanguageCode();
+    return AppLanguage.fromCode(code);
+  }
+
+  @override
+  Future<void> setLanguage(SetLanguageParam param) =>
+      _settingsDatasource.setLanguage(param);
 
   ThemeMode _decode(String value) {
     switch (value) {

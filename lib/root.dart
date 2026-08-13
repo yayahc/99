@@ -11,11 +11,14 @@ import 'package:ninety/domain/usecases/favorite/get_favorite_names_usecase.dart'
 import 'package:ninety/domain/usecases/favorite/remove_name_to_favorite_usecase.dart';
 import 'package:ninety/domain/usecases/name/get_names_usecase.dart';
 import 'package:ninety/domain/usecases/quiz/get_quiz_questions_usecase.dart';
+import 'package:ninety/domain/usecases/settings/get_language_usecase.dart';
 import 'package:ninety/domain/usecases/settings/get_quran_auto_play_usecase.dart';
+import 'package:ninety/domain/usecases/settings/set_language_usecase.dart';
 import 'package:ninety/domain/usecases/settings/get_theme_mode_usecase.dart';
 import 'package:ninety/domain/usecases/settings/set_quran_auto_play_usecase.dart';
 import 'package:ninety/domain/usecases/settings/set_theme_mode_usecase.dart';
 import 'package:ninety/presentation/bloc/favorite_cubit.dart';
+import 'package:ninety/presentation/bloc/language_cubit.dart';
 import 'package:ninety/presentation/bloc/name_cubit.dart';
 import 'package:ninety/presentation/bloc/quiz_cubit.dart';
 import 'package:ninety/presentation/bloc/quran_auto_play_cubit.dart';
@@ -57,6 +60,12 @@ class Root extends StatelessWidget {
             locator.get<QuranAudioController>(),
           )..loadAutoPlay(),
         ),
+        BlocProvider(
+          create: (context) => LanguageCubit(
+            locator.get<GetLanguageUsecase>(),
+            locator.get<SetLanguageUsecase>(),
+          )..loadLanguage(),
+        ),
       ],
       child: ScreenUtilInit(
           designSize: const Size(390, 844),
@@ -68,11 +77,13 @@ class Root extends StatelessWidget {
               builder: (context, themeMode) {
                 final light = locator.get<IAppColor>(instanceName: 'light');
                 final dark = locator.get<IAppColor>(instanceName: 'dark');
+                final language = context.watch<LanguageCubit>().state;
                 return MaterialApp.router(
                   routerConfig: AppRouter.router,
                   theme: AppTheme.light(light),
                   darkTheme: AppTheme.dark(dark),
                   themeMode: themeMode,
+                  locale: language.locale,
                   localizationsDelegates: const [
                     AppLocalizations.delegate,
                     GlobalMaterialLocalizations.delegate,

@@ -264,7 +264,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.white70,
                     fontSize: 11.sp,
                     fontWeight: FontWeight.w700,
-                    letterSpacing: 1.8,
+                    letterSpacing: context.languageCode == 'ar' ? 0 : 1.8,
                   ),
                 ),
                 SizedBox(height: 10.sp),

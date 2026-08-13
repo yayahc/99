@@ -65,8 +65,8 @@ class DailyNotificationService {
   /// Refills the rolling window. Safe to call on every launch — previously
   /// scheduled reminders in the window are replaced, not duplicated.
   static Future<void> scheduleDailyReminders({
-    int morningHour = 7,
-    int morningMinute = 20,
+    int morningHour = 9,
+    int morningMinute = 0,
     int eveningHour = 21,
     int eveningMinute = 0,
     Locale? locale,

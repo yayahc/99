@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ninety/data/datasources/i_settings_datasource.dart';
 import 'package:ninety/database.dart';
+import 'package:ninety/domain/entities/app_language.dart';
 import 'package:ninety/domain/entities/quran_auto_play.dart';
+import 'package:ninety/domain/params/settings/set_language_param.dart';
 import 'package:ninety/domain/params/settings/set_quran_auto_play_param.dart';
 import 'package:ninety/domain/params/settings/set_theme_mode_param.dart';
 
@@ -48,6 +50,22 @@ class LocalSettingsDatasourceImpl implements ISettingsDatasource {
             id: const Value(_rowId),
             autoPlayQuran: Value(param.autoPlay.enabled),
             autoPlayQuranVolume: Value(param.autoPlay.volume),
+          ),
+        );
+  }
+
+  @override
+  Future<String> getLanguageCode() async {
+    final row = await _row();
+    return row?.languageCode ?? AppLanguage.system.code;
+  }
+
+  @override
+  Future<void> setLanguage(SetLanguageParam param) async {
+    await db.into(db.appSettingsModel).insertOnConflictUpdate(
+          AppSettingsModelCompanion.insert(
+            id: const Value(_rowId),
+            languageCode: Value(param.language.code),
           ),
         );
   }
