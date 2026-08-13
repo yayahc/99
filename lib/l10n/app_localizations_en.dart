@@ -101,10 +101,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noSavedNamesSubtitle => 'Tap the heart on any name to save it here';
 
   @override
-  String get theme => 'THEME';
+  String get theme => 'Theme';
 
   @override
-  String get language => 'LANGUAGE';
+  String get language => 'Language';
 
   @override
   String get english => 'English';

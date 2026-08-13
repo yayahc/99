@@ -268,13 +268,13 @@ abstract class AppLocalizations {
   /// No description provided for @theme.
   ///
   /// In en, this message translates to:
-  /// **'THEME'**
+  /// **'Theme'**
   String get theme;
 
   /// No description provided for @language.
   ///
   /// In en, this message translates to:
-  /// **'LANGUAGE'**
+  /// **'Language'**
   String get language;
 
   /// No description provided for @english.

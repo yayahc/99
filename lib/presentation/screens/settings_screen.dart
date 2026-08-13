@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ninety/core/extensions/context_extension.dart';
-import 'package:ninety/core/extensions/localized_name_extensions.dart';
 import 'package:ninety/domain/entities/app_language.dart';
 import 'package:ninety/domain/entities/quran_auto_play.dart';
 import 'package:ninety/l10n/app_localizations.dart';
@@ -26,14 +25,8 @@ class SettingsScreen extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(16.sp, 8.sp, 16.sp, 24.sp),
         children: [
           const _QuranAutoPlayCard(),
-          SizedBox(height: 24.sp),
-          _SectionLabel(text: l10n.theme),
-          SizedBox(height: 10.sp),
-          const _ThemeModeSelector(),
-          SizedBox(height: 24.sp),
-          _SectionLabel(text: l10n.language),
-          SizedBox(height: 10.sp),
-          const _LanguageSelector(),
+          SizedBox(height: 16.sp),
+          const _PreferencesCard(),
           SizedBox(height: 28.sp),
           const _AppVersionLabel(),
         ],
@@ -42,63 +35,254 @@ class SettingsScreen extends StatelessWidget {
   }
 }
 
-class _SectionLabel extends StatelessWidget {
-  final String text;
-  const _SectionLabel({required this.text});
+class _PreferencesCard extends StatelessWidget {
+  const _PreferencesCard();
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsetsDirectional.only(start: 4.sp),
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: 11.sp,
-          fontWeight: FontWeight.w800,
-          color: context.colors.emerald,
-          letterSpacing: context.languageCode == 'ar' ? 0 : 1.4,
+    final l10n = AppLocalizations.of(context)!;
+    return _SettingsCard(
+      child: Column(
+        children: [
+          BlocBuilder<ThemeCubit, ThemeMode>(
+            builder: (context, mode) => _ValueRow(
+              icon: _themeIcon(mode),
+              label: l10n.theme,
+              value: _themeLabel(l10n, mode),
+              onTap: () => _pickOption<ThemeMode>(
+                context: context,
+                title: l10n.theme,
+                current: mode,
+                options: [
+                  for (final m in ThemeMode.values)
+                    _Option(m, _themeLabel(l10n, m), _themeIcon(m)),
+                ],
+                onPicked: context.read<ThemeCubit>().setThemeMode,
+              ),
+            ),
+          ),
+          const _RowDivider(),
+          BlocBuilder<LanguageCubit, AppLanguage>(
+            builder: (context, language) => _ValueRow(
+              icon: Icons.translate_rounded,
+              label: l10n.language,
+              value: _languageLabel(l10n, language),
+              onTap: () => _pickOption<AppLanguage>(
+                context: context,
+                title: l10n.language,
+                current: language,
+                options: [
+                  for (final lang in AppLanguage.values)
+                    _Option(lang, _languageLabel(l10n, lang), null),
+                ],
+                onPicked: context.read<LanguageCubit>().setLanguage,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  IconData _themeIcon(ThemeMode mode) => switch (mode) {
+        ThemeMode.light => Icons.light_mode_rounded,
+        ThemeMode.dark => Icons.dark_mode_rounded,
+        ThemeMode.system => Icons.brightness_auto_rounded,
+      };
+
+  String _themeLabel(AppLocalizations l10n, ThemeMode mode) => switch (mode) {
+        ThemeMode.light => l10n.light,
+        ThemeMode.dark => l10n.dark,
+        ThemeMode.system => l10n.system,
+      };
+
+  String _languageLabel(AppLocalizations l10n, AppLanguage language) =>
+      switch (language) {
+        AppLanguage.system => l10n.system,
+        AppLanguage.english => l10n.english,
+        AppLanguage.french => l10n.french,
+        AppLanguage.arabic => l10n.arabic,
+      };
+}
+
+class _Option<T> {
+  final T value;
+  final String label;
+  final IconData? icon;
+  const _Option(this.value, this.label, this.icon);
+}
+
+Future<void> _pickOption<T>({
+  required BuildContext context,
+  required String title,
+  required T current,
+  required List<_Option<T>> options,
+  required ValueChanged<T> onPicked,
+}) async {
+  final picked = await showModalBottomSheet<T>(
+    context: context,
+    backgroundColor: context.colors.surface,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20.sp)),
+    ),
+    builder: (sheetContext) => SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(height: 12.sp),
+          Container(
+            width: 36.sp,
+            height: 4.sp,
+            decoration: BoxDecoration(
+              color: context.colors.black.withValues(alpha: 0.15),
+              borderRadius: BorderRadius.circular(4.sp),
+            ),
+          ),
+          SizedBox(height: 14.sp),
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 15.sp,
+              fontWeight: FontWeight.w800,
+              color: context.colors.black,
+            ),
+          ),
+          SizedBox(height: 6.sp),
+          for (final option in options)
+            _OptionTile(
+              option: option,
+              selected: option.value == current,
+              onTap: () => Navigator.of(sheetContext).pop(option.value),
+            ),
+          SizedBox(height: 8.sp),
+        ],
+      ),
+    ),
+  );
+  if (picked != null && picked != current) onPicked(picked);
+}
+
+class _OptionTile<T> extends StatelessWidget {
+  final _Option<T> option;
+  final bool selected;
+  final VoidCallback onTap;
+
+  const _OptionTile({
+    required this.option,
+    required this.selected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final emerald = context.colors.emerald;
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 22.sp, vertical: 13.sp),
+        child: Row(
+          children: [
+            if (option.icon != null) ...[
+              Icon(
+                option.icon,
+                size: 20.sp,
+                color: selected
+                    ? emerald
+                    : context.colors.black.withValues(alpha: 0.45),
+              ),
+              SizedBox(width: 12.sp),
+            ],
+            Expanded(
+              child: Text(
+                option.label,
+                style: TextStyle(
+                  fontSize: 15.sp,
+                  fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+                  color: selected ? emerald : context.colors.black,
+                ),
+              ),
+            ),
+            if (selected)
+              Icon(Icons.check_rounded, size: 20.sp, color: emerald),
+          ],
         ),
       ),
     );
   }
 }
 
-class _ThemeModeSelector extends StatelessWidget {
-  const _ThemeModeSelector();
+class _RowDivider extends StatelessWidget {
+  const _RowDivider();
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    return BlocBuilder<ThemeCubit, ThemeMode>(
-      builder: (context, mode) {
-        return _SettingsCard(
-          child: Column(
-            children: [
-              _SelectableOption(
-                icon: Icons.light_mode_rounded,
-                label: l10n.light,
-                selected: mode == ThemeMode.light,
-                onTap: () =>
-                    context.read<ThemeCubit>().setThemeMode(ThemeMode.light),
+    return Padding(
+      padding: EdgeInsetsDirectional.only(start: 46.sp, end: 10.sp),
+      child: Divider(
+        height: 1,
+        thickness: 1,
+        color: context.colors.black.withValues(alpha: 0.06),
+      ),
+    );
+  }
+}
+
+class _ValueRow extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final String value;
+  final VoidCallback onTap;
+
+  const _ValueRow({
+    required this.icon,
+    required this.label,
+    required this.value,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final isRtl = Directionality.of(context) == TextDirection.rtl;
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10.sp, vertical: 14.sp),
+        child: Row(
+          children: [
+            Icon(icon, size: 22.sp, color: context.colors.emerald),
+            SizedBox(width: 14.sp),
+            Expanded(
+              child: Text(
+                label,
+                style: TextStyle(
+                  fontSize: 15.sp,
+                  fontWeight: FontWeight.w500,
+                  color: context.colors.black,
+                ),
               ),
-              _SelectableOption(
-                icon: Icons.dark_mode_rounded,
-                label: l10n.dark,
-                selected: mode == ThemeMode.dark,
-                onTap: () =>
-                    context.read<ThemeCubit>().setThemeMode(ThemeMode.dark),
+            ),
+            Text(
+              value,
+              style: TextStyle(
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w600,
+                color: context.colors.black.withValues(alpha: 0.45),
               ),
-              _SelectableOption(
-                icon: Icons.brightness_auto_rounded,
-                label: l10n.system,
-                selected: mode == ThemeMode.system,
-                onTap: () =>
-                    context.read<ThemeCubit>().setThemeMode(ThemeMode.system),
+            ),
+            SizedBox(width: 2.sp),
+            Transform.flip(
+              flipX: isRtl,
+              child: Icon(
+                Icons.chevron_right_rounded,
+                size: 20.sp,
+                color: context.colors.black.withValues(alpha: 0.30),
               ),
-            ],
-          ),
-        );
-      },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -203,17 +387,18 @@ class _VolumeSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final emerald = context.colors.emerald;
     return Padding(
-      padding: EdgeInsets.fromLTRB(14.sp, 4.sp, 14.sp, 8.sp),
+      padding: EdgeInsets.fromLTRB(14.sp, 4.sp, 14.sp, 12.sp),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
               Icon(
-                Icons.volume_down_rounded,
+                Icons.volume_up_rounded,
                 size: 18.sp,
-                color: Colors.grey.shade500,
+                color: emerald,
               ),
               SizedBox(width: 8.sp),
               Expanded(
@@ -226,29 +411,46 @@ class _VolumeSlider extends StatelessWidget {
                   ),
                 ),
               ),
-              Text(
-                '${(value * 100).round()}%',
-                style: TextStyle(
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w700,
-                  color: context.colors.emerald,
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 8.sp, vertical: 3.sp),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.sp),
+                ),
+                child: Text(
+                  '${(value * 100).round()}%',
+                  textDirection: TextDirection.ltr,
+                  style: TextStyle(
+                    fontSize: 11.sp,
+                    fontWeight: FontWeight.w800,
+                    color: emerald,
+                  ),
                 ),
               ),
             ],
           ),
+          SizedBox(height: 4.sp),
           SliderTheme(
             data: SliderTheme.of(context).copyWith(
-              trackHeight: 3,
-              overlayShape: const RoundSliderOverlayShape(overlayRadius: 12),
-              thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 7),
+              trackHeight: 6.sp,
+              trackShape: const RoundedRectSliderTrackShape(),
+              activeTrackColor: emerald,
+              inactiveTrackColor: emerald.withValues(alpha: 0.12),
+              thumbColor: emerald,
+              thumbShape: RoundSliderThumbShape(
+                enabledThumbRadius: 9.sp,
+                elevation: 2,
+                pressedElevation: 5,
+              ),
+              overlayShape: RoundSliderOverlayShape(overlayRadius: 18.sp),
+              overlayColor: emerald.withValues(alpha: 0.12),
+              tickMarkShape: SliderTickMarkShape.noTickMark,
+              showValueIndicator: ShowValueIndicator.never,
+              padding: EdgeInsets.zero,
             ),
             child: Slider(
               min: 0.05,
               max: 1,
-              divisions: 19,
               value: value.clamp(0.05, 1),
-              activeColor: context.colors.emerald,
-              inactiveColor: context.colors.emerald.withValues(alpha: 0.15),
               onChanged: onChanged,
               onChangeEnd: onChangeEnd,
             ),
@@ -282,50 +484,6 @@ class _SettingsCard extends StatelessWidget {
       ),
       padding: EdgeInsets.all(6.sp),
       child: child,
-    );
-  }
-}
-
-class _LanguageSelector extends StatelessWidget {
-  const _LanguageSelector();
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    return BlocBuilder<LanguageCubit, AppLanguage>(
-      builder: (context, language) {
-        final cubit = context.read<LanguageCubit>();
-        return _SettingsCard(
-          child: Column(
-            children: [
-              _SelectableOption(
-                icon: Icons.public_rounded,
-                label: l10n.system,
-                selected: language == AppLanguage.system,
-                onTap: () => cubit.setLanguage(AppLanguage.system),
-              ),
-              _SelectableOption(
-                badge: 'EN',
-                label: l10n.english,
-                selected: language == AppLanguage.english,
-                onTap: () => cubit.setLanguage(AppLanguage.english),
-              ),
-              _SelectableOption(
-                badge: 'FR',
-                label: l10n.french,
-                selected: language == AppLanguage.french,
-                onTap: () => cubit.setLanguage(AppLanguage.french),
-              ),
-              _SelectableOption(
-                badge: 'ع',
-                label: l10n.arabic,
-                selected: language == AppLanguage.arabic,
-                onTap: () => cubit.setLanguage(AppLanguage.arabic),
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 }
@@ -370,92 +528,6 @@ class _AppVersionLabelState extends State<_AppVersionLabel> {
                 ),
         );
       },
-    );
-  }
-}
-
-class _SelectableOption extends StatelessWidget {
-  final IconData? icon;
-  final String? badge;
-  final String label;
-  final bool selected;
-  final VoidCallback onTap;
-
-  const _SelectableOption({
-    this.icon,
-    this.badge,
-    required this.label,
-    required this.selected,
-    required this.onTap,
-  }) : assert(icon != null || badge != null);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      behavior: HitTestBehavior.opaque,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 220),
-        curve: Curves.easeOut,
-        padding: EdgeInsets.symmetric(horizontal: 14.sp, vertical: 14.sp),
-        decoration: BoxDecoration(
-          color: selected
-              ? context.colors.primary.withValues(alpha: 0.14)
-              : Colors.transparent,
-          border: Border.all(
-            color: selected
-                ? context.colors.primary.withValues(alpha: 0.35)
-                : Colors.transparent,
-          ),
-          borderRadius: BorderRadius.circular(8.sp),
-        ),
-        child: Row(
-          children: [
-            SizedBox(
-              width: 22.sp,
-              child: icon != null
-                  ? Icon(
-                      icon,
-                      size: 22.sp,
-                      color: selected
-                          ? context.colors.primary
-                          : context.colors.black.withValues(alpha: 0.45),
-                    )
-                  : Text(
-                      badge!,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w800,
-                        color: selected
-                            ? context.colors.primary
-                            : context.colors.black.withValues(alpha: 0.45),
-                      ),
-                    ),
-            ),
-            SizedBox(width: 14.sp),
-            Expanded(
-              child: Text(
-                label,
-                style: TextStyle(
-                  fontSize: 15.sp,
-                  fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
-                  color: context.colors.black,
-                ),
-              ),
-            ),
-            AnimatedScale(
-              duration: const Duration(milliseconds: 220),
-              scale: selected ? 1 : 0,
-              child: Icon(
-                Icons.check_circle_rounded,
-                size: 22.sp,
-                color: context.colors.primary,
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
