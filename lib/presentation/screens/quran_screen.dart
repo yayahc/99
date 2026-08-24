@@ -632,62 +632,9 @@ class _MiniPlayer extends StatelessWidget {
               ),
             ),
             SizedBox(height: 4.sp),
-            _VolumeRow(value: volume, onChanged: onVolumeChanged),
           ],
         ),
       ),
-    );
-  }
-}
-
-class _VolumeRow extends StatelessWidget {
-  final double value;
-  final ValueChanged<double> onChanged;
-  const _VolumeRow({required this.value, required this.onChanged});
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    return Row(
-      children: [
-        Icon(
-          value <= 0.01
-              ? Icons.volume_off_rounded
-              : (value < 0.5
-                  ? Icons.volume_down_rounded
-                  : Icons.volume_up_rounded),
-          size: 18.sp,
-          color: Colors.grey.shade500,
-        ),
-        Expanded(
-          child: Semantics(
-            label: l10n.volume,
-            child: SliderTheme(
-              data: SliderTheme.of(context).copyWith(
-                trackHeight: 2,
-                overlayShape: const RoundSliderOverlayShape(overlayRadius: 10),
-                thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 5),
-              ),
-              child: Slider(
-                min: 0,
-                max: 1,
-                value: value.clamp(0, 1),
-                activeColor: context.colors.gold,
-                inactiveColor: Colors.grey.shade300,
-                onChanged: onChanged,
-              ),
-            ),
-          ),
-        ),
-        Text(
-          '${(value * 100).round()}%',
-          style: TextStyle(
-            fontSize: 10.sp,
-            fontWeight: FontWeight.w700,
-            color: Colors.grey.shade500,
-          ),
-        ),
-      ],
     );
   }
 }
