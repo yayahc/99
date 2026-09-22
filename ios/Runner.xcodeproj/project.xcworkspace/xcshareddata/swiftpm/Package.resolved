@@ -1,0 +1,22 @@
+{
+  "pins" : [
+    {
+      "identity" : "csqlite",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/simolus3/CSQLite.git",
+      "state" : {
+        "revision" : "ae972b235e8b3c5af6d8f4e5bf18c800bdddb27e"
+      }
+    },
+    {
+      "identity" : "onesignal-xcframework",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/OneSignal/OneSignal-XCFramework",
+      "state" : {
+        "revision" : "55b0a4f1ff1435d692088e682ce12daf151a3312",
+        "version" : "5.5.1"
+      }
+    }
+  ],
+  "version" : 2
+}

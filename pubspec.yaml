@@ -64,6 +64,7 @@ dependencies:
   timezone: ^0.10.0
   flutter_timezone: ^4.1.1
   package_info_plus: ^9.0.1
+  dynamic_app_icon_flutter_plus: ^2.2.1
 
 dev_dependencies:
   sqlite3: ^2.4.0

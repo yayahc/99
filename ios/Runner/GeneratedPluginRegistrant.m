@@ -18,6 +18,12 @@
 @import audio_session;
 #endif
 
+#if __has_include(<dynamic_app_icon_flutter_plus/DynamicAppIconFlutterPlusPlugin.h>)
+#import <dynamic_app_icon_flutter_plus/DynamicAppIconFlutterPlusPlugin.h>
+#else
+@import dynamic_app_icon_flutter_plus;
+#endif
+
 #if __has_include(<flutter_local_notifications/FlutterLocalNotificationsPlugin.h>)
 #import <flutter_local_notifications/FlutterLocalNotificationsPlugin.h>
 #else
@@ -83,6 +89,7 @@
 + (void)registerWithRegistry:(NSObject<FlutterPluginRegistry>*)registry {
   [AudioServicePlugin registerWithRegistrar:[registry registrarForPlugin:@"AudioServicePlugin"]];
   [AudioSessionPlugin registerWithRegistrar:[registry registrarForPlugin:@"AudioSessionPlugin"]];
+  [DynamicAppIconFlutterPlusPlugin registerWithRegistrar:[registry registrarForPlugin:@"DynamicAppIconFlutterPlusPlugin"]];
   [FlutterLocalNotificationsPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterLocalNotificationsPlugin"]];
   [FlutterTimezonePlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterTimezonePlugin"]];
   [HomeWidgetPlugin registerWithRegistrar:[registry registrarForPlugin:@"HomeWidgetPlugin"]];
