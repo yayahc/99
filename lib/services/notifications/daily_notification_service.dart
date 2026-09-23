@@ -11,13 +11,6 @@ import 'package:ninety/l10n/app_localizations.dart';
 import 'package:timezone/data/latest.dart' as tzdata;
 import 'package:timezone/timezone.dart' as tz;
 
-/// Schedules the two daily reminders:
-///   * morning — the Name of the Day, matching the home widget
-///   * evening — a short reminder to close the day with dhikr
-///
-/// Both carry per-day content, so they cannot be scheduled as a single
-/// repeating notification. Instead a rolling window of [_windowDays] days is
-/// scheduled ahead and topped up every time the app starts.
 class DailyNotificationService {
   DailyNotificationService._();
 
@@ -27,8 +20,6 @@ class DailyNotificationService {
   static Future<void> initialize() async {
     tzdata.initializeTimeZones();
 
-    // initializeTimeZones() only loads the database; without this tz.local
-    // stays UTC and every reminder is scheduled at the wrong wall-clock hour.
     try {
       final name = await FlutterTimezone.getLocalTimezone();
       tz.setLocalLocation(tz.getLocation(name));
@@ -43,7 +34,7 @@ class DailyNotificationService {
       iOS: iosInit,
     );
 
-    await _plugin.initialize(settings);
+    await _plugin.initialize(settings: settings);
   }
 
   static Future<void> requestPermissions() async {
@@ -62,8 +53,6 @@ class DailyNotificationService {
     }
   }
 
-  /// Refills the rolling window. Safe to call on every launch — previously
-  /// scheduled reminders in the window are replaced, not duplicated.
   static Future<void> scheduleDailyReminders({
     int morningHour = 9,
     int morningMinute = 0,
@@ -123,10 +112,6 @@ class DailyNotificationService {
     }
   }
 
-  /// The next [days] occurrences of [hour]:[minute] strictly after [now].
-  ///
-  /// Day arithmetic is done in UTC so a DST transition cannot skip or repeat a
-  /// calendar day; the slot itself is then built in [tz.local].
   @visibleForTesting
   static List<tz.TZDateTime> upcomingSlots({
     required tz.TZDateTime now,
@@ -145,8 +130,6 @@ class DailyNotificationService {
     return slots;
   }
 
-  /// Rotates through the evening messages so the reminder does not read the
-  /// same every night.
   @visibleForTesting
   static String eveningBodyFor(AppLocalizations l10n, DateTime date) {
     final bodies = <String>[
@@ -175,45 +158,38 @@ class DailyNotificationService {
     required AndroidScheduleMode scheduleMode,
   }) async {
     await _plugin.zonedSchedule(
-      id,
-      title,
-      body,
-      when,
-      NotificationDetails(
-        android: AndroidNotificationDetails(
-          channelId,
-          channelName,
-          channelDescription: channelDescription,
-          importance: Importance.max,
-          priority: Priority.high,
-          // Without this the body is truncated to a single line.
-          styleInformation: BigTextStyleInformation(
-            body,
-            contentTitle: title,
+        id: id,
+        title: title,
+        body: body,
+        scheduledDate: when,
+        notificationDetails: NotificationDetails(
+          android: AndroidNotificationDetails(
+            channelId,
+            channelName,
+            channelDescription: channelDescription,
+            importance: Importance.max,
+            priority: Priority.high,
+            styleInformation: BigTextStyleInformation(
+              body,
+              contentTitle: title,
+            ),
           ),
+          iOS: DarwinNotificationDetails(threadIdentifier: channelId),
         ),
-        iOS: DarwinNotificationDetails(threadIdentifier: channelId),
-      ),
-      androidScheduleMode: scheduleMode,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
-    );
+        androidScheduleMode: scheduleMode);
   }
 
   static Future<void> _clearWindow() async {
-    // id 1 was the old single repeating reminder; drop it on upgrade.
-    await _plugin.cancel(_legacyReminderId);
+    await _plugin.cancel(id: _legacyReminderId);
     for (var i = 0; i < _windowDays; i++) {
-      await _plugin.cancel(_morningIdBase + i);
-      await _plugin.cancel(_eveningIdBase + i);
+      await _plugin.cancel(id: _morningIdBase + i);
+      await _plugin.cancel(id: _eveningIdBase + i);
     }
   }
 
   static Future<AppLocalizations> _localizations(Locale? override) async =>
       AppLocalizations.delegate.load(Locale(_languageCode(override)));
 
-  /// The app locale the reminder text should use, resolved against the
-  /// locales the app actually ships.
   static String _languageCode(Locale? override) {
     final device = override ?? PlatformDispatcher.instance.locale;
     return AppLocalizations.supportedLocales
@@ -221,10 +197,6 @@ class DailyNotificationService {
         .firstWhere((code) => code == device.languageCode, orElse: () => 'en');
   }
 
-  /// On Android 12+ exact alarms need a permission that is denied by default
-  /// on Android 14+. Asking for it anyway and then scheduling exactly would
-  /// throw `exact_alarms_not_permitted`, so fall back to an inexact alarm —
-  /// a daily reminder does not need minute precision.
   static Future<AndroidScheduleMode> _androidScheduleMode() async {
     if (defaultTargetPlatform != TargetPlatform.android) {
       return AndroidScheduleMode.exactAllowWhileIdle;
@@ -240,8 +212,6 @@ class DailyNotificationService {
         : AndroidScheduleMode.inexactAllowWhileIdle;
   }
 
-  /// Fires a notification a few seconds from now. Useful to verify the whole
-  /// pipeline (channel, icon, permissions) without waiting for the real slot.
   static Future<void> debugFireTestNotification({Locale? locale}) async {
     final l10n = await _localizations(locale);
     final lang = _languageCode(locale);
@@ -263,8 +233,6 @@ class DailyNotificationService {
   static Future<List<PendingNotificationRequest>> pendingNotifications() =>
       _plugin.pendingNotificationRequests();
 
-  // 14 days x 2 reminders = 28 pending notifications, well inside the iOS
-  // cap of 64. Reminders stop if the app is not opened within the window.
   static const int _windowDays = 14;
   static const int _morningIdBase = 100;
   static const int _eveningIdBase = 200;

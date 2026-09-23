@@ -3,13 +3,17 @@ import 'package:dynamic_app_icon_flutter_plus/dynamic_app_icon_flutter_plus.dart
 class DynamicIconManager {
   static List<String> availableIcons = [];
   static bool isSupported = false;
+
   static Future<void> init() async {
     final bool supported =
         await DynamicAppIconFlutterPlus.supportsAlternateIcons;
     if (supported) {
       isSupported = supported;
-      await getIcons();
-      await getCurrentIcon();
+      final icons = await getIcons();
+      print('DynamicIconManager: available icons: $icons');
+      final _ = await getCurrentIcon();
+      print('DynamicIconManager: current icon: $_');
+      await resetIcon();
     }
   }
 
